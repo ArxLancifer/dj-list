@@ -1,4 +1,4 @@
-const NewUser = require('../models/NewUser');
+const User = require('../models/CreateUserModel');
 const bcrypt = require('bcrypt');
 
 const users = [];
@@ -22,19 +22,19 @@ const userAuth = {
         }
     },
     signUp:async function(req, res){
-      const user = new NewUser({name:"asdasd",password:"asdasd"});
-      await user.save();
+        
         try {
             const password = req.body.password;
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
-            const user = {name: req.body.name, password: hashedPassword}
-            // users.push(user);
-            console.log("asdasda")
-            res.json("asdsadas");
-            // console.log(users)
+            const user = {username: req.body.username, password: hashedPassword}
+            console.log(user)
+            const newUser = new User(user);
+            await newUser.save();
+            res.json("Account created succesfully")
         } catch (error) {
-          res.send("")  
+            console.log(error)
+            res.send("Something went wrong")  
         }
     },
     showAllUsers: function(res, res){
