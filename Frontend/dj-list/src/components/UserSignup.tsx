@@ -4,7 +4,7 @@ import React from 'react'
 function UserLogin() {
   return (
     <div className='container'>
-      <h1>Login Page</h1>
+      <h1>Sign Up Page</h1>
     <form className='w-50 mx-auto mt-5 border rounded p-5'>
 <div className="mb-3">
     <label htmlFor="username" className="form-label">Email address</label>
