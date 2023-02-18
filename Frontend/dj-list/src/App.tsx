@@ -9,11 +9,10 @@ function App() {
   return (
     <BrowserRouter>
     <NavigationBar />
-    <HomePage />
     <Routes>
+      <Route path='/home' element={<HomePage />} />
       <Route path='/login' element={<UserLogin />} />
       <Route path='/signup' element={<UserSingup />} />
-      <Route path='/home' element={<HomePage />} />
       {/* <Route path='/signup' element={<UserLists />} /> */}
     </Routes>
     </BrowserRouter>
