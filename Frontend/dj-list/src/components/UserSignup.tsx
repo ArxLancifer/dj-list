@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { ISignUp } from '../interfaces/UserInterfaces';
 
 function UserLogin() {
-    const [errorsState, setErrorsState] = useState({});
+    const [errorsState, setErrorsState] = useState<{[key:string]:string}>({});
     const [userInputs, setUserInputs] = useState<ISignUp>({username:"", email:"", password:"", password2:""});
     const navigate = useNavigate();
-
     function handleInputs(e: React.ChangeEvent<HTMLInputElement>):void{
         setUserInputs((prevUserInputs)=>{
             return {
@@ -21,7 +20,7 @@ function UserLogin() {
         e.preventDefault();
         const isValid = checkValidity(userInputs);
         console.log(isValid)
-        if(!isValid) return;
+        if(isValid) return;
         await createAccount();
 
     }
@@ -44,22 +43,15 @@ function UserLogin() {
     function checkValidity(inputs:ISignUp){
         setErrorsState({});
         const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-        const validLength = Object.values(inputs).find(input => input.length <= 5);
+        const validLength = Object.values(inputs).some(input => input.length <= 5);
         const validEmail = emailRegex.test(inputs.email);
-        const validPassword = inputs.password === inputs.password2;
+        const validPassword = inputs.password === inputs.password2 && inputs.password !== ""
         if(validLength){
+            console.log(validEmail,validLength, validPassword)
             setErrorsState((prevErrors)=>{
                 return {
                     ...prevErrors,
                     "inputsLength":"Inputs must be 5 or more characters or numbers"
-                }
-            })
-        }
-        if(!validPassword){
-            setErrorsState((prevErrors)=>{
-                return {
-                    ...prevErrors,
-                    "PasswordMatch":"Passwords does not match"
                 }
             })
         }
@@ -71,15 +63,24 @@ function UserLogin() {
                 }
             })
         }
+        if(!validPassword){
+            setErrorsState((prevErrors)=>{
+                return {
+                    ...prevErrors,
+                    "PasswordMatch":"Passwords does not match"
+                }
+            })
+        }
+        console.log(errorsState);
         if(!validLength && validPassword && validEmail) return true;
-        else return false;
+        return false;
     }
 
     return (
     <div className='container'>
         <h1>Sign Up Page</h1>
         <form className='w-50 mx-auto mt-5 border rounded p-5'>
-            {Object.values(errorsState).map((error:any, index)=>{
+            {Object.values(errorsState).map((error, index)=>{
                 return <Alert key={index} variant={'danger'}>{error}</Alert>
             })}
         
