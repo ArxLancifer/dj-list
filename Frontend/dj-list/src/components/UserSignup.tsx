@@ -1,24 +1,108 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { Alert } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
+import { ISignUp } from '../interfaces/UserInterfaces';
 
 function UserLogin() {
-  return (
+    const [errorsState, setErrorsState] = useState({});
+    const [userInputs, setUserInputs] = useState<ISignUp>({username:"", email:"", password:"", password2:""});
+    const navigate = useNavigate();
+
+    function handleInputs(e: React.ChangeEvent<HTMLInputElement>):void{
+        setUserInputs((prevUserInputs)=>{
+            return {
+                ...prevUserInputs,
+                [e.target.id]:e.target.value
+            }
+        })
+    }
+
+    async function handleSignup(e:React.MouseEvent<HTMLButtonElement>){
+        e.preventDefault();
+        const isValid = checkValidity(userInputs);
+        console.log(isValid)
+        if(!isValid) return;
+        await createAccount();
+
+    }
+
+    async function createAccount(){
+        const postRequest = await fetch("http://localhost:5000/signup?", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(userInputs)
+        })
+        const responseData = postRequest.json();
+        if(postRequest.status === 200 ){
+            navigate("/login")
+        }
+        console.log(postRequest.status)
+    }
+
+    function checkValidity(inputs:ISignUp){
+        setErrorsState({});
+        const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+        const validLength = Object.values(inputs).find(input => input.length <= 5);
+        const validEmail = emailRegex.test(inputs.email);
+        const validPassword = inputs.password === inputs.password2;
+        if(validLength){
+            setErrorsState((prevErrors)=>{
+                return {
+                    ...prevErrors,
+                    "inputsLength":"Inputs must be 5 or more characters or numbers"
+                }
+            })
+        }
+        if(!validPassword){
+            setErrorsState((prevErrors)=>{
+                return {
+                    ...prevErrors,
+                    "PasswordMatch":"Passwords does not match"
+                }
+            })
+        }
+        if(!validEmail){
+            setErrorsState((prevErrors)=>{
+                return {
+                    ...prevErrors,
+                    "InvalidEmail":"Email is invalid"
+                }
+            })
+        }
+        if(!validLength && validPassword && validEmail) return true;
+        else return false;
+    }
+
+    return (
     <div className='container'>
-      <h1>Sign Up Page</h1>
-    <form className='w-50 mx-auto mt-5 border rounded p-5'>
-<div className="mb-3">
-    <label htmlFor="username" className="form-label">Email address</label>
-    <input type="text" className="form-control" id="username" aria-describedby="user name" />
-    
-  </div>
-  <div className="mb-3">
-    <label htmlFor="password" className="form-label">Password</label>
-    <input type="password" className="form-control" id="password" />
-    <div id="password" className="form-text">We'll never share your password with anyone else.</div>
-  </div>
-  <button type="submit" className="btn btn-primary">Submit</button>
-</form>
-</div>
+        <h1>Sign Up Page</h1>
+        <form className='w-50 mx-auto mt-5 border rounded p-5'>
+            {Object.values(errorsState).map((error:any, index)=>{
+                return <Alert key={index} variant={'danger'}>{error}</Alert>
+            })}
+        
+        <div className="mb-3">
+        <label htmlFor="username" className="form-label">Username</label>
+        <input onChange={handleInputs} type="text" className="form-control" id="username" aria-describedby="user name" minLength={5} maxLength={15} />
+        </div>
+        <div className="mb-3">
+        <label htmlFor="email" className="form-label">Email</label>
+        <input onChange={handleInputs} type="text" className="form-control" id="email" aria-describedby="Email address" />
+        </div>
+        <div className="mb-3">
+        <label htmlFor="password" className="form-label">Password</label>
+        <input onChange={handleInputs} type="password" className="form-control" id="password" />
+        </div>
+        <div className="mb-3">
+        <label htmlFor="password2" className="form-label">Repeat Password</label>
+        <input onChange={handleInputs} type="password" className="form-control" id="password2" />
+        <div id="password2" className="form-text">We'll never share your password with anyone else.</div>
+        </div>
+        <button onClick={handleSignup} className="btn btn-primary">Signup</button>
+        </form>
+    </div>
   )
 }
 

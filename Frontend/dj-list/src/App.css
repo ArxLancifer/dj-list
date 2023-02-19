@@ -2,3 +2,7 @@ a{
   text-decoration: none;
   color: #fff;
 }
+.alert-danger{
+   padding: 4px;
+   margin: 5px 0 5px 0;
+}
