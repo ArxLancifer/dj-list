@@ -28,8 +28,23 @@ const dummyPosts = [
     
 ]
 
-app.use('/login', userAuth);
-app.use('/user', userPosts);
+app.use('/user', userAuth);
+app.use('/userlist', userPosts);
+const x = jwt.sign({name:"Anestis",email:"anestis@gmail.com"}, process.env.TOKEN_SECRET);
+console.log(x)
+console.log(jwt.verify(x,process.env.TOKEN_SECRET))
+app.post('/jwttestlogin', (req, res)=>{
+    const username = req.body.username;
+    const user ={name:username}
+
+    const createdUserToken = jwt.sign({user, exp:5000}, process.env.TOKEN_SECRET)
+    res.json(createdUserToken);
+})
+app.get('/jwttestauth', (req,res)=>{
+    const userToken = req.body.token;
+    const authTicket = jwt.verify(userToken, process.env.TOKEN_SECRET);
+    res.json(authTicket);
+})
 
 app.listen(PORT, ()=>{
     console.log("Server is running on port "+ PORT)
