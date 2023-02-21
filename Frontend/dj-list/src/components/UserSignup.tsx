@@ -43,11 +43,10 @@ function UserLogin() {
     function checkValidity(inputs:ISignUp){
         setErrorsState({});
         const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-        const validLength = Object.values(inputs).some(input => input.length <= 5);
+        const validLength = !Object.values(inputs).some(input => input.length <= 5);
         const validEmail = emailRegex.test(inputs.email);
         const validPassword = inputs.password === inputs.password2 && inputs.password !== ""
-        if(validLength){
-            console.log(validEmail,validLength, validPassword)
+        if(!validLength){
             setErrorsState((prevErrors)=>{
                 return {
                     ...prevErrors,
