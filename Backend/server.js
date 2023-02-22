@@ -37,7 +37,7 @@ app.post('/jwttestlogin', (req, res)=>{
     const username = req.body.username;
     const user ={name:username}
 
-    const createdUserToken = jwt.sign({user, exp:5000}, process.env.TOKEN_SECRET)
+    const createdUserToken = jwt.sign({user, exp:"1h"}, process.env.TOKEN_SECRET)
     res.json(createdUserToken);
 })
 app.get('/jwttestauth', (req,res)=>{
