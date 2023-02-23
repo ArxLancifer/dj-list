@@ -31,8 +31,7 @@ const dummyPosts = [
 app.use('/user', userAuth);
 app.use('/userlist', userPosts);
 const x = jwt.sign({name:"Anestis",email:"anestis@gmail.com"}, process.env.TOKEN_SECRET);
-console.log(x)
-console.log(jwt.verify(x,process.env.TOKEN_SECRET))
+
 app.post('/jwttestlogin', (req, res)=>{
     const username = req.body.username;
     const user ={name:username}
