@@ -15,7 +15,7 @@ const userAuth = {
          const userToken = createUserToken(user);
          const refreshToken = new Token({refreshToken:userToken.refreshToken});
          await refreshToken.save();
-            res.json({userToken});
+            res.json({userToken, username:user.username});
           }else {
             res.json("Wrong account");
           }

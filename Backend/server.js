@@ -1,11 +1,19 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const mongodDB = require('./config/mongoDB')
 const jwt = require('jsonwebtoken');
 require('dotenv').config({path:'config/.env'});
 const PORT = process.env.PORT;
 const userAuth = require('./routes/userAcount');
 const userPosts = require('./routes/userPosts');
+
+app.use(cors({
+    origin: "http://localhost:3000", // allow to server to accept request from different origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // allow session cookie from browser to pass through
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 mongodDB();
