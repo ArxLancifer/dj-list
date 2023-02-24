@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-
-function isAuthenticated(req, res, next){
+const Token = require('../models/TokenModel');
+async function isAuthenticated(req, res, next){
     const userToken = req.body.userToken;
     
 
@@ -16,7 +16,9 @@ function isAuthenticated(req, res, next){
         if(tokenIsVerified) {
             return next();
         }
-        if(refreshTokenIsVerified) {
+        const refreshTokenIsValid = await Token.findOne({refreshToken:userToken.refreshToken})
+        console.log(refreshTokenIsValid);
+        if(refreshTokenIsVerified && refreshTokenIsValid) {
             const newToken = jwt.sign({refreshTokenIsVerified}, process.env.TOKEN_SECRET,{expiresIn:"20s"});
             const refreshedToken = {
                 ...userToken,
@@ -25,10 +27,10 @@ function isAuthenticated(req, res, next){
             return res.json({userToken:refreshedToken});
         }
 
-    if(!tokenIsVerified && !refreshTokenIsVerified){
-        res.json("Redirected to homepage")
-        res.redirect('/');   
-    }
+    
+        res.json("Redirected to logIn page")
+        // res.redirect('/');   
+    
     } catch (error) {
         res.json(error)
     }
