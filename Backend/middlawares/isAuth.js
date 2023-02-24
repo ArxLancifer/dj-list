@@ -4,7 +4,6 @@ function isAuthenticated(req, res, next){
     const userToken = req.body.userToken;
     
 
-
     try {
         const tokenIsVerified = jwt.verify(userToken.createdUserToken, process.env.TOKEN_SECRET, function(err, result){
             if (err) return null;
@@ -14,14 +13,11 @@ function isAuthenticated(req, res, next){
             if (err) return null;
             return result;
         });
-        // return res.json({refreshTokenIsVerified, userToken});
         if(tokenIsVerified) {
             return next();
         }
-        
         if(refreshTokenIsVerified) {
-            const newToken = jwt.sign(refreshTokenIsVerified, process.env.REFRESH_TOKEN_SECRET);
-            const x = jwt.verify(newToken, process.env.REFRESH_TOKEN_SECRET)
+            const newToken = jwt.sign({refreshTokenIsVerified}, process.env.TOKEN_SECRET,{expiresIn:"20s"});
             const refreshedToken = {
                 ...userToken,
                 createdUserToken:newToken

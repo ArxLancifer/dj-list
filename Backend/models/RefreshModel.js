@@ -10,7 +10,6 @@ const TokenSchema = new Schema({
     },
     {
         timestamps:true,
-        // expireAfterSeconds:6000
     }
 )
 
