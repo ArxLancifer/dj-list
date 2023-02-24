@@ -1,5 +1,5 @@
 const User = require('../models/UserModel');
-const Token = require('../models/RefreshModel');
+const Token = require('../models/TokenModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const createUserToken = require('../helpers/createToken');
@@ -40,44 +40,16 @@ const userAuth = {
             res.send("Something went wrong")  
         }
     },
-    showAllUsers: function(req, res){
+    logOut:async function(req,res){
         try {
-            const isVerified = jwt.verify(req.body.userToken.refreshToken, process.env.REFRESH_TOKEN_SECRET)
-            res.json(isVerified);
-            
-        } catch (error) {
-            res.json(error)
-        }
-    },
-    test:async function (req,res){
-        try {
-            const username = req.body.username;
-            const userPassword = req.body.password;
-            const user = await User.findOne({username:username}).select('password').lean();
-
-            if(!user){
-              return  res.json({massage:"Invalid email or password"});
-            }
-
-            const isAccountValid = await bcrypt.compare(userPassword, user.password);
-            if(!isAccountValid){
-              return  res.json({massage:"Invalid email or password"});
-            }
-            const userData = {
-                userId:user._id,
-                userPassword:userPassword
-            }
-            const createdUserToken = jwt.sign({userData, expiresIn:'10s'}, process.env.TOKEN_SECRET)
-            console.log(userData)
-            const isAuthenticated = jwt.verify(createdUserToken, process.env.TOKEN_SECRET)
-            // res.json({user_id:user._id,isAccountValid});
-            console.log(req.header)
-            res.json({createdUserToken});
+            const userToken = req.body.userToken;
+            await Token.findOneAndDelete({refreshToken:userToken.refreshToken});
+            res.send("Redirect to homepage");
         } catch (error) {
             console.log(error)
         }
-       
     }
+       
 }
 
 module.exports= userAuth;
