@@ -1,18 +1,22 @@
 import React, { useRef, useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import styles from './styles.module.css';
 import axios from 'axios';
 import { Alert } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { logInUser, logOutUser } from './store/userState';
+import { IUser } from '../interfaces/UserInterfaces';
 
 
 function UserLogin() {
 
     let localStorageTokens = localStorage.getItem("userToken");
-    console.log(localStorageTokens);
+    const selector = useSelector<any>(state=>state.userData);
     const [error, setError] = useState<String>("");
     const email = useRef<HTMLInputElement>(null)
     const password = useRef<HTMLInputElement>(null) 
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
    async function loginHandler(e: React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
         const emailInput = email.current?.value || "";
@@ -33,18 +37,34 @@ function UserLogin() {
         }
         )
         
-
-        console.log(fetchUserData.data);
-        console.log(fetchUserData.status);
         if(!localStorageTokens){
             const userTokens = JSON.stringify(fetchUserData.data.userToken)
             localStorage.setItem("userToken", userTokens);
         }
+        console.log(fetchUserData.data)
+        if(fetchUserData.status === 200){
+            const userPayload: IUser = {
+                name: fetchUserData.data.username,
+                email: emailInput,
+                id: fetchUserData.data.id,
+                userTokens:{...fetchUserData.data.userToken},
+                isAuth:true,
+              };
+
+            dispatch(logInUser(userPayload))
+            navigate("/");
+
+        }else {
+            setError(fetchUserData.data)
+        }
+        
         
     }
-    // async function logIn(){
-    //     const
-    // }
+
+
+    console.log(selector)
+
+
   return (
 <div className='container'>
     <h1>Login Page</h1>

@@ -7,6 +7,7 @@ function UserLogin() {
     const [errorsState, setErrorsState] = useState<{[key:string]:string}>({});
     const [userInputs, setUserInputs] = useState<ISignUp>({username:"", email:"", password:"", password2:""});
     const navigate = useNavigate();
+    
     function handleInputs(e: React.ChangeEvent<HTMLInputElement>):void{
         setUserInputs((prevUserInputs)=>{
             return {
@@ -19,7 +20,6 @@ function UserLogin() {
     async function handleSignup(e:React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
         const isValid = checkValidity(userInputs);
-        console.log(isValid)
         if(isValid) return;
         await createAccount();
 
@@ -37,7 +37,6 @@ function UserLogin() {
         if(postRequest.status === 200 ){
             navigate("/login")
         }
-        console.log(postRequest.status)
     }
 
     function checkValidity(inputs:ISignUp){
@@ -70,7 +69,6 @@ function UserLogin() {
                 }
             })
         }
-        console.log(errorsState);
         if(!validLength && validPassword && validEmail) return true;
         return false;
     }

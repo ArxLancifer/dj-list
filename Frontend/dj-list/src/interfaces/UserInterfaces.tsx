@@ -4,3 +4,11 @@ export interface ISignUp {
     password:string;
     password2:string
 } 
+
+export interface IUser {
+    name:string;
+    email:string;
+    id:string;
+    userTokens:object;
+    isAuth:boolean;
+}

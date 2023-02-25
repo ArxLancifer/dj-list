@@ -5,10 +5,10 @@ import HomePage from './components/HomePage';
 import NavigationBar from './components/NavigationBar';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import UserLists from './components/UserLists';
+
 
 function App() {
-    const userdata = useSelector(state=>state);
-    console.log(userdata)
   return (
     <BrowserRouter>
     <NavigationBar />
@@ -16,7 +16,7 @@ function App() {
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<UserLogin />} />
       <Route path='/signup' element={<UserSingup />} />
-      {/* <Route path='/signup' element={<UserLists />} /> */}
+      <Route path='/mylists' element={<UserLists />} />
     </Routes>
     </BrowserRouter>
   );
