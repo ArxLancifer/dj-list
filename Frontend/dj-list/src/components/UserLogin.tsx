@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import styles from './styles.module.css';
-import axios from 'axios';
+import axios, { Axios, AxiosResponse } from 'axios';
 import { Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { logInUser, logOutUser } from './store/userState';
@@ -35,14 +35,23 @@ function UserLogin() {
             email:emailInput,
             password:passwordInput
         }
-        )
+        ).catch((err: Error | any)=>{
+            if (axios.isAxiosError(error))  {
+              // Access to config, request, and response
+              console.log(error.response?.data);
+            } else {
+                // Stock Error
+                setError(err.response.data);
+                console.log(err.response.data);
+            }
+          })
         
         if(!localStorageTokens){
-            const userTokens = JSON.stringify(fetchUserData.data.userToken)
+            const userTokens = JSON.stringify(fetchUserData?.data.userToken)
             localStorage.setItem("userToken", userTokens);
         }
-        console.log(fetchUserData.data)
-        if(fetchUserData.status === 200){
+
+        if(fetchUserData?.status === 200){
             const userPayload: IUser = {
                 name: fetchUserData.data.username,
                 email: emailInput,
@@ -54,8 +63,6 @@ function UserLogin() {
             dispatch(logInUser(userPayload))
             navigate("/");
 
-        }else {
-            setError(fetchUserData.data)
         }
         
         

@@ -17,7 +17,7 @@ const userAuth = {
          await refreshToken.save();
             res.json({userToken, username:user.username, id:user._id});
           }else {
-            res.json("Wrong account");
+            res.status(403).json("Wrong account");
           }
 
         } catch (error) {
