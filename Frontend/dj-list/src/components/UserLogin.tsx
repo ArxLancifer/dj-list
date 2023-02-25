@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import styles from './styles.module.css';
-import axios, { Axios, AxiosResponse } from 'axios';
+import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import { Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { logInUser, logOutUser } from './store/userState';
@@ -12,7 +12,7 @@ function UserLogin() {
 
     let localStorageTokens = localStorage.getItem("userToken");
     const selector = useSelector<any>(state=>state.userData);
-    const [error, setError] = useState<String>("");
+    const [error, setError] = useState<string>("");
     const email = useRef<HTMLInputElement>(null)
     const password = useRef<HTMLInputElement>(null) 
     const navigate = useNavigate();
@@ -35,14 +35,14 @@ function UserLogin() {
             email:emailInput,
             password:passwordInput
         }
-        ).catch((err: Error | any)=>{
-            if (axios.isAxiosError(error))  {
+        ).catch((err: Error | AxiosError)=>{
+            if (axios.isAxiosError(err))  {
               // Access to config, request, and response
-              console.log(error.response?.data);
+              console.log((err as AxiosError).response?.data);
+              setError((err as AxiosError).response?.data as string);
             } else {
-                // Stock Error
-                setError(err.response.data);
-                console.log(err.response.data);
+                // Stock error
+                console.log((err as Error).message)
             }
           })
         
