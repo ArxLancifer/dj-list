@@ -35,6 +35,7 @@ function UserLogin() {
         
 
         console.log(fetchUserData.data);
+        console.log(fetchUserData.status);
         if(!localStorageTokens){
             const userTokens = JSON.stringify(fetchUserData.data.userToken)
             localStorage.setItem("userToken", userTokens);
