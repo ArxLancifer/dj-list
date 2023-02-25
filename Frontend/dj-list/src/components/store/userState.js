@@ -9,7 +9,7 @@ const userData = createSlice({
     },
     reducers:{
        logInUser(state, action){
-
+        
        },
        logOutUser(state){
 
