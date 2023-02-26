@@ -8,3 +8,19 @@ a{
    padding: 4px;
    margin: 5px 0 5px 0;
 }
+
+#basic-nav-dropdown{
+    color:#5bc0de;
+    font-size: 1.3rem;
+    font-weight: 500;
+
+}
+
+div.dropdown-menu{
+    padding: 0.2rem 0.4rem ;
+}
+
+div.dropdown-menu > a {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
