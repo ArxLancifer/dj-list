@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
+const {Track, TrackSchema} = require('./TrackModel');
 
-const TrackSchema = new Schema(
-    {
+const TrackType = {
         title:{
             type:String,
             required:true
@@ -30,13 +30,31 @@ const TrackSchema = new Schema(
             type:String,
             default: "Not available"
         }
+    }
 
+const ListSchema = new Schema({
+
+    user:{
+        type:Schema.Types.ObjectId,
+        ref:'User'
     },
-        {
-        timestamps:true,
-        }
+    name:{
+        type:String,
+        required:true
+    },
+    genre:{
+        type:String,
+        required:true
+    },
+    tracks:[{
+        type:TrackType
+    }]
+
+},
+    {
+    timestamps:true,
+    }
 )
 
-
-const Track = model("Track", TrackSchema);
-module.exports = {Track, TrackSchema};
+const List = model("List", ListSchema);
+module.exports = List;

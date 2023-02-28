@@ -7,6 +7,7 @@ require('dotenv').config({path:'config/.env'});
 const PORT = process.env.PORT;
 const userAuth = require('./routes/userAcount');
 const userPosts = require('./routes/userPosts');
+const userLists = require('./routes/userLists');
 
 app.use(cors({
     origin: "http://localhost:3000", // allow to server to accept request from different origin
@@ -38,6 +39,7 @@ const dummyPosts = [
 
 app.use('/user', userAuth);
 app.use('/userlist', userPosts);
+app.use('/user/userlists', userLists);
 const x = jwt.sign({name:"Anestis",email:"anestis@gmail.com"}, process.env.TOKEN_SECRET);
 
 app.post('/jwttestlogin', (req, res)=>{
