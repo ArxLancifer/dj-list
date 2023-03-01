@@ -10,7 +10,7 @@ function NavigationBar() {
     
     
     const {userInfo} = useSelector<any, any>(state => state.userData);
-   
+   console.log(userInfo)
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -38,6 +38,7 @@ function NavigationBar() {
           </Nav>
         </Navbar.Collapse>
       </Container>
+      <h1 className='text-light'>{userInfo.name}</h1>
     </Navbar>
   );
 }

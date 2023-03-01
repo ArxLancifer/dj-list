@@ -14,7 +14,7 @@ import { stat } from 'fs';
 
 function App() {
     // @ts-ignore
-    const userData:any = useSelector(state => state)
+    const userData:any = useSelector(state => state.userData.userInfo.name)
     const fetchStatus:any = useSelector((state:any) => state.userData.fetchStatus)
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -22,7 +22,7 @@ function App() {
             dispatch<any>(fetchUserThunk())
         }
     }, [dispatch])
-    console.log(userData, "<------")
+    console.log(userData || "", "<------")
 
 
 
@@ -38,7 +38,7 @@ function App() {
   return (
     <BrowserRouter>
     <NavigationBar />
-    {/* <h1>{userData.userInfo.name}</h1> */}
+    <h1>{userData}</h1>
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<UserLogin />} />

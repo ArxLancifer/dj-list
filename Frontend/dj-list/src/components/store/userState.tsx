@@ -45,22 +45,29 @@ const userData = createSlice({
     extraReducers: (builder) => {
         builder
           .addCase(fetchUserThunk.pending, (state, action) => {
-            console.log("Fetch pending")
-            state.fetchStatus = 'pending';
+            if (state.fetchStatus === 'idle'){
+                state.fetchStatus = 'pending';
+                console.log("Fetch pending")
+            }
           })
           .addCase(fetchUserThunk.fulfilled, (state, action) => {
             const { requestId } = action.meta
-           
-            state.userInfo.name = "Egw eimai re";
-            state.userInfo.id = "9a9asd09asd089";
-            state.fetchStatus = 'idle'
-            console.log("Fetch fulfilled")
+            if (state.fetchStatus === 'pending'){
+                state.userInfo.name = "Egw eimai re";
+                state.userInfo.id = "9a9asd09asd089";
+                state.fetchStatus = 'idle';
+                state.userInfo.isAuth = true;
+                console.log("Fetch fulfilled")
+
+            }
            
           })
           .addCase(fetchUserThunk.rejected, (state, action) => {
             const { requestId } = action.meta;
-            state.fetchStatus = 'idle';
-            console.log("Fetch rejected");
+            if(state.fetchStatus === 'pending'){
+                state.fetchStatus = 'idle';
+                console.log("Fetch rejected");
+            }
 
           })
       },
