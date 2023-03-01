@@ -8,6 +8,7 @@ const PORT = process.env.PORT;
 const userAuth = require('./routes/userAcount');
 const userPosts = require('./routes/userPosts');
 const userLists = require('./routes/userLists');
+const { response } = require('express');
 
 app.use(cors({
     origin: "http://localhost:3000", // allow to server to accept request from different origin
@@ -37,9 +38,30 @@ const dummyPosts = [
     
 ]
 
+app.post("/gatekeeper", (req,res)=>{
+    const token = req.body.token;
+        
+    try {
+        const userIsAuth = jwt.verify(token, process.env.TOKEN_SECRET, (err, result)=>{
+        if(err) return null;
+        return result;
+        })
+        if(userIsAuth){
+           return res.json({id:userIsAuth._id, name:userIsAuth.username, isAuth:true});
+        }else{
+           return res.status(403).json("Unauthorized user!");
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 app.use('/user', userAuth);
 app.use('/userlist', userPosts);
 app.use('/user/userlists', userLists);
+
+
+
 const x = jwt.sign({name:"Anestis",email:"anestis@gmail.com"}, process.env.TOKEN_SECRET);
 
 app.post('/jwttestlogin', (req, res)=>{

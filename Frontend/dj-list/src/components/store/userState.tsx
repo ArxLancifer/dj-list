@@ -19,6 +19,11 @@ const userData = createSlice({
        logInUser(state, action:PayloadAction<IUser>){
         state.userInfo = {...action.payload};
        },
+       isAuth(state, action:PayloadAction<{id:string, name:string, isAuth:boolean}>){
+           state.userInfo.id = action.payload.id;
+           state.userInfo.name = action.payload.name;
+           state.userInfo.isAuth = action.payload.isAuth;
+    },
        logOutUser(state){
         console.log("dispatch did run");
        },

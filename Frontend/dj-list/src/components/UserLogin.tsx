@@ -46,10 +46,13 @@ function UserLogin() {
             }
           })
         
-        if(!localStorageTokens){
-            const userTokens = JSON.stringify(fetchUserData?.data.userToken)
-            localStorage.setItem("userToken", userTokens);
-        }
+        // if(!localStorageTokens){
+        //     const userTokens = JSON.stringify(fetchUserData?.data.userToken)
+        //     localStorage.setItem("userToken", userTokens);
+        // }else{
+        // }
+        const userTokens = JSON.stringify(fetchUserData?.data.userToken)
+        localStorage.setItem("userToken", userTokens);
 
         if(fetchUserData?.status === 200){
             const userPayload: IUser = {
@@ -59,7 +62,7 @@ function UserLogin() {
                 userTokens:{...fetchUserData.data.userToken},
                 isAuth:true,
               };
-
+              
             dispatch(logInUser(userPayload))
             navigate("/");
 

@@ -11,7 +11,6 @@ function NavigationBar() {
     
     const {userInfo} = useSelector<any, any>(state => state.userData);
    
-    console.log(userInfo)
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -25,12 +24,12 @@ function NavigationBar() {
           <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Home</Nav.Link>
             <Nav.Link as={Link} to={"/userlists"} className='fs-5 mx-3 text-light'>My lists</Nav.Link>
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 
-            <Nav.Link as={Link} to={"/login"} className='fs-5 mx-5 text-info'>
-                 <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+            
+                 <NavDropdown className='fs-5 mx-5 text-info' title={userInfo.name} id="basic-nav-dropdown">
                      <NavDropdown.Item>Logout</NavDropdown.Item>
                 </NavDropdown>
                 
-            </Nav.Link>
+           
             :
             <Nav.Link as={Link} to={"/login"} className='fs-5 mx-5 text-light'>
                 Login
