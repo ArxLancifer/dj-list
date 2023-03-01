@@ -6,29 +6,39 @@ import NavigationBar from './components/NavigationBar';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserLists from './components/UserLists';
+import { useDispatch } from 'react-redux';
+import {fetchUserThunk} from './components/store/userState'
 import axios, { AxiosResponse } from 'axios';
 import { stat } from 'fs';
 
 
 function App() {
+    // @ts-ignore
+    const userData:any = useSelector(state => state)
+    const fetchStatus:any = useSelector((state:any) => state.userData.fetchStatus)
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        if(fetchStatus === 'idle'){
+            dispatch<any>(fetchUserThunk())
+        }
+    }, [dispatch])
+    console.log(userData, "<------")
 
-    const userData = useSelector(state => state)
-    console.log(userData)
-   async function fetchUserData(){
-        const token: any = JSON.parse(localStorage.getItem('userToken') || '');
-        const response = await axios.post("http://localhost:5000/gatekeeper", {token:token.createdUserToken});
-        console.log(token.createdUserToken)
-        console.log(response.data)
-   }
 
-   useEffect(()=>{
-    fetchUserData()
-   }, []);
+
+    // console.log(userData)
+//    async function fetchUserData(){
+//         const token: any = JSON.parse(localStorage.getItem('userToken') || '');
+//         const response = await axios.post("http://localhost:5000/gatekeeper", {token:token.createdUserToken});
+//         console.log(token.createdUserToken)
+//         console.log(response.data)
+//    }
 
 
   return (
     <BrowserRouter>
     <NavigationBar />
+    {/* <h1>{userData.userInfo.name}</h1> */}
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<UserLogin />} />

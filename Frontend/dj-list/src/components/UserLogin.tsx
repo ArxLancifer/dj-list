@@ -72,8 +72,6 @@ function UserLogin() {
     }
 
 
-    console.log(selector)
-
 
   return (
 <div className='container'>

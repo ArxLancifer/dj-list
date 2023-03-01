@@ -1,5 +1,16 @@
-import { createSlice , PayloadAction} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice , PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../interfaces/UserInterfaces";
+import axios from "axios";
+
+export const fetchUserThunk = createAsyncThunk("userData/fetchData", async function(){
+    try {
+        const token: any = JSON.parse(localStorage.getItem('userToken') || '');
+        const response = await axios.post("http://localhost:5000/gatekeeper", {token:token.createdUserToken});
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 const initialState = {
     userInfo:{
@@ -9,6 +20,7 @@ const initialState = {
         userTokens:{},
         isAuth:false,
     },
+    fetchStatus:"idle",
 }
 
 const userData = createSlice({
@@ -29,7 +41,29 @@ const userData = createSlice({
        },
 
 
-    }
+    },
+    extraReducers: (builder) => {
+        builder
+          .addCase(fetchUserThunk.pending, (state, action) => {
+            console.log("Fetch pending")
+            state.fetchStatus = 'pending';
+          })
+          .addCase(fetchUserThunk.fulfilled, (state, action) => {
+            const { requestId } = action.meta
+           
+            state.userInfo.name = "Egw eimai re";
+            state.userInfo.id = "9a9asd09asd089";
+            state.fetchStatus = 'idle'
+            console.log("Fetch fulfilled")
+           
+          })
+          .addCase(fetchUserThunk.rejected, (state, action) => {
+            const { requestId } = action.meta;
+            state.fetchStatus = 'idle';
+            console.log("Fetch rejected");
+
+          })
+      },
 })
 
 export default userData.reducer;
