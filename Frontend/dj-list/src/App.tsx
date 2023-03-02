@@ -22,7 +22,6 @@ function App() {
             dispatch<any>(fetchUserThunk())
         }
     }, [dispatch])
-    console.log(userData || "", "<------")
 
 
 
@@ -38,7 +37,6 @@ function App() {
   return (
     <BrowserRouter>
     <NavigationBar />
-    <h1>{userData}</h1>
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<UserLogin />} />

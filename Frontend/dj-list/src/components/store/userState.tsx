@@ -3,13 +3,13 @@ import {IUser} from "../../interfaces/UserInterfaces";
 import axios from "axios";
 
 export const fetchUserThunk = createAsyncThunk("userData/fetchData", async function(){
-    try {
+    // try {
         const token: any = JSON.parse(localStorage.getItem('userToken') || '');
         const response = await axios.post("http://localhost:5000/gatekeeper", {token:token.createdUserToken});
         return response.data;
-    } catch (error) {
-        console.log(error);
-    }
+    // } catch (error) {
+    //     console.log(error);
+    // }
 })
 
 const initialState = {
@@ -37,7 +37,10 @@ const userData = createSlice({
            state.userInfo.isAuth = action.payload.isAuth;
     },
        logOutUser(state){
-        console.log("dispatch did run");
+        state.userInfo.name = "";
+        state.userInfo.id = "";
+        state.userInfo.isAuth = false;
+        state.userInfo.userTokens = {};
        },
 
 
@@ -53,10 +56,10 @@ const userData = createSlice({
           .addCase(fetchUserThunk.fulfilled, (state, action) => {
             const { requestId } = action.meta
             if (state.fetchStatus === 'pending'){
-                state.userInfo.name = "Egw eimai re";
-                state.userInfo.id = "9a9asd09asd089";
+                state.userInfo.name = action.payload.name;
+                state.userInfo.id = action.payload.id;
+                state.userInfo.isAuth = action.payload.isAuth;
                 state.fetchStatus = 'idle';
-                state.userInfo.isAuth = true;
                 console.log("Fetch fulfilled")
 
             }
@@ -66,6 +69,8 @@ const userData = createSlice({
             const { requestId } = action.meta;
             if(state.fetchStatus === 'pending'){
                 state.fetchStatus = 'idle';
+                state.userInfo.name = "";
+                state.userInfo.id = "";
                 console.log("Fetch rejected");
             }
 

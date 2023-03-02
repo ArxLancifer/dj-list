@@ -42,9 +42,9 @@ const userAuth = {
     },
     logOut:async function(req,res){
         try {
-            const userToken = req.body.userToken;
-            await Token.findOneAndDelete({refreshToken:userToken.refreshToken});
-            res.send("Redirect to homepage");
+            const refreshToken = req.body.refreshToken;
+            await Token.findOneAndDelete({refreshToken:refreshToken});
+            res.json("Redirect to homepage");
         } catch (error) {
             console.log(error)
         }

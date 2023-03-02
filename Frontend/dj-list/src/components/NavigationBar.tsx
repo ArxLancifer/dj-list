@@ -1,18 +1,50 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import axios, { AxiosError } from 'axios';
 import "../App.css";
-import { NavDropdown } from 'react-bootstrap';
+import { Alert, NavDropdown } from 'react-bootstrap';
+import { logOutUser } from './store/userState';
+import { Fragment, useState } from 'react';
 
 function NavigationBar() {
     
     
     const {userInfo} = useSelector<any, any>(state => state.userData);
-   console.log(userInfo)
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
+    async function handleLogout(){
+      const {refreshToken}:any = JSON.parse(localStorage.getItem('userToken') || '{}')
+      // *NOTE* I HAVE TO ADD BEARER FOR DELETE REQUEST IN BACKEND
+      const logOutRequest = await axios.post("http://localhost:5000/user/logout", {refreshToken:refreshToken}, {
+        headers: {
+          'Content-Type': 'application/json'
+      }
+      }).catch((err: Error | AxiosError)=>{
+        if (axios.isAxiosError(err))  {
+          // Access to config, request, and response
+          setError(true);
+          setTimeout(()=>{
+            setError(false);
+          },3000)
+        } else {
+            // Stock error
+            setError(true);
+        }
+      });
+
+      localStorage.setItem('userToken', '');
+      dispatch(logOutUser())
+      navigate("/login")
+    }
 
   return (
+    <Fragment>
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="#home">
@@ -26,7 +58,7 @@ function NavigationBar() {
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 
             
                  <NavDropdown className='fs-5 mx-5 text-info' title={userInfo.name} id="basic-nav-dropdown">
-                     <NavDropdown.Item>Logout</NavDropdown.Item>
+                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
                 
            
@@ -38,8 +70,9 @@ function NavigationBar() {
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <h1 className='text-light'>{userInfo.name}</h1>
     </Navbar>
+    {error && <Alert variant='danger' className=' w-50 mx-auto'>Did not log out properly</Alert>}
+    </Fragment>
   );
 }
 
