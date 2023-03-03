@@ -58,7 +58,7 @@ app.post("/gatekeeper", (req,res)=>{
 
 app.use('/user', userAuth);
 app.use('/userlist', userPosts);
-app.use('/user/userlists', userLists);
+app.use('/userlists', userLists);
 
 
 

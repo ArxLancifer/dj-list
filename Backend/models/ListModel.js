@@ -36,7 +36,8 @@ const ListSchema = new Schema({
 
     user:{
         type:Schema.Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required: true
     },
     name:{
         type:String,
@@ -45,6 +46,10 @@ const ListSchema = new Schema({
     genre:{
         type:String,
         required:true
+    },
+    isPrivate: {
+        type:Boolean,
+        default:false,
     },
     tracks:[{
         type:TrackType

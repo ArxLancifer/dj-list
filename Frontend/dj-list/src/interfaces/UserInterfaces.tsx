@@ -5,6 +5,11 @@ export interface ISignUp {
     password2:string
 } 
 
+export interface IState {
+    userInfo:object;
+    fetchStatus:string;
+}
+
 export interface IUser {
     name:string;
     email:string;

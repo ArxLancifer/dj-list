@@ -9,12 +9,15 @@ userLists = {
     },
     createList: async function(req, res){
 
-        const listName = req.body.listName;
-        const genre = req.body.genre;
+        const listName = req.body.name;
+        const listGenre = req.body.genre;
+        const listPublic = req.body.isPublic;
+        const id = req.body.userId;
 
-        const newList = new List({name:listName, genre:genre})
+        const newList = new List({user:id, name:listName, genre:listGenre, public:listPublic});
         await newList.save()
-        res.send("List created");
+        console.log(newList);
+        res.json("List created");
     },
     pushTrack: async function(req, res){
         const track = "Kapetanios Drake";
