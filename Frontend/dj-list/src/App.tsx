@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import {fetchUserThunk} from './components/store/userState'
 import axios, { AxiosResponse } from 'axios';
 import { stat } from 'fs';
+import CreateListForm from './components/SubComponents/CreateListForm';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
       <Route path='/login' element={<UserLogin />} />
       <Route path='/signup' element={<UserSingup />} />
       <Route path='/userlists' element={<UserLists />} />
+      <Route path='/createlist' element={<CreateListForm />} />
     </Routes>
     </BrowserRouter>
   );
