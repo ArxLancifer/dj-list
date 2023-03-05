@@ -16,7 +16,7 @@ function NavigationBar() {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const listsDisabled = userInfo.isAuth ?  "text-light": "text-secondary disabled";
 
     async function handleLogout(){
       const {refreshToken}:any = JSON.parse(localStorage.getItem('userToken') || '{}')
@@ -48,25 +48,26 @@ function NavigationBar() {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="#home">
-        <img className='w-25 p-0 mx-4' src={process.env.PUBLIC_URL + '/Logo.png'} alt="app logo"/>
+        <img className='p-0 mx-5 memotrack-logo' src={process.env.PUBLIC_URL + '/Logo.png'} alt="app logo"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse className='text-center ' id="basic-navbar-nav">
           <Nav className="ms-auto">
           <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Home</Nav.Link>
-            <Nav.Link as={Link} to={"/userlists"} className='fs-5 mx-3 text-light'>My lists</Nav.Link>
+            <Nav.Link as={Link} to={"/userlists"} className={'fs-5 mx-3 ' + listsDisabled }>My lists</Nav.Link>
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 
             
-                 <NavDropdown className='fs-5 mx-5 text-info' title={userInfo.name} id="basic-nav-dropdown">
+                 <NavDropdown className='fs-5 mx-3 text-info' title={userInfo.name} id="basic-nav-dropdown">
                      <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
                 
            
             :
-            <Nav.Link as={Link} to={"/login"} className='fs-5 mx-5 text-light'>
+            <Nav.Link as={Link} to={"/login"} className='fs-5 mx-3 text-light'>
                 Login
             </Nav.Link>
             }
+            <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

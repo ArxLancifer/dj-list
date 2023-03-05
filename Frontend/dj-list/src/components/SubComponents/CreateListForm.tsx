@@ -3,6 +3,7 @@ import { Alert, Button, Container, Form } from 'react-bootstrap'
 import { useRef } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {IState} from '../../interfaces/UserInterfaces';
 function CreateListForm() {
 
@@ -11,6 +12,7 @@ function CreateListForm() {
     const listName = useRef<any>();
     const listGenre = useRef<any>();
     const listPublic = useRef<any>();
+    const navigate = useNavigate();
 
     function inputValidity(name:string, genre:string):boolean{
         console.log(name.length > 3 && genre.length > 3)
@@ -37,12 +39,14 @@ function CreateListForm() {
         if (axios.isAxiosError(err))  {
           // Access to config, request, and response
           setError("Failed to create list please check you internet");
+          return;
         } else {
             // Stock error
             setError("Failed to create list please check you internet");
+            return;
         }
       });
-
+      navigate('/userlists')
     }
 
   return (

@@ -3,9 +3,12 @@ const List = require('../models/ListModel');
 const {Track} = require('../models/TrackModel')
 userLists = {
     getLists: async function(req, res){
-
-        res.send("All Lists");
-
+        const userId = req.params.user;
+        if(!userId){
+            return res.status(404).json("User not found");
+        }
+        const userLists = await List.find({id:userId}).select('user name genre').lean();
+        res.json(userLists);
     },
     createList: async function(req, res){
 

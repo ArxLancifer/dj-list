@@ -46,11 +46,6 @@ function UserLogin() {
             }
           })
         
-        // if(!localStorageTokens){
-        //     const userTokens = JSON.stringify(fetchUserData?.data.userToken)
-        //     localStorage.setItem("userToken", userTokens);
-        // }else{
-        // }
         const userTokens = JSON.stringify(fetchUserData?.data.userToken)
         localStorage.setItem("userToken", userTokens);
 

@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice , PayloadAction} from "@reduxjs/toolkit";
-import {IUser} from "../../interfaces/UserInterfaces";
+import {IUser, IToken} from "../../interfaces/UserInterfaces";
 import axios from "axios";
 
 export const fetchUserThunk = createAsyncThunk("userData/fetchData", async function(){
     // try {
-        const token: any = JSON.parse(localStorage.getItem('userToken') || '');
+        const token: IToken = JSON.parse(localStorage.getItem('userToken') || '');
         const response = await axios.post("http://localhost:5000/gatekeeper", {token:token.createdUserToken});
         return response.data;
     // } catch (error) {

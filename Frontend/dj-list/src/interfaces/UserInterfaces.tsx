@@ -10,10 +10,22 @@ export interface IState {
     fetchStatus:string;
 }
 
+export interface IToken {
+    createdUserToken:string;
+    refreshToken:string;
+}
+
 export interface IUser {
     name:string;
     email:string;
     id:string;
-    userTokens:object;
+    userTokens:IToken;
     isAuth:boolean;
+}
+
+export interface IList {
+        _id: string;
+        user: string;
+        name: string;
+        genre: string;
 }
