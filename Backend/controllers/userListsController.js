@@ -5,9 +5,13 @@ userLists = {
     getLists: async function(req, res){
         const userId = req.params.user;
         if(!userId){
-            return res.status(404).json("User not found");
+            return res.status(400).json("User not found");
         }
-        const userLists = await List.find({id:userId}).select('user name genre').lean();
+        
+        const userLists = await List.find({user:"63f8d98aa07f43eca4390fb6"})
+        .select('user name genre')
+        .populate({path:'user', select:'username'})
+        .lean();
         res.json(userLists);
     },
     createList: async function(req, res){
@@ -19,7 +23,7 @@ userLists = {
 
         const newList = new List({user:id, name:listName, genre:listGenre, public:listPublic});
         await newList.save()
-        console.log(newList);
+
         res.json("List created");
     },
     pushTrack: async function(req, res){

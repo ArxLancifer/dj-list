@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {Button, Container, Form, InputGroup } from 'react-bootstrap'
-import GenreCard from './SubComponents/GenreCard';
+import ListCard from './SubComponents/ListCard';
 import  {PlusSquare} from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import axios, { AxiosError, AxiosResponse } from 'axios';
@@ -8,31 +8,21 @@ import { IList, IState, IUser } from '../interfaces/UserInterfaces';
 import { useSelector } from 'react-redux';
 function UserLists() {
 
-    const [lists, setLists] = useState<[IList]>([ {_id: "", user: "", name: "", genre: ""}]);
+    const [userLists, setUserLists] = useState<[IList]>([ {_id: "", user: {username:""}, name: "", genre: ""}]);
     const userId = useSelector((state:any)=>state.userData.userInfo.id)
-    console.log(userId)
     async function fetchLists(){
         try {
-            const response = await axios.get<AxiosResponse>(`http://localhost:5000/userlists/getlists/user=${userId}`)
-            console.log(response.data)
+            const response = await axios.get(`http://localhost:5000/userlists/getlists/${userId}`)
+            const listsData = response.data;
+            setUserLists(listsData);
         } catch (error) {
             console.log(error)
         }
     }
-    //    .catch((err: Error | AxiosError)=>{
-    //     if (axios.isAxiosError(err))  {
-    //         console.log(err.status)
-    //         return
-    //     } else {
-    //         // Stock error
-    //         console.log(err)
-    //         return
-    //     }
-    //   });
-    // }
+    console.log(userLists)
     useEffect(()=>{
         fetchLists();
-    }, )
+    },[userId] )
 
 
   return (
@@ -49,7 +39,10 @@ function UserLists() {
         />
       </InputGroup>
       <Container className='d-flex flex-wrap justify-content-center'>
-       <GenreCard />
+        {userLists.map((list:IList)=>{
+            return <ListCard listData={list} />
+        })}
+       {/* <ListCard /> */}
       </Container>
     </Container>
   )

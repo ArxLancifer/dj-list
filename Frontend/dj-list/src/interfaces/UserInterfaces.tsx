@@ -25,7 +25,9 @@ export interface IUser {
 
 export interface IList {
         _id: string;
-        user: string;
+        user: {
+            username:string;
+        };
         name: string;
         genre: string;
 }

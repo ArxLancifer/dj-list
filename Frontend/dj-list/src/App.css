@@ -1,3 +1,4 @@
+/* Navbar */
 a{
   text-decoration: none;
   color: #fff;
@@ -24,7 +25,19 @@ div.dropdown-menu > a {
     font-size: 1.1rem;
     font-weight: 500;
 }
-
+/* Logo */
 .memotrack-logo{
     width: 80px;
+}
+
+/* Card styling */
+.card {
+    height: 10rem;
+    overflow: hidden;
+}
+.card-body{
+    border-radius: 5px;
+}
+.card-title, .djName{
+    color: rgb(26, 153, 0);
 }
