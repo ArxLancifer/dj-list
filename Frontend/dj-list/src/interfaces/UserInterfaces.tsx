@@ -31,3 +31,14 @@ export interface IList {
         name: string;
         genre: string;
 }
+
+export interface ITrack {
+    _id:string;
+    title:string;
+    artist:string;
+    album:string;
+    subGenre:string;
+    duration:string;
+    BPM:number;
+    youtubeLink:string;
+}
