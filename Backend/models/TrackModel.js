@@ -2,6 +2,10 @@ const {Schema, model} = require('mongoose');
 
 const TrackSchema = new Schema(
     {
+        play:{
+            type:String,
+            default:""
+        },
         title:{
             type:String,
             required:true
@@ -11,11 +15,11 @@ const TrackSchema = new Schema(
             required:true
         },
         album:{
-            type:Number,
+            type:String,
             default: "Not available"
         },
         subGenre:{
-            type:Number,
+            type:String,
             default: "Not available"
         },
         duration:{

@@ -2,6 +2,10 @@ const {Schema, model} = require('mongoose');
 const {Track, TrackSchema} = require('./TrackModel');
 
 const TrackType = {
+        play:{
+            type:String,
+            default:""
+        },
         title:{
             type:String,
             required:true
@@ -11,11 +15,11 @@ const TrackType = {
             required:true
         },
         album:{
-            type:Number,
+            type:String,
             default: "Not available"
         },
         subGenre:{
-            type:Number,
+            type:String,
             default: "Not available"
         },
         duration:{
@@ -23,7 +27,7 @@ const TrackType = {
             default: "Not available"
         },
         BPM:{
-            type:Number,
+            type:String,
             default: "Not available"
         },
         youtubeLink:{

@@ -7,10 +7,11 @@ import  {Play} from 'react-bootstrap-icons';
 import { Container } from 'react-bootstrap';
 import { useDispatch} from 'react-redux';
 import {setYoutubeLink , modalShow} from '../store/modalState';
-
+import {useParams} from 'react-router-dom';
 
 function TracksTable() {
 
+    const params = useParams();
 
     const dispatch = useDispatch();
     function handleSetLink(e:React.SyntheticEvent<HTMLElement>){

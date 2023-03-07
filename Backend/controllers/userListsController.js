@@ -26,14 +26,19 @@ userLists = {
 
         res.json("List created");
     },
+    getTracks: async function(req, res){
+        const listId = req.params.listid;
+        const tracks = await List.findById(listId).select('tracks').lean();
+        res.json(tracks);
+    },
     pushTrack: async function(req, res){
-        const track = "Kapetanios Drake";
-        
-        const newTrack = {title:"asta na pane"};
+        const listId = req.params.listid;
+        const trackData = {title:"Where Are You", artist:"Sako Isoyan ", duration:"6:18", BPM:"100", youtubeLink:"https://www.youtube.com/embed/0Q76S9eOsco"}
+        const newTrack = new Track(trackData)
 
-        await List.updateOne({id:"63fe36d7b352f704d8d1af25"}, {$push:{tracks:newTrack}})
+        await List.findByIdAndUpdate(listId, {$push:{tracks:newTrack}})
         
-        res.send("Track pushed to list")
+        res.json({x:newTrack, y:"Track pushed to list"})
     }
 }
 

@@ -9,6 +9,7 @@ import UserLists from './components/UserLists';
 import { useDispatch } from 'react-redux';
 import {fetchUserThunk} from './components/store/userState'
 import CreateListForm from './components/SubComponents/CreateListForm';
+import TracksTable from './components/SubComponents/TracksTable';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Route path='/signup' element={<UserSingup />} />
       <Route path='/userlists' element={<UserLists />} />
       <Route path='/createlist' element={<CreateListForm />} />
+      <Route path='/trackstable/:listid' element={<TracksTable />} />
     </Routes>
     </BrowserRouter>
   );
