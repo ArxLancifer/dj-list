@@ -27,7 +27,7 @@ function ModalEmbedYoutube() {
           <Modal.Title>{trackTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe src={youtubeLink} title={trackTitle}></iframe>
+          <iframe src={youtubeLink + "?autoplay=1"} title={trackTitle} allow='autoplay' allowFullScreen></iframe>
         </Modal.Body>
         <Modal.Footer>
           {/* <Button variant="secondary" onClick={handleClose}>

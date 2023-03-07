@@ -8,7 +8,7 @@ userLists = {
             return res.status(400).json("User not found");
         }
         
-        const userLists = await List.find({user:"63f8d98aa07f43eca4390fb6"})
+        const userLists = await List.find({user:userId})
         .select('user name genre')
         .populate({path:'user', select:'username'})
         .lean();

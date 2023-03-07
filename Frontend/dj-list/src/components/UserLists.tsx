@@ -38,8 +38,8 @@ function UserLists() {
         />
       </InputGroup>
       <Container className='d-flex flex-wrap justify-content-center'>
-        {userLists.map((list:IList)=>{
-            return <ListCard listData={list} />
+        {userLists.map((list:IList, index)=>{
+            return <ListCard key={index} listData={list} />
         })}
        {/* <ListCard /> */}
       </Container>

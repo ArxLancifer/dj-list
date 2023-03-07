@@ -6,6 +6,7 @@ const createUserToken = require('../helpers/createToken');
 
 const userAuth = {
     loginUser: async function(req, res){
+        console.log(req.body)
         const user = await User.findOne({email:req.body.email}).lean();
         if(!user){
          return res.json("Invalid email or password");
@@ -21,7 +22,7 @@ const userAuth = {
           }
 
         } catch (error) {
-           res.send(error); 
+           res.json(error); 
         }
     },
     signUp:async function(req, res){

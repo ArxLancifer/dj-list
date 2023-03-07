@@ -15,6 +15,8 @@ import TracksTable from './components/SubComponents/TracksTable';
 function App() {
 
     const fetchStatus:any = useSelector((state:any) => state.userData.fetchStatus)
+    const allstate = useSelector(state=>state);
+    console.log(allstate)
     const dispatch = useDispatch();
     useEffect(()=>{
         if(fetchStatus === 'idle'){

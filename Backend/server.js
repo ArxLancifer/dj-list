@@ -46,6 +46,7 @@ app.post("/gatekeeper", (req,res)=>{
         if(err) return null;
         return result;
         })
+        // console.log(userIsAuth)
         if(userIsAuth){
            return res.json({id:userIsAuth._id, name:userIsAuth.username, isAuth:true});
         }else{

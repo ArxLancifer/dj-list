@@ -4,7 +4,6 @@ function HomePage() {
   return (
     <div>
        <h1>Welcome to Memotrack</h1> 
-       <TracksTable />
     </div>
   )
 }

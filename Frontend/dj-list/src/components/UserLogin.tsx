@@ -10,7 +10,7 @@ import { IUser } from '../interfaces/UserInterfaces';
 
 function UserLogin() {
 
-    let localStorageTokens = localStorage.getItem("userToken");
+    let localStorageTokens = localStorage.getItem("userToken") || "";
     const selector = useSelector<any>(state=>state.userData);
     const [error, setError] = useState<string>("");
     const email = useRef<HTMLInputElement>(null)

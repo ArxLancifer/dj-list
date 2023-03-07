@@ -1,18 +1,26 @@
-import React, { Fragment} from 'react'
+import React, { Fragment, useEffect, useState} from 'react'
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table'; 
 import { ITrack } from '../../interfaces/UserInterfaces';
 import { createTheme, ThemeProvider} from '@mui/material';
 import ModalEmbedYoutube from './ModalEmbedYoutube';
 import  {Play} from 'react-bootstrap-icons';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { useDispatch} from 'react-redux';
 import {setYoutubeLink , modalShow} from '../store/modalState';
 import {useParams} from 'react-router-dom';
-
+import useTrackTable from '../../hooks/useTrackTable';
 function TracksTable() {
 
-    const params = useParams();
-
+    const [tracks, setTracks] = useState([])
+    
+    const {listid} = useParams();
+    const {fetchTracks} = useTrackTable();
+    console.log(tracks);
+    useEffect(()=>{
+        //@ts-ignore
+        fetchTracks(listid).then(data=> setTracks(data.tracks));
+    }, [])
+    console.log(tracks);
     const dispatch = useDispatch();
     function handleSetLink(e:React.SyntheticEvent<HTMLElement>){
         const linkToYoutube:string = e.currentTarget.dataset.link || "";
@@ -40,30 +48,6 @@ function TracksTable() {
         }
     })
 
-    const data:ITrack[] = [
-        {
-            play:"",
-            _id:"123",
-            title:"Fokume",
-            artist:"Fokume",
-            album:"Oti nanai",
-            subGenre:"Gipsy rap",
-            BPM:100,
-            duration:"2min",
-            youtubeLink:"https://www.youtube.com/embed/FRFeKXMBn3o"
-        },
-        {
-            play:"",
-            _id:'3f25309c-8fa1-470f-811e-cdb082ab9017',
-            title:"Kapetanios Drake",
-            artist:"Kapetanios",
-            album:"To kynhgi toy 8hsayroy",
-            subGenre:"Gipsy rap",
-            BPM:100,
-            duration:"2min",
-            youtubeLink:"https://www.youtube.com/embed/rCVWOTlB8Wg"
-        }
-    ]
 
     const columns:MRT_ColumnDef<ITrack>[] = [
         // {
@@ -130,7 +114,7 @@ function TracksTable() {
     <Container>
     <ThemeProvider theme={theme}>
         <MaterialReactTable
-            columns={columns} data={data}
+            columns={columns} data={tracks}
             muiTableBodyCellProps={{sx:{fontSize:"0.85rem"}}}
             // muiTableBodyRowProps={({ row }) => ({
             //     onClick: (event) => {
@@ -146,6 +130,14 @@ function TracksTable() {
                 'data-user-id':row.original._id,
                 "data-yourube-link":row.original.youtubeLink
             })}
+            renderBottomToolbarCustomActions={({ table }) => {
+                
+                return (             
+                    <Button variant='success'>
+                        Add Track
+                    </Button>      
+                );
+              }}
             getRowId={(row) => row._id}
             enableDensityToggle={false}
             initialState={{ density: 'compact' }}
