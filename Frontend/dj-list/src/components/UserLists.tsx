@@ -3,8 +3,8 @@ import {Button, Container, Form, InputGroup } from 'react-bootstrap'
 import ListCard from './SubComponents/ListCard';
 import  {PlusSquare} from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { IList, IState, IUser } from '../interfaces/UserInterfaces';
+import axios from 'axios';
+import { IList} from '../interfaces/UserInterfaces';
 import { useSelector } from 'react-redux';
 function UserLists() {
 
@@ -19,7 +19,6 @@ function UserLists() {
             console.log(error)
         }
     }
-    console.log(userLists)
     useEffect(()=>{
         fetchLists();
     },[userId] )

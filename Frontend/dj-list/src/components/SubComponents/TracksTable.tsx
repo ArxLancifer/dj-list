@@ -1,25 +1,27 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment} from 'react'
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table'; 
 import { ITrack } from '../../interfaces/UserInterfaces';
-import { createTheme, ThemeProvider, useTheme } from '@mui/material';
+import { createTheme, ThemeProvider} from '@mui/material';
 import ModalEmbedYoutube from './ModalEmbedYoutube';
 import  {Play} from 'react-bootstrap-icons';
 import { Container } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import {setYoutubeLink} from '../store/modalState';
-import { RootState } from '../store';
+import { useDispatch} from 'react-redux';
+import {setYoutubeLink , modalShow} from '../store/modalState';
+
+
 function TracksTable() {
 
 
     const dispatch = useDispatch();
-    const youtubeLink = useSelector((state:RootState)=>state.modalState);
-    console.log(youtubeLink);
     function handleSetLink(e:React.SyntheticEvent<HTMLElement>){
-        console.log(e.currentTarget.dataset.trackTitle)
         const linkToYoutube:string = e.currentTarget.dataset.link || "";
         const trackTitle:string = e.currentTarget.dataset.trackTitle || "";
         dispatch<any>(setYoutubeLink({link:linkToYoutube, trackTitle:trackTitle}))
-        
+    }
+
+
+    function fetchListTrack(){
+        return null;
     }
 
     const theme = createTheme({
@@ -47,40 +49,51 @@ function TracksTable() {
             subGenre:"Gipsy rap",
             BPM:100,
             duration:"2min",
-            youtubeLink:"https://www.youtube.com/watch?v=FRFeKXMBn3o"
+            youtubeLink:"https://www.youtube.com/embed/FRFeKXMBn3o"
+        },
+        {
+            play:"",
+            _id:'3f25309c-8fa1-470f-811e-cdb082ab9017',
+            title:"Kapetanios Drake",
+            artist:"Kapetanios",
+            album:"To kynhgi toy 8hsayroy",
+            subGenre:"Gipsy rap",
+            BPM:100,
+            duration:"2min",
+            youtubeLink:"https://www.youtube.com/embed/rCVWOTlB8Wg"
         }
     ]
 
     const columns:MRT_ColumnDef<ITrack>[] = [
-        {
-            accessorKey: '_id', //access nested data with dot notation
-            header: 'user ID',
-            maxSize:100
-        },
+        // {
+        //     accessorKey: '_id', //access nested data with dot notation
+        //     header: 'user ID',
+        //     maxSize:100
+        // },
         {
             accessorKey: 'title', //access nested data with dot notation
             header: 'Title',
-            maxSize:100,
+            maxSize:140,
         },
         {
             accessorKey: 'artist', //access nested data with dot notation
             header: 'Artist',
-            maxSize:100
+            maxSize:120
         },
         {
             accessorKey: 'album', //access nested data with dot notation
             header: 'Album',
-            maxSize:100,
+            maxSize:160,
         },
         {
             accessorKey: 'BPM', //access nested data with dot notation
             header: 'BPM',
-            maxSize:100
+            maxSize:40
         },
         {
             accessorKey: 'duration', //access nested data with dot notation
             header: 'Duration',
-            maxSize:100
+            maxSize:40,
         },
         // {
         //     accessorKey: 'youtubeLink', //access nested data with dot notation
@@ -97,7 +110,7 @@ function TracksTable() {
             }),
             //or in the component override callbacks like this
             Cell: ({ cell, row }) => (
-                <button onClick={handleSetLink} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
+                <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
                 {row.original.play = 'Play'}
                 <Play className='fs-5'/>
                 </button>
@@ -118,15 +131,21 @@ function TracksTable() {
         <MaterialReactTable
             columns={columns} data={data}
             muiTableBodyCellProps={{sx:{fontSize:"0.85rem"}}}
-            muiTableBodyRowProps={({ row }) => ({
-                onClick: (event) => {
-                    event.stopPropagation()
-                    // console.info(event.target, row);
-                },
-                sx: {
-                  cursor: 'pointer', //you might want to change the cursor too when adding an onClick
-                },
-              })}
+            // muiTableBodyRowProps={({ row }) => ({
+            //     onClick: (event) => {
+            //         event.stopPropagation()
+            //         console.info(event.target, row);
+            //     },
+            //     sx: {
+            //       cursor: 'pointer', //you might want to change the cursor too when adding an onClick
+            //     },
+            //   })}
+            //@ts-ignore
+            muiTableBodyRowProps={({row})=>({
+                'data-user-id':row.original._id,
+                "data-yourube-link":row.original.youtubeLink
+            })}
+            getRowId={(row) => row._id}
             enableDensityToggle={false}
             initialState={{ density: 'compact' }}
         />

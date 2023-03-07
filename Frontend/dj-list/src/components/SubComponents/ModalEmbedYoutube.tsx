@@ -11,13 +11,9 @@ function ModalEmbedYoutube() {
     const youtubeLink = useSelector((state:RootState)=>state.modalState.youtubeLink);
     const trackTitle = useSelector((state:RootState)=>state.modalState.trackTitle);
     const dispatch = useDispatch();
-    console.log(modalState)
 
   return (
     <Container>
-      <Button variant="primary" onClick={()=>dispatch<any>(modalShow())}>
-        Launch static backdrop modal
-      </Button>
 
       <Modal
         show={modalState}
@@ -31,13 +27,13 @@ function ModalEmbedYoutube() {
           <Modal.Title>{trackTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+          <iframe src={youtubeLink} title={trackTitle}></iframe>
         </Modal.Body>
         <Modal.Footer>
           {/* <Button variant="secondary" onClick={handleClose}>
             Close
           </Button> */}
-          <Button variant="primary">Understood</Button>
+          <Button variant="danger">Close</Button>
         </Modal.Footer>
       </Modal>
     </Container>

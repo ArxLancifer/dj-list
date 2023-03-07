@@ -4,7 +4,8 @@ import { useRef } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {IState} from '../../interfaces/UserInterfaces';
+
+
 function CreateListForm() {
 
     const [error, setError] = useState<string>('');
@@ -15,7 +16,6 @@ function CreateListForm() {
     const navigate = useNavigate();
 
     function inputValidity(name:string, genre:string):boolean{
-        console.log(name.length > 3 && genre.length > 3)
         return name.length > 3 && genre.length > 3
     }
  

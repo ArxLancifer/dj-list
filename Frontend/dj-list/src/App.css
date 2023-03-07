@@ -41,3 +41,9 @@ div.dropdown-menu > a {
 .card-title, .djName{
     color: rgb(26, 153, 0);
 }
+
+/* iframe google video */
+iframe{
+    width: 100%;
+    height: 50vh;
+}

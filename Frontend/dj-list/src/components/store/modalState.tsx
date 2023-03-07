@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice , PayloadAction} from "@reduxjs/toolkit";
-import {IUser, IToken} from "../../interfaces/UserInterfaces";
-import axios from "axios";
+import {createSlice , PayloadAction} from "@reduxjs/toolkit";
+
 
 
 const initialState={
