@@ -17,7 +17,6 @@ async function isAuthenticated(req, res, next){
             return next();
         }
         const refreshTokenIsValid = await Token.findOne({refreshToken:userToken.refreshToken})
-        console.log(refreshTokenIsValid);
         if(refreshTokenIsVerified && refreshTokenIsValid) {
             const newToken = jwt.sign(refreshTokenIsVerified, process.env.TOKEN_SECRET,{expiresIn:"3600s"});
             const refreshedToken = {

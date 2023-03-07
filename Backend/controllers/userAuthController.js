@@ -31,7 +31,6 @@ const userAuth = {
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
             const user = {username: req.body.username,email:req.body.email, password: hashedPassword}
-            console.log(user)
             const newUser = new User(user);
             await newUser.save();
             res.json("Account created succesfully")
