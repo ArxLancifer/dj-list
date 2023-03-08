@@ -1,16 +1,24 @@
-import axios, { AxiosResponse } from 'axios'
 import React from 'react'
+import axios, { AxiosResponse } from 'axios'
 import {ITrack} from '../interfaces/UserInterfaces'
 function TrackTableHook() {
-  async function fetchTracks(listId?:string){
+  async function fetchTracks(listId:string){
     const response = await axios.get<AxiosResponse>(`http://localhost:5000/userlists/gettracks/${listId}`)
     const data = response.data;
     return data;
   }
-  function testHook(){
-    console.log("hook is working");
-  }
-  return {fetchTracks, testHook}
-}
 
+  async function addTrack(listId:string,track:ITrack){
+         try {
+
+             const response = await axios.post<AxiosResponse>(`http://localhost:5000/userlists/pushtrack/${listId}`, track)
+             const data = response.data;
+              console.log(data)  
+         } catch (error) {
+            console.log(error)
+            console.log("Track failed to be add");
+         }
+}
+    return {fetchTracks, addTrack}
+}
 export default TrackTableHook

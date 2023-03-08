@@ -6,6 +6,6 @@ const userLists = require('../controllers/userListsController');
 router.get('/getlists/:user', userLists.getLists);
 router.get('/gettracks/:listid', userLists.getTracks);
 router.post('/createlist', userLists.createList);
-router.post('/pushtrack', userLists.pushTrack);
+router.post('/pushtrack/:listid', userLists.pushTrack);
 
 module.exports = router;

@@ -10,13 +10,12 @@ import { useDispatch } from 'react-redux';
 import {fetchUserThunk} from './components/store/userState'
 import CreateListForm from './components/SubComponents/CreateListForm';
 import TracksTable from './components/SubComponents/TracksTable';
-
+import AddTrackForm from './components/SubComponents/AddTrackForm';
 
 function App() {
 
     const fetchStatus:any = useSelector((state:any) => state.userData.fetchStatus)
     const allstate = useSelector(state=>state);
-    console.log(allstate)
     const dispatch = useDispatch();
     useEffect(()=>{
         if(fetchStatus === 'idle'){
@@ -38,6 +37,7 @@ function App() {
       <Route path='/userlists' element={<UserLists />} />
       <Route path='/createlist' element={<CreateListForm />} />
       <Route path='/trackstable/:listid' element={<TracksTable />} />
+      <Route path='/pushtrack-form'  element={<AddTrackForm />} />
     </Routes>
     </BrowserRouter>
   );

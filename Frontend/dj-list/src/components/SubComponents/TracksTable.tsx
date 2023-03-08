@@ -9,18 +9,22 @@ import { useDispatch} from 'react-redux';
 import {setYoutubeLink , modalShow} from '../store/modalState';
 import {useParams} from 'react-router-dom';
 import useTrackTable from '../../hooks/useTrackTable';
+import {useNavigate} from 'react-router-dom';
+
+
 function TracksTable() {
 
     const [tracks, setTracks] = useState([])
     
     const {listid} = useParams();
     const {fetchTracks} = useTrackTable();
-    console.log(tracks);
+
+    const navigate = useNavigate();
+
     useEffect(()=>{
         //@ts-ignore
         fetchTracks(listid).then(data=> setTracks(data.tracks));
     }, [])
-    console.log(tracks);
     const dispatch = useDispatch();
     function handleSetLink(e:React.SyntheticEvent<HTMLElement>){
         const linkToYoutube:string = e.currentTarget.dataset.link || "";
@@ -109,9 +113,9 @@ function TracksTable() {
     ]
     
   return (
-    <Fragment>
+    
+    <Container className='mt-5 pt-5'>
         <ModalEmbedYoutube />
-    <Container>
     <ThemeProvider theme={theme}>
         <MaterialReactTable
             columns={columns} data={tracks}
@@ -133,7 +137,7 @@ function TracksTable() {
             renderBottomToolbarCustomActions={({ table }) => {
                 
                 return (             
-                    <Button variant='success'>
+                    <Button onClick={()=>navigate('/pushtrack-form')} variant='success'>
                         Add Track
                     </Button>      
                 );
@@ -144,7 +148,6 @@ function TracksTable() {
         />
     </ThemeProvider>
     </Container>
-    </Fragment>
   )
 }
 

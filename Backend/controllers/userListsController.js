@@ -1,6 +1,7 @@
 const { default: mongoose, Mongoose } = require('mongoose');
 const List = require('../models/ListModel');
 const {Track} = require('../models/TrackModel')
+const transformLinkToEmbed = require('../helpers/transformYoutubeLink');
 userLists = {
     getLists: async function(req, res){
         const userId = req.params.user;
@@ -32,13 +33,26 @@ userLists = {
         res.json(tracks);
     },
     pushTrack: async function(req, res){
-        const listId = req.params.listid;
-        const trackData = {title:"Where Are You", artist:"Sako Isoyan ", duration:"6:18", BPM:"100", youtubeLink:"https://www.youtube.com/embed/0Q76S9eOsco"}
-        const newTrack = new Track(trackData)
-
-        await List.findByIdAndUpdate(listId, {$push:{tracks:newTrack}})
-        
-        res.json({x:newTrack, y:"Track pushed to list"})
+        try {
+            const listId = req.params.listid;
+            const validEmbedLink = transformLinkToEmbed(req.body.youtubeLink)
+            const trackData =
+            {  
+                title:req.body.title,
+                artist:req.body.artist,
+                album:req.body.album,
+                youtubeLink:validEmbedLink,
+                duration:req.body.duration,
+                BPM:req.body.BPM,
+                subGenre:req.body.subGere
+            }
+            const newTrack = new Track(trackData)
+    
+            await List.findByIdAndUpdate(listId, {$push:{tracks:newTrack}})
+            res.json(newTrack) 
+        } catch (error) {
+            res.json("Something went wrong. The track did not added")
+        }
     }
 }
 
