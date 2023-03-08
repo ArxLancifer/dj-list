@@ -44,12 +44,13 @@ userLists = {
                 youtubeLink:validEmbedLink,
                 duration:req.body.duration,
                 BPM:req.body.BPM,
-                subGenre:req.body.subGere
+                subGenre:req.body.subGenre
             }
             const newTrack = new Track(trackData)
     
             await List.findByIdAndUpdate(listId, {$push:{tracks:newTrack}})
-            res.json(newTrack) 
+            
+            res.json("New track has been added"); 
         } catch (error) {
             res.json("Something went wrong. The track did not added")
         }

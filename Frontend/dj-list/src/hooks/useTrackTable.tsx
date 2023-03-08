@@ -1,6 +1,6 @@
 import React from 'react'
 import axios, { AxiosResponse } from 'axios'
-import {ITrack} from '../interfaces/UserInterfaces'
+import {INewTrack} from '../interfaces/UserInterfaces'
 function TrackTableHook() {
   async function fetchTracks(listId:string){
     const response = await axios.get<AxiosResponse>(`http://localhost:5000/userlists/gettracks/${listId}`)
@@ -8,7 +8,7 @@ function TrackTableHook() {
     return data;
   }
 
-  async function addTrack(listId:string,track:ITrack){
+  async function addTrack(listId:string,track:INewTrack){
          try {
 
              const response = await axios.post<AxiosResponse>(`http://localhost:5000/userlists/pushtrack/${listId}`, track)

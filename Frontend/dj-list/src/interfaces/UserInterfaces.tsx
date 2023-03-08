@@ -43,3 +43,13 @@ export interface ITrack {
     BPM:number;
     youtubeLink:string;
 }
+
+export interface INewTrack {
+    title:string;
+    artist:string;
+    album:string;
+    subGenre:string;
+    duration:string;
+    BPM:string;
+    youtubeLink:string;
+}

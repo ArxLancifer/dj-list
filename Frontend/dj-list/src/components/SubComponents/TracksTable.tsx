@@ -137,7 +137,7 @@ function TracksTable() {
             renderBottomToolbarCustomActions={({ table }) => {
                 
                 return (             
-                    <Button onClick={()=>navigate('/pushtrack-form')} variant='success'>
+                    <Button onClick={()=>navigate('/pushtrack-form', {state:{listid}})} variant='success'>
                         Add Track
                     </Button>      
                 );
