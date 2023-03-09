@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState} from 'react'
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table'; 
+import MaterialReactTable, { MRT_ColumnDef,  MaterialReactTableProps } from 'material-react-table'; 
 import { ITrack } from '../../interfaces/UserInterfaces';
 import { createTheme, ThemeProvider} from '@mui/material';
 import ModalEmbedYoutube from './ModalEmbedYoutube';
@@ -52,6 +52,11 @@ function TracksTable() {
         }
     })
 
+    const handleSaveRow: MaterialReactTableProps<ITrack>['onEditingRowSave'] =
+    async ({ exitEditingMode, row, values }) => {
+        console.log(row, values)
+      exitEditingMode(); //required to exit editing mode
+    };
 
     const columns:MRT_ColumnDef<ITrack>[] = [
         // {
@@ -63,6 +68,7 @@ function TracksTable() {
             accessorKey: 'title', //access nested data with dot notation
             header: 'Title',
             maxSize:140,
+            
         },
         {
             accessorKey: 'artist', //access nested data with dot notation
@@ -88,15 +94,21 @@ function TracksTable() {
         //     accessorKey: 'youtubeLink', //access nested data with dot notation
         //     header: 'Link',
         //     maxSize:100
+        // Cell: ({ cell, row }) => (
+        //     <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
+        //     {row.original.play = 'Play'}
+        //     <Play className='fs-5'/>
+        //     </button>
+        // ),
         // },
         {
             accessorKey: 'play',
             header: 'Play',
             maxSize:80,
-            //you can access a row instance in column definition option callbacks like this
-            muiTableBodyCellEditTextFieldProps: ({ row }) => ({
-              disabled: row.original.title === 'Retired',
-            }),
+            muiTableBodyCellEditTextFieldProps: {
+                disabled:true,
+                hidden:true
+              },
             //or in the component override callbacks like this
             Cell: ({ cell, row }) => (
                 <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
@@ -120,15 +132,7 @@ function TracksTable() {
         <MaterialReactTable
             columns={columns} data={tracks}
             muiTableBodyCellProps={{sx:{fontSize:"0.85rem"}}}
-            // muiTableBodyRowProps={({ row }) => ({
-            //     onClick: (event) => {
-            //         event.stopPropagation()
-            //         console.info(event.target, row);
-            //     },
-            //     sx: {
-            //       cursor: 'pointer', //you might want to change the cursor too when adding an onClick
-            //     },
-            //   })}
+
             //@ts-ignore
             muiTableBodyRowProps={({row})=>({
                 'data-user-id':row.original._id,
@@ -145,6 +149,21 @@ function TracksTable() {
             getRowId={(row) => row._id}
             enableDensityToggle={false}
             initialState={{ density: 'compact' }}
+            editingMode="modal" //default
+            enableEditing
+            onEditingRowSave={handleSaveRow}
+            // displayColumnDefOptions={{
+            //     'mrt-row-actions': {
+            //       header: 'Title', //change "Actions" to "Edit"
+            //       //use a text button instead of a icon button
+            //       Cell: ({ cell, row }) => (
+            //         <button onClick={()=>console.log("row",row.id)}  className='btn btn-sm btn-danger p-0' data-link={JSON.stringify(row.getAllCells())}>
+            //         Play
+            //         <Play className='fs-5'/>
+            //         </button>
+            //     ),
+            //     },
+            //   }}
         />
     </ThemeProvider>
     </Container>
