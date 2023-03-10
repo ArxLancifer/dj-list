@@ -1,5 +1,5 @@
 import React from 'react'
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import {INewTrack} from '../interfaces/UserInterfaces'
 function TrackTableHook() {
   async function fetchTracks(listId:string){
@@ -19,6 +19,24 @@ function TrackTableHook() {
             console.log("Track failed to be add");
          }
 }
-    return {fetchTracks, addTrack}
+
+    async function editTrack(listId:string, trackId:string, editedTrack:INewTrack){
+        // const response = await axios.put(`http://localhost:5000/userlists/updatetrack/${listId}/${trackId}`, {values:editedTrack})
+
+        try {
+            const response = await axios.put<AxiosResponse>(`http://localhost:5000/userlists/updatetrack/${listId}/${trackId}`, {values:editedTrack});
+            console.log(response.data);
+            return response.data;
+          } catch (error) {
+              if (axios.isAxiosError(error)) {
+                console.log(error.response?.data)
+            }
+            return (error as AxiosError).response?.data;
+          }
+            
+        
+    }
+
+    return {fetchTracks, addTrack, editTrack}
 }
 export default TrackTableHook

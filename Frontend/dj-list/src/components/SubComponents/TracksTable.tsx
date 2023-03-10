@@ -4,7 +4,7 @@ import { INewTrack, ITrack } from '../../interfaces/UserInterfaces';
 import { createTheme, ThemeProvider} from '@mui/material';
 import ModalEmbedYoutube from './ModalEmbedYoutube';
 import  {Play} from 'react-bootstrap-icons';
-import { Button, Container } from 'react-bootstrap';
+import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { useDispatch} from 'react-redux';
 import {setYoutubeLink , modalShow} from '../store/modalState';
 import {useParams} from 'react-router-dom';
@@ -16,17 +16,18 @@ import { table } from 'console';
 
 function TracksTable() {
 
-    const [tracks, setTracks] = useState<ITrack[]>([])
-    
+    const [tracks, setTracks] = useState<ITrack[]>([]);
+    const [error, setError] = useState<string>('');
     const {listid} = useParams();
-    const {fetchTracks} = useTrackTable();
-
+    const {fetchTracks, editTrack} = useTrackTable();
     const navigate = useNavigate();
 
     useEffect(()=>{
-        //@ts-ignore
-        fetchTracks(listid).then(data=> setTracks(data.tracks));
-    }, [])
+        if(!tracks.length){
+            //@ts-ignore
+            fetchTracks(listid).then(data=> setTracks(data.tracks));
+        }
+    }, [tracks])
     const dispatch = useDispatch();
     function handleSetLink(e:React.SyntheticEvent<HTMLElement>){
         const linkToYoutube:string = e.currentTarget.dataset.link || "";
@@ -56,7 +57,17 @@ function TracksTable() {
     // Changes row data and updated request to database to change data as well
     const handleSaveRow: MaterialReactTableProps<ITrack>['onEditingRowSave'] =
     async ({ exitEditingMode, row, values }) => {
-       tracks[row.index]  = values;
+        // console.log(row.id, row.index )
+        // console.log(row.original._id, tracks[row.index], values)
+        const request = await editTrack(listid ?? "", row.id, values);
+       // @ts-ignore
+        if(request.errorMessage){
+            //@ts-ignore
+            setError(request.errorMessage);
+            exitEditingMode();
+            return;
+        }
+       tracks[row.index]  = {...values, _id:row.id};
         setTracks([...tracks]);
         
       exitEditingMode(); //required to exit editing mode
@@ -131,6 +142,7 @@ function TracksTable() {
   return (
     
     <Container className='mt-5 pt-5'>
+        {error && <Alert className='w-50 mx-auto' variant='danger'>{error}</Alert>}
         <ModalEmbedYoutube />
     <ThemeProvider theme={theme}>
         <MaterialReactTable
@@ -139,7 +151,7 @@ function TracksTable() {
 
             //@ts-ignore
             muiTableBodyRowProps={({row})=>({
-                'data-user-id':row.original._id,
+                'data-track-id':row.original._id,
                 "data-yourube-link":row.original.youtubeLink
             })}
             renderBottomToolbarCustomActions={({ table }) => {
