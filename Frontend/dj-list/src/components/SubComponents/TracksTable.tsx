@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState} from 'react'
 import MaterialReactTable, { MRT_ColumnDef,  MaterialReactTableProps } from 'material-react-table'; 
-import { ITrack } from '../../interfaces/UserInterfaces';
+import { INewTrack, ITrack } from '../../interfaces/UserInterfaces';
 import { createTheme, ThemeProvider} from '@mui/material';
 import ModalEmbedYoutube from './ModalEmbedYoutube';
 import  {Play} from 'react-bootstrap-icons';
@@ -10,11 +10,13 @@ import {setYoutubeLink , modalShow} from '../store/modalState';
 import {useParams} from 'react-router-dom';
 import useTrackTable from '../../hooks/useTrackTable';
 import {useNavigate} from 'react-router-dom';
+import MRTDialog from './MRTDialog';
+import { table } from 'console';
 
 
 function TracksTable() {
 
-    const [tracks, setTracks] = useState([])
+    const [tracks, setTracks] = useState<ITrack[]>([])
     
     const {listid} = useParams();
     const {fetchTracks} = useTrackTable();
@@ -51,10 +53,12 @@ function TracksTable() {
             },
         }
     })
-
+    // Changes row data and updated request to database to change data as well
     const handleSaveRow: MaterialReactTableProps<ITrack>['onEditingRowSave'] =
     async ({ exitEditingMode, row, values }) => {
-        console.log(row, values)
+       tracks[row.index]  = values;
+        setTracks([...tracks]);
+        
       exitEditingMode(); //required to exit editing mode
     };
 
@@ -90,33 +94,33 @@ function TracksTable() {
             header: 'Duration',
             maxSize:40,
         },
-        // {
-        //     accessorKey: 'youtubeLink', //access nested data with dot notation
-        //     header: 'Link',
-        //     maxSize:100
-        // Cell: ({ cell, row }) => (
-        //     <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
-        //     {row.original.play = 'Play'}
-        //     <Play className='fs-5'/>
-        //     </button>
-        // ),
-        // },
         {
-            accessorKey: 'play',
-            header: 'Play',
-            maxSize:80,
-            muiTableBodyCellEditTextFieldProps: {
-                disabled:true,
-                hidden:true
-              },
-            //or in the component override callbacks like this
-            Cell: ({ cell, row }) => (
-                <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
-                {row.original.play = 'Play'}
-                <Play className='fs-5'/>
-                </button>
-            ),
-          },
+            accessorKey: 'youtubeLink', //access nested data with dot notation
+            header: 'Link',
+            maxSize:100,
+        Cell: ({ cell, row }) => (
+            <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
+            Play
+            <Play className='fs-5'/>
+            </button>
+        ),
+        },
+        // {
+        //     accessorKey: 'play',
+        //     header: 'Play',
+        //     maxSize:80,
+        //     muiTableBodyCellEditTextFieldProps: {
+        //         disabled:true,
+        //         hidden:true
+        //       },
+        //     //or in the component override callbacks like this
+        //     Cell: ({ cell, row }) => (
+        //         <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
+        //         {row.original.play = 'Play'}
+        //         <Play className='fs-5'/>
+        //         </button>
+        //     ),
+        //   },
         {
             accessorKey: 'subGenre', //access nested data with dot notation
             header: 'Sub genre',
@@ -165,6 +169,8 @@ function TracksTable() {
             //     },
             //   }}
         />
+       {/* <MRTDialog  columns={columns}/>  MRT Custom dialog if needed ill add this later instead of my AddTrackForm*/}
+       {/*docs source https://www.material-react-table.com/docs/examples/editing-crud */}
     </ThemeProvider>
     </Container>
   )

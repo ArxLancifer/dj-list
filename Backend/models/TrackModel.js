@@ -2,10 +2,6 @@ const {Schema, model} = require('mongoose');
 
 const TrackSchema = new Schema(
     {
-        play:{
-            type:String,
-            default:""
-        },
         title:{
             type:String,
             required:true

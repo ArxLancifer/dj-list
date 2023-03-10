@@ -33,7 +33,6 @@ export interface IList {
 }
 
 export interface ITrack {
-    play:any;
     _id:string;
     title:string;
     artist:string;

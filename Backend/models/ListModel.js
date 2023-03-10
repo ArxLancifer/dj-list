@@ -2,10 +2,6 @@ const {Schema, model} = require('mongoose');
 const {Track, TrackSchema} = require('./TrackModel');
 
 const TrackType = {
-        play:{
-            type:String,
-            default:""
-        },
         title:{
             type:String,
             required:true
