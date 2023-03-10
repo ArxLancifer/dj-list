@@ -7,5 +7,5 @@ router.get('/getlists/:user', userLists.getLists);
 router.get('/gettracks/:listid', userLists.getTracks);
 router.post('/createlist', userLists.createList);
 router.post('/pushtrack/:listid', userLists.pushTrack);
-
+router.put('/updatetrac/:listid/:trackid', userLists.editTrack);
 module.exports = router;

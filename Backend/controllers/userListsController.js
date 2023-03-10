@@ -54,6 +54,12 @@ userLists = {
         } catch (error) {
             res.json("Something went wrong. The track did not added")
         }
+    },
+    editTrack: async function(req, res){
+            const listid = req.params.listid;
+            const trackToUpdated = req.params.trackid;
+            const updatedTrack = res.body.values;
+            console.log(updatedTrack, req.params);
     }
 }
 
