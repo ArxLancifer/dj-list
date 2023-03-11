@@ -57,8 +57,6 @@ function TracksTable() {
     // Changes row data and updated request to database to change data as well
     const handleSaveRow: MaterialReactTableProps<ITrack>['onEditingRowSave'] =
     async ({ exitEditingMode, row, values }) => {
-        // console.log(row.id, row.index )
-        // console.log(row.original._id, tracks[row.index], values)
         const request = await editTrack(listid ?? "", row.id, values);
        // @ts-ignore
         if(request.errorMessage){

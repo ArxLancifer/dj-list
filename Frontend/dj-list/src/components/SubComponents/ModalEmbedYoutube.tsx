@@ -11,13 +11,13 @@ function ModalEmbedYoutube() {
     const youtubeLink = useSelector((state:RootState)=>state.modalState.youtubeLink);
     const trackTitle = useSelector((state:RootState)=>state.modalState.trackTitle);
     const dispatch = useDispatch();
-
+    console.log(youtubeLink);
   return (
     <Container>
 
       <Modal
         show={modalState}
-        onHide={()=>dispatch<any>(modalHide())}
+        onHide={()=>dispatch(modalHide())}
         backdrop="static"
         keyboard={false}
         centered
@@ -27,13 +27,15 @@ function ModalEmbedYoutube() {
           <Modal.Title>{trackTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe src={youtubeLink + "?autoplay=1"} title={trackTitle} allow='autoplay' allowFullScreen></iframe>
+            {youtubeLink ==="Not available" ? <h1>There is not link reference</h1>
+            :
+            <iframe src={youtubeLink + "?autoplay=1"} title={trackTitle} allow='autoplay' allowFullScreen></iframe>}
         </Modal.Body>
         <Modal.Footer>
           {/* <Button variant="secondary" onClick={handleClose}>
             Close
           </Button> */}
-          <Button variant="danger">Close</Button>
+          <Button onClick={()=>dispatch(modalHide())} variant="danger">Close</Button>
         </Modal.Footer>
       </Modal>
     </Container>

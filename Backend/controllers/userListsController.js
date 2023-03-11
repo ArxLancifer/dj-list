@@ -60,22 +60,19 @@ userLists = {
             const listid = req.params.listid;
             const trackToUpdated = req.params.trackid;
             const updatedTrack = req.body.values;
-
-            // console.log(await List.findById(listid).find({_id:trackToUpdated, {$in:'tracks'}}))
-            // const query = await List.findById(listid).find({{ trackToUpdated: { "$in" : ["tracks"]}})
-            const query = await List.findOneAndUpdate({ 'tracks._id': trackToUpdated },
-            { 
-                "$set": {[`tracks.$.1`]: {title:"asdasd", artist:"1231", album:"poasdpod",duration:"12312"}} 
-              },
-              { 
-                "arrayFilters": [{ "outer._id": "tracks" }]
-              }
-            );
-            console.log(query)
-            // List.find({
-            //     '_id': { $in: tracks.split(',') })
-            // const x = await List.findById(list).findById({trackid:{$in: tracks}})
-        //     // console.log(x);
+            const validEmbedLink = transformLinkToEmbed(req.body.values.youtubeLink)
+            const query = await List.updateOne(
+                { "_id": listid, "tracks._id": trackToUpdated },
+                { $set: {
+                     "tracks.$.title": updatedTrack.title,
+                     "tracks.$.artist": updatedTrack.artist,
+                      "tracks.$.album": updatedTrack.album,
+                      "tracks.$.subGenre": updatedTrack.subGenre,
+                      "tracks.$.duration": updatedTrack.duration,
+                      "tracks.$.BPM": updatedTrack.BPM,
+                      "tracks.$.youtubeLink": validEmbedLink 
+                    } }
+            )
         } catch (error) {
                 console.log(error)
                return res.status(404).json({errorMessage:"Failed to update track"});
