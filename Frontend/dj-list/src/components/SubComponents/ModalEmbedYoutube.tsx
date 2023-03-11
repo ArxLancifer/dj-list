@@ -11,7 +11,6 @@ function ModalEmbedYoutube() {
     const youtubeLink = useSelector((state:RootState)=>state.modalState.youtubeLink);
     const trackTitle = useSelector((state:RootState)=>state.modalState.trackTitle);
     const dispatch = useDispatch();
-    console.log(youtubeLink);
   return (
     <Container>
 

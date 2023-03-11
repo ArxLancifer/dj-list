@@ -25,7 +25,6 @@ function TrackTableHook() {
 
         try {
             const response = await axios.put<AxiosResponse>(`http://localhost:5000/userlists/updatetrack/${listId}/${trackId}`, {values:editedTrack});
-            console.log(response.data);
             return response.data;
           } catch (error) {
               if (axios.isAxiosError(error)) {
