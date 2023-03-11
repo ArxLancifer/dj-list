@@ -78,6 +78,30 @@ userLists = {
                return res.status(404).json({errorMessage:"Failed to update track"});
             }
             res.json({message:"Track updated successfully"});
+    },
+    deleteTrack: async function(req, res){
+        try {
+            const listid = req.params.listid;
+            const trackToDelete = req.params.trackid;
+            console.log(trackToDelete)
+            // const query = await List.updateOne(
+            //     {"_id":listid, "tracks._id":trackToDelete},
+            //     {$pull:{tracks:{$elemMatch:{_id:trackToDelete}}}}
+            //     )
+                await List.updateOne(
+                    {_id:listid}, // your query, usually match by _id
+                    { $pull: { tracks: { _id:trackToDelete  } } }, // item(s) to match from array you want to pull/remove
+                    { multi: true } // set this to true if you want to remove multiple elements.
+                )
+                
+            // console.log(query)
+           return res.json({message:"Track removed successfully"})
+        } catch (error) {
+            console.log(error)
+            return res.json({errorMessage:"Track failed to be remove"})
+        }
+
+
     }
 }
 

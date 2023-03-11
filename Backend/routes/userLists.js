@@ -8,4 +8,5 @@ router.get('/gettracks/:listid', userLists.getTracks);
 router.post('/createlist', userLists.createList);
 router.post('/pushtrack/:listid', userLists.pushTrack);
 router.put('/updatetrack/:listid/:trackid', userLists.editTrack);
+router.delete('/deletetrack/:listid/:trackid', userLists.deleteTrack);
 module.exports = router;
