@@ -35,7 +35,23 @@ function TrackTableHook() {
             
         
     }
+    async function deleteTrack(listId:string, trackId:string) {
 
-    return {fetchTracks, addTrack, editTrack}
+        try {
+            const response = await axios.delete<AxiosResponse>(`http://localhost:5000/userlists/updatetrack/${listId}/${trackId}`);
+            return response.data;
+          } catch (error) {
+              if (axios.isAxiosError(error)) {
+                console.log(error.response?.data)
+            }
+            return (error as AxiosError).response?.data;
+          } 
+          
+    }
+
+    return {fetchTracks, addTrack, editTrack, deleteTrack}
 }
+
+    
+
 export default TrackTableHook

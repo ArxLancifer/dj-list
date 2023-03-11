@@ -1,6 +1,6 @@
-import React, { Fragment, useCallback, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import MaterialReactTable, { MRT_ColumnDef,  MaterialReactTableProps, MRT_Row } from 'material-react-table'; 
-import { INewTrack, ITrack } from '../../interfaces/UserInterfaces';
+import { ITrack } from '../../interfaces/UserInterfaces';
 import { createTheme, ThemeProvider} from '@mui/material';
 import ModalEmbedYoutube from './ModalEmbedYoutube';
 import  {Play, Trash, Pen} from 'react-bootstrap-icons';
@@ -10,8 +10,7 @@ import {setYoutubeLink , modalShow} from '../store/modalState';
 import {useParams} from 'react-router-dom';
 import useTrackTable from '../../hooks/useTrackTable';
 import {useNavigate} from 'react-router-dom';
-import MRTDialog from './MRTDialog';
-import { table } from 'console';
+
 
 
 function TracksTable() {
@@ -19,8 +18,9 @@ function TracksTable() {
     const [tracks, setTracks] = useState<ITrack[]>([]);
     const [error, setError] = useState<string>('');
     const {listid} = useParams();
-    const {fetchTracks, editTrack} = useTrackTable();
+    const {fetchTracks, editTrack, deleteTrack} = useTrackTable();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         if(!tracks.length){
@@ -28,7 +28,7 @@ function TracksTable() {
             fetchTracks(listid).then(data=> setTracks(data.tracks));
         }
     }, [tracks])
-    const dispatch = useDispatch();
+
     function handleSetLink(e:React.SyntheticEvent<HTMLElement>){
         const linkToYoutube:string = e.currentTarget.dataset.link || "";
         const trackTitle:string = e.currentTarget.dataset.trackTitle || "";
@@ -36,9 +36,6 @@ function TracksTable() {
     }
 
 
-    function fetchListTrack(){
-        return null;
-    }
 
     const theme = createTheme({
         palette:{
@@ -71,13 +68,17 @@ function TracksTable() {
       exitEditingMode(); //required to exit editing mode
     };
 
-    const handleDeleteRow = (row: MRT_Row<ITrack>) => {
+    const handleDeleteRow = async (row: MRT_Row<ITrack>) => {
+        console.log(row.original._id)
+        const trackId = row.original._id;
           // eslint-disable-next-line no-restricted-globals
           if (!confirm(`Are you sure you want to delete ${row.getValue('title')}`)) {
             return;
           }
-
-          //send api delete request here, then refetch or update local table data for re-render
+        //   send api delete request here, then refetch or update local table data for re-render
+        
+          const requestDelete = await deleteTrack(listid ?? "", trackId)
+          console.log(requestDelete)
           tracks.splice(row.index, 1);
           setTracks([...tracks]);
         }
