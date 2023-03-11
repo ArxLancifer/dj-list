@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect, useState} from 'react'
-import MaterialReactTable, { MRT_ColumnDef,  MaterialReactTableProps } from 'material-react-table'; 
+import React, { Fragment, useCallback, useEffect, useState} from 'react'
+import MaterialReactTable, { MRT_ColumnDef,  MaterialReactTableProps, MRT_Row } from 'material-react-table'; 
 import { INewTrack, ITrack } from '../../interfaces/UserInterfaces';
 import { createTheme, ThemeProvider} from '@mui/material';
 import ModalEmbedYoutube from './ModalEmbedYoutube';
-import  {Play} from 'react-bootstrap-icons';
+import  {Play, Trash, Pen} from 'react-bootstrap-icons';
 import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { useDispatch} from 'react-redux';
 import {setYoutubeLink , modalShow} from '../store/modalState';
@@ -70,6 +70,17 @@ function TracksTable() {
         
       exitEditingMode(); //required to exit editing mode
     };
+
+    const handleDeleteRow = (row: MRT_Row<ITrack>) => {
+          // eslint-disable-next-line no-restricted-globals
+          if (!confirm(`Are you sure you want to delete ${row.getValue('title')}`)) {
+            return;
+          }
+
+          //send api delete request here, then refetch or update local table data for re-render
+          tracks.splice(row.index, 1);
+          setTracks([...tracks]);
+        }
 
     const columns:MRT_ColumnDef<ITrack>[] = [
         // {
@@ -160,6 +171,12 @@ function TracksTable() {
                     </Button>      
                 );
               }}
+              renderRowActions={({row, table})=>(
+                <div className='d-flex'>
+                    <div onClick={() => table.setEditingRow(row)}><Pen   className='fs-5 mx-2 text-secondary' /></div>
+                    <div onClick={()=>handleDeleteRow(row)}><Trash className='fs-5 mx-2 text-secondary' /></div>
+                </div>
+              )}
             getRowId={(row) => row._id}
             enableDensityToggle={false}
             initialState={{ density: 'compact' }}
