@@ -12,10 +12,10 @@ import CreateListForm from './components/SubComponents/CreateListForm';
 import TracksTable from './components/SubComponents/TracksTable';
 import AddTrackForm from './components/SubComponents/AddTrackForm';
 
-function App() {
 
+function App() {
+    
     const fetchStatus:any = useSelector((state:any) => state.userData.fetchStatus)
-    const allstate = useSelector(state=>state);
     const dispatch = useDispatch();
     useEffect(()=>{
         if(fetchStatus === 'idle'){

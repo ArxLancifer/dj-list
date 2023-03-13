@@ -5,9 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './components/store';
-import { fetchUserThunk } from './components/store/userState';
 
-// store.dispatch(fetchUserThunk())
 
 
 const root = ReactDOM.createRoot(

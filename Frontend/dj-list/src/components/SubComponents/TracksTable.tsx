@@ -174,8 +174,8 @@ function TracksTable() {
               }}
               renderRowActions={({row, table})=>(
                 <div className='d-flex'>
-                    <div onClick={() => table.setEditingRow(row)}><Pen   className='fs-5 mx-2 text-secondary' /></div>
-                    <div onClick={()=>handleDeleteRow(row)}><Trash className='fs-5 mx-2 text-secondary' /></div>
+                    <div onClick={() => table.setEditingRow(row)}><Pen   className='fs-5 mx-2 text-primary' /></div>
+                    <div onClick={()=>handleDeleteRow(row)}><Trash className='fs-5 mx-2 text-secondary text-danger' /></div>
                 </div>
               )}
             getRowId={(row) => row._id}

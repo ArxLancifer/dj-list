@@ -20,31 +20,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 mongodDB();
 
-const users = [];
 
-const dummyPosts = [
-    {
-        username:"Kyle",
-        title:'Post 1'
-    },
-    {
-        username:"Anestis",
-        title:'Post 2'
-    },
-    {
-        username:"Teo",
-        title:'Post 3'
-    }
-    
-]
 
 app.post("/gatekeeper", (req,res)=>{
     const token = req.body.token;
-        
     try {
         const userIsAuth = jwt.verify(token, process.env.TOKEN_SECRET, (err, result)=>{
-        if(err) return null;
-        return result;
+            if(err) return null;
+            return result;
         })
         if(userIsAuth){
            return res.json({id:userIsAuth._id, name:userIsAuth.username, isAuth:true});
