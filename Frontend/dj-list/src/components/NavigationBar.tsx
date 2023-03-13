@@ -59,10 +59,14 @@ function NavigationBar() {
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 
             
             <div className='d-flex align-items-center'>
-                 <NavDropdown className='fs-5 mx-3' title={userInfo.name} id="basic-nav-dropdown">
+                 <NavDropdown className='fs-5 mx-3' title={
+                    <div>
+                        <div className='user-picture'><span className='fs-5 fw-bold'>{userInfo.name[0].toUpperCase()}</span></div>
+                       <span className='d-block'>{userInfo.name}</span>
+                    </div>
+                 } id="basic-nav-dropdown">
                      <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
-                <div className='user-picture'><span className='mt-2 d-block fs-6 fw-bold'>{userInfo.name[0].toUpperCase()}</span></div>
             </div>
                 
            

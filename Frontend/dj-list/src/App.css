@@ -6,6 +6,10 @@
     font-family: "Roboto";
 }
 
+main{
+    height: 90vh;
+}
+
 a{
   text-decoration: none;
   color: #fff;
@@ -18,7 +22,22 @@ a{
 }
 
 #basic-nav-dropdown{
-    color:#5bc0de;
+    color:#00d836;
+    font-size: 0.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1px;
+}
+
+.basic-nav-dropdown::after{
+   display: inline-block;
+   width: 5px;
+  
+}
+
+.dropdown-toggle::after{
+    font-size: 1rem;
 }
 
 div.dropdown-menu{
@@ -55,10 +74,11 @@ iframe{
 
 
 .user-picture{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: rgb(151, 151, 151);
+    margin: 0 auto;
 }
 
 /* Hero section Homepage */
@@ -67,7 +87,3 @@ iframe{
     background: rgb(20,20,20);
     background: linear-gradient(90deg, rgba(20,20,20,1) 18%, rgba(43,43,43,1) 53%, rgba(62,62,62,1) 76%);
 }
-/* .hero-table-img{
-    position: relative;
-    transform: translatey(25%);
-} */

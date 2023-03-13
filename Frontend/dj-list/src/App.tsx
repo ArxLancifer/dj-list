@@ -31,6 +31,7 @@ function App() {
   return (
     <BrowserRouter>
     <NavigationBar />
+    <main>
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<UserLogin />} />
@@ -40,6 +41,7 @@ function App() {
       <Route path='/trackstable/:listid' element={<TracksTable />} />
       <Route path='/pushtrack-form'  element={<AddTrackForm />} />
     </Routes>
+    </main>
     <Footer />
     </BrowserRouter>
   );
