@@ -11,6 +11,7 @@ import {fetchUserThunk} from './components/store/userState'
 import CreateListForm from './components/SubComponents/CreateListForm';
 import TracksTable from './components/SubComponents/TracksTable';
 import AddTrackForm from './components/SubComponents/AddTrackForm';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       <Route path='/trackstable/:listid' element={<TracksTable />} />
       <Route path='/pushtrack-form'  element={<AddTrackForm />} />
     </Routes>
+    <Footer />
     </BrowserRouter>
   );
 }

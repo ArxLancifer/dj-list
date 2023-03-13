@@ -45,21 +45,25 @@ function NavigationBar() {
 
   return (
     <Fragment>
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar className='' bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="#home">
-        <img className='p-0 mx-5 memotrack-logo' src={process.env.PUBLIC_URL + '/Logo.png'} alt="app logo"/>
+        <img className='p-0 mx-5 memotrack-logo' src={process.env.PUBLIC_URL + '/MemotrackLogo.png'} alt="app logo"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className='text-center ' id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto align-items-center">
           <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Home</Nav.Link>
             <Nav.Link as={Link} to={"/userlists"} className={'fs-5 mx-3 ' + listsDisabled }>My lists</Nav.Link>
+            <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link>
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 
             
-                 <NavDropdown className='fs-5 mx-3 text-info' title={userInfo.name} id="basic-nav-dropdown">
+            <div className='d-flex align-items-center'>
+                 <NavDropdown className='fs-5 mx-3' title={userInfo.name} id="basic-nav-dropdown">
                      <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
+                <div className='user-picture'><span className='mt-2 d-block fs-6 fw-bold'>{userInfo.name[0].toUpperCase()}</span></div>
+            </div>
                 
            
             :
@@ -67,7 +71,7 @@ function NavigationBar() {
                 Login
             </Nav.Link>
             }
-            <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -10,6 +10,7 @@ import {setYoutubeLink , modalShow} from '../store/modalState';
 import {useParams} from 'react-router-dom';
 import useTrackTable from '../../hooks/useTrackTable';
 import {useNavigate} from 'react-router-dom';
+import '../../App.css'
 
 
 
@@ -44,11 +45,25 @@ function TracksTable() {
         components:{
             MuiTableCell:{
                 styleOverrides:{
-                    root:{
+                    head:{
                         color:"#64d86b"
                     }
-                },
+                }
             },
+            MuiToolbar:{
+                styleOverrides:{
+                    gutters:{
+                        borderRadius:"5px",
+                    }
+                }
+            },
+            MuiPaper:{
+                styleOverrides:{
+                   root:{
+                    borderRadius:"10px"
+                   }
+                }
+            }
         }
     })
     // Changes row data and updated request to database to change data as well
@@ -120,8 +135,8 @@ function TracksTable() {
             header: 'Link',
             maxSize:100,
         Cell: ({ cell, row }) => (
-            <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger p-0' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
-            Play
+            <button onClick={(e)=>{handleSetLink(e); dispatch(modalShow())}} className='btn btn-sm btn-danger py-0 px-1' data-link={row.original.youtubeLink} data-track-title={row.original.title}>
+            <span className='ps-1'>Play</span>
             <Play className='fs-5'/>
             </button>
         ),
@@ -167,7 +182,7 @@ function TracksTable() {
             renderBottomToolbarCustomActions={({ table }) => {
                 
                 return (             
-                    <Button onClick={()=>navigate('/pushtrack-form', {state:{listid}})} variant='success'>
+                    <Button  className='btn-sm' onClick={()=>navigate('/pushtrack-form', {state:{listid}})} variant='success'>
                         Add Track
                     </Button>      
                 );
