@@ -8,6 +8,7 @@ const PORT = process.env.PORT;
 const userAuth = require('./routes/userAcount');
 const userPosts = require('./routes/userPosts');
 const userLists = require('./routes/userLists');
+const publickLists = require('./routes/publucLists');
 const { response } = require('express');
 
 app.use(cors({
@@ -42,7 +43,7 @@ app.post("/gatekeeper", (req,res)=>{
 app.use('/user', userAuth);
 app.use('/userlist', userPosts);
 app.use('/userlists', userLists);
-
+app.use('/publiclists', publickLists);
 
 
 const x = jwt.sign({name:"Anestis",email:"anestis@gmail.com"}, process.env.TOKEN_SECRET);

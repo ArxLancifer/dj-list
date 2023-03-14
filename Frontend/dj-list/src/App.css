@@ -48,6 +48,9 @@ div.dropdown-menu > a {
     font-size: 1.1rem;
     font-weight: 500;
 }
+.dropdown-menu {
+    min-width: 6rem;
+}
 /* Logo */
 .memotrack-logo{
     width: 160px;

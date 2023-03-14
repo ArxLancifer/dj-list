@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import {Button, Container, Form, InputGroup } from 'react-bootstrap'
+import {Container, Form, InputGroup } from 'react-bootstrap'
 import ListCard from './SubComponents/ListCard';
-import  {PlusSquare} from 'react-bootstrap-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { IList} from '../interfaces/UserInterfaces';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
-function UserLists() {
+import { Input } from '@mui/material';
+function PublicLists() {
 
     const navigate = useNavigate();
     const userIsAuth = useSelector((state:RootState)=>state.userData.userInfo.isAuth);
@@ -15,11 +15,11 @@ function UserLists() {
         navigate('/login')
     }
 
-    const [userLists, setUserLists] = useState<[IList]>([ {_id: "", user: {username:""}, name: "", genre: "", userImage:""}]);
-    const userId = useSelector((state:any)=>state.userData.userInfo.id)
+    const [userLists, setUserLists] = useState<[IList]>([ {_id: "", user: {username:""}, name: "", genre: "", userImage: "http://placekitten.com/200/300"}]);
+    
     async function fetchLists(){
         try {
-            const response = await axios.get(`http://localhost:5000/userlists/getlists/${userId}`)
+            const response = await axios.get(`http://localhost:5000/publiclists/getlists`)
             const listsData = response.data;
             setUserLists(listsData);
         } catch (error) {
@@ -28,16 +28,11 @@ function UserLists() {
     }
     useEffect(()=>{
         fetchLists();
-    },[userId] )
+    },[] )
 
 
   return (
     <Container className='my-5'>
-      <div className='clearfix'>
-        <Link to={'/createlist'}>
-          <Button variant="success" className='float-end'><PlusSquare className='me-1'/>New </Button>
-        </Link>
-      </div>
         <InputGroup className="w-50 my-5 mx-auto" size='sm'>
         <Form.Control
           placeholder="Search your list"
@@ -55,4 +50,4 @@ function UserLists() {
   )
 }
 
-export default UserLists
+export default PublicLists

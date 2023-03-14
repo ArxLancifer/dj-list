@@ -30,6 +30,7 @@ export interface IList {
         };
         name: string;
         genre: string;
+        userImage:string;
 }
 
 export interface ITrack {

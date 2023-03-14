@@ -12,7 +12,7 @@ function CreateListForm() {
     const userId = useSelector<any>((state) => state.userData.userInfo.id);
     const listName = useRef<any>();
     const listGenre = useRef<any>();
-    const listPublic = useRef<any>();
+    const listPrivate = useRef<any>();
     const navigate = useNavigate();
 
     function inputValidity(name:string, genre:string):boolean{
@@ -24,14 +24,14 @@ function CreateListForm() {
         event.preventDefault();
         const name = listName.current.value;
         const genre = listGenre.current.value;
-        const isPublic = !listPublic.current.checked;
+        const isPrivate = listPrivate.current.checked;
         const inputsAreValid = inputValidity(name, genre);
-
+        console.log(isPrivate)
         if(!inputsAreValid){
             setError('Inputs must have 3 or more characters');
             return;
         } 
-        const requestCreateList = await axios.post("http://localhost:5000/userlists/createlist", {name, genre, isPublic, userId}, {
+        const requestCreateList = await axios.post("http://localhost:5000/userlists/createlist", {name, genre, isPrivate, userId}, {
         headers: {
           'Content-Type': 'application/json'
       }
@@ -63,7 +63,7 @@ function CreateListForm() {
         <Form.Control ref={listGenre} type="text" placeholder="Genre" />
       </Form.Group>
       <Form.Group className="mb-3 fw-bold">
-        <Form.Check ref={listPublic} type="checkbox" label="Private" />
+        <Form.Check ref={listPrivate} type="checkbox" label="Private" />
       </Form.Group>
       <div className='text-end'>
       <Button onClick={createList}  variant="primary">

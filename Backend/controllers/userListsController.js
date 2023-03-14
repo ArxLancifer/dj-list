@@ -19,10 +19,10 @@ userLists = {
 
         const listName = req.body.name;
         const listGenre = req.body.genre;
-        const listPublic = req.body.isPublic;
+        const listPrivate = req.body.isPrivate;
         const id = req.body.userId;
 
-        const newList = new List({user:id, name:listName, genre:listGenre, public:listPublic});
+        const newList = new List({user:id, name:listName, genre:listGenre, isPrivate:listPrivate});
         await newList.save()
 
         res.json("List created");

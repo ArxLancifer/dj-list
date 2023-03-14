@@ -54,24 +54,28 @@ function NavigationBar() {
         <Navbar.Collapse className='text-center ' id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
           <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Home</Nav.Link>
-            <Nav.Link as={Link} to={"/userlists"} className={'fs-5 mx-3 ' + listsDisabled }>My lists</Nav.Link>
-            <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link>
+            {/* <Nav.Link as={Link} to={"/userlists"} className={'fs-5 mx-3 ' + listsDisabled }>My lists</Nav.Link> */}
+            <NavDropdown disabled={!userInfo.isAuth} menuVariant='dark'  className='fs-5 mx-3' title={<span className={listsDisabled}>Lists</span>}>
+                     <NavDropdown.Item as={Link} to={"/userlists"}><span  className={'fs-6 text-light'}>My lists</span></NavDropdown.Item>
+                     <NavDropdown.Item className={'fs-6 text-light'}>Public Lists</NavDropdown.Item>
+                </NavDropdown>
+                <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link>
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 
             
             <div className='d-flex align-items-center'>
-                 <NavDropdown className='fs-5 mx-3' title={
+                 <NavDropdown menuVariant='dark' className='fs-5 mx-4' title={
                     <div>
                         <div className='user-picture'><span className='fs-5 fw-bold'>{userInfo.name[0].toUpperCase()}</span></div>
                        <span className='d-block'>{userInfo.name}</span>
                     </div>
                  } id="basic-nav-dropdown">
-                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                     <NavDropdown.Item className='fs-6' onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
             </div>
                 
            
             :
-            <Nav.Link as={Link} to={"/login"} className='fs-5 mx-3 text-light'>
+            <Nav.Link as={Link} to={"/login"} className='fs-5 mx-4 text-light'>
                 Login
             </Nav.Link>
             }
