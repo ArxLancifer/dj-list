@@ -9,13 +9,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from './store';
 function UserLists() {
 
-    const navigate = useNavigate();
-    const userIsAuth = useSelector((state:RootState)=>state.userData.userInfo.isAuth);
-    if(!userIsAuth){
-        navigate('/login')
-    }
+    // const navigate = useNavigate();
+    // const userIsAuth = useSelector((state:RootState)=>state.userData.userInfo.isAuth);
+    // if(!userIsAuth){
+    //     navigate('/login')
+    // }
 
-    const [userLists, setUserLists] = useState<[IList]>([ {_id: "", user: {username:""}, name: "", genre: "", userImage:""}]);
+    const [userLists, setUserLists] = useState<[IList]>([ {_id: "", user: {username:""}, name: "", genre: ""}]);
     const userId = useSelector((state:any)=>state.userData.userInfo.id)
     async function fetchLists(){
         try {
