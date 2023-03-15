@@ -27,6 +27,7 @@ export interface IList {
         _id: string;
         user: {
             username:string;
+            userimage:string;
         };
         name: string;
         genre: string;

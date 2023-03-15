@@ -15,7 +15,7 @@ function UserLists() {
     //     navigate('/login')
     // }
 
-    const [userLists, setUserLists] = useState<[IList]>([ {_id: "", user: {username:""}, name: "", genre: ""}]);
+    const [userLists, setUserLists] = useState<[IList]>([ {_id: "", user: {username:"", userimage:""}, name: "", genre: ""}]);
     const userId = useSelector((state:any)=>state.userData.userInfo.id)
     async function fetchLists(){
         try {
