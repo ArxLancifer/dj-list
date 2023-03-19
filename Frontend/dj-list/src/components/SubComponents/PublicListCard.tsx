@@ -15,7 +15,12 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
     
     const userId = useSelector((state:RootState)=> state.userData.userInfo.id);
     
-    const userLikedThisList = listData.usersLiked.includes(userId) ?  'btn-primary' : 'btn-outline-primary' ;
+    // const userLikedThisList = listData.usersLiked.includes(userId) ?  'btn-primary' : 'btn-outline-primary' ; // Change this to Array Set for performance
+
+    const usersLiked = new Set(listData.usersLiked);
+
+    const userLikedThisList = usersLiked.has(userId) ?  'btn-primary' : 'btn-outline-primary' ;
+
 
 
     function dateFormate(date:string){
