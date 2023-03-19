@@ -16,7 +16,7 @@ function CommentInput() {
         id="userID"
       />
         </div>
-    <Button className='col-10 ms-auto' size='sm' variant='success'>Comment</Button>
+    <Button className='col-11 ms-auto' size='sm' variant='success'>Comment</Button>
     </div>
     </>
   )
