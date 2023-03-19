@@ -67,7 +67,9 @@ div.dropdown-menu > a {
 .card-title, .djName{
     color: rgb(26, 153, 0);
 }
-
+.list-date{
+    font-size: 0.7rem;
+}
 /* iframe google video */
 iframe{
     width: 100%;

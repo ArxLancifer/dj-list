@@ -36,6 +36,7 @@ export interface IList {
 
 export interface IPublicListCard extends IList{
     userImage:string;
+    createdAt:string;
 }
 
 export interface ITrack {
