@@ -28,9 +28,13 @@ userLists = {
         res.json("List created");
     },
     getTracks: async function(req, res){
-        const listId = req.params.listid;
-        const tracks = await List.findById(listId).select('tracks').lean();
-        res.json(tracks);
+        try {
+            const listId = req.params.listid;
+            const tracks = await List.findById(listId).select('tracks').lean();
+            res.json(tracks);
+        } catch (error) {
+            console.log(error)
+        }
     },
     pushTrack: async function(req, res){
         try {

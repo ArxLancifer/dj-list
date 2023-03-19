@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import { IPublicListCard } from '../../interfaces/UserInterfaces';
 import {HandThumbsUp, HandThumbsUpFill} from 'react-bootstrap-icons';
+import axios from 'axios';
 function PublicListCard({listData}:{listData:IPublicListCard}) {
 
     function dateFormate(date:string){
@@ -11,9 +12,11 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         return formatedDate;
     }
 
-    function removedOutline(e:React.SyntheticEvent<HTMLButtonElement>){
+    async function removedOutline(e:React.SyntheticEvent<HTMLButtonElement>){
         const buttonClasses = e.currentTarget.classList;
+        const listId = e.currentTarget.dataset.listId
         if(buttonClasses.contains("btn-outline-primary")){
+            await axios.post("http://localhost:5000/userlists/createlist")
             e.currentTarget.classList.remove("btn-outline-primary")
             e.currentTarget.classList.add("btn-primary")
         }else{
@@ -33,7 +36,7 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
           bulk of the card's content.
         </Card.Text> */}
         <div className='d-flex justify-content-between'>
-        <Link to={`/trackstable/${listData._id}`}>
+        <Link to={`/publiclist/trackstable/${listData._id}`}>
         <Button className='py-1 px-1' size='sm' variant="info">Watch</Button>
            
         </Link>

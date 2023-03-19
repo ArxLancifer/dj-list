@@ -13,6 +13,7 @@ import TracksTable from './components/SubComponents/TracksTable';
 import AddTrackForm from './components/SubComponents/AddTrackForm';
 import Footer from './components/Footer';
 import PublicLists from './components/PublicLists';
+import PublicTracksTable from './components/SubComponents/PublicTracksTable';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
       <Route path='/trackstable/:listid' element={<TracksTable />} />
       <Route path='/pushtrack-form'  element={<AddTrackForm />} />
       <Route path='/publicklists' element={<PublicLists />} />
+      <Route path='/publiclist/trackstable/:listid' element={<PublicTracksTable />} />
     </Routes>
     </main>
     <Footer />
