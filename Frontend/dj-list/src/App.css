@@ -92,3 +92,10 @@ iframe{
     background: rgb(20,20,20);
     background: linear-gradient(90deg, rgba(20,20,20,1) 18%, rgba(43,43,43,1) 53%, rgba(62,62,62,1) 76%);
 }
+
+
+/* Boostrap button hover (override) */
+.btn-outline-primary:hover{
+    color: #0275d8;
+    background-color:transparent;
+}
