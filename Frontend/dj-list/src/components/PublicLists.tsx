@@ -31,7 +31,6 @@ function PublicLists() {
        
     },[] )
 
-    console.log(userLists)
 
   return (
     <Container>

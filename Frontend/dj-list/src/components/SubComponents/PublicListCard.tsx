@@ -37,8 +37,9 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         <Button className='py-1 px-1' size='sm' variant="info">Watch</Button>
            
         </Link>
-        <button onClick={removedOutline} className='py-1 px-1 btn btn-sm btn-outline-primary' >Like<HandThumbsUp className='fs-6 mb-1 align-middle'/></button>
+        <button data-list-id={listData._id} onClick={removedOutline} className='py-1 px-1 btn btn-sm btn-outline-primary' >Like<HandThumbsUp className='fs-6 mb-1 align-middle'/></button>
          </div>
+        <small className="list-date text-muted">Likes: {listData.usersLiked.length}</small>
         <Card.Footer className="text-muted p-0 pt-1 mt-1 bg-light bg-transparent">
         <small className="list-date text-muted">Created at : {dateFormate(listData.createdAt)}</small>
         </Card.Footer>
