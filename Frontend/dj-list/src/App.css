@@ -85,7 +85,24 @@ iframe{
     background-color: rgb(151, 151, 151);
     margin: 0 auto;
 }
-
+.user-picture-discussion{
+    width: 56px;
+    height: 56px;
+    line-height: 56px;
+    border-radius: 50%;
+    background-color: rgb(151, 151, 151);
+}
+.user-comment-container .user-picture,
+.comment-input .user-picture{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: rgb(151, 151, 151);
+}
+.comment-input .form-control:focus{
+    box-shadow:none;
+}
 /* Hero section Homepage */
 .hero-section{
     height: 90vh;

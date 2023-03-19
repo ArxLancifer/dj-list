@@ -14,6 +14,7 @@ import AddTrackForm from './components/SubComponents/AddTrackForm';
 import Footer from './components/Footer';
 import PublicLists from './components/PublicLists';
 import PublicTracksTable from './components/SubComponents/PublicTracksTable';
+import ListDiscussion from './components/ListDiscussion';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
         if(fetchStatus === 'idle'){
             dispatch<any>(fetchUserThunk())
         }
-    }, [dispatch])
+    }, [])
 
 
 
@@ -44,6 +45,7 @@ function App() {
       <Route path='/pushtrack-form'  element={<AddTrackForm />} />
       <Route path='/publicklists' element={<PublicLists />} />
       <Route path='/publiclist/trackstable/:listid' element={<PublicTracksTable />} />
+      <Route path='/listdiscussion' element={<ListDiscussion />} />
     </Routes>
     </main>
     <Footer />
