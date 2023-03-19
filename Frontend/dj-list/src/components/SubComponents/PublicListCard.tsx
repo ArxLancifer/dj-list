@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,11 @@ import { RootState } from '../store';
 
 function PublicListCard({listData}:{listData:IPublicListCard}) {
 
+    const [likesCounter, setLikesCounter] = useState<number>(listData.usersLiked.length);
+    
     const userId = useSelector((state:RootState)=> state.userData.userInfo.id);
+    
+    const userLikedThisList = listData.usersLiked.includes(userId) ?  'btn-primary' : 'btn-outline-primary' ;
 
 
     function dateFormate(date:string){
@@ -27,13 +31,13 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         // console.log(e.currentTarget.classList)
             e.currentTarget.classList.remove("btn-outline-primary")
             e.currentTarget.classList.add("btn-primary")
-
+            setLikesCounter((prevLikes) => prevLikes+1)
             await axios.post("http://localhost:5000/publiclists/likelist", {listId, userId});
            
         }else{
             e.currentTarget.classList.remove("btn-primary")
             e.currentTarget.classList.add("btn-outline-primary")
-            
+            setLikesCounter((prevLikes) => prevLikes-1)
             await axios.post("http://localhost:5000/publiclists/unlikelist", {listId, userId});
         }
     }
@@ -53,9 +57,9 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         <Button className='py-1 px-1' size='sm' variant="info">Watch</Button>
            
         </Link>
-        <button data-list-id={listData._id} onClick={removedOutline} className='py-1 px-1 btn btn-sm btn-outline-primary' >Like<HandThumbsUp className='fs-6 mb-1 align-middle'/></button>
+        <button data-list-id={listData._id} onClick={removedOutline} className={`py-1 px-1 btn btn-sm ${userLikedThisList}`} >Like<HandThumbsUp className='fs-6 mb-1 align-middle'/></button>
          </div>
-        <small className="list-date text-muted">Likes: {listData.usersLiked.length}</small>
+        <small className="list-date text-muted">Likes: {likesCounter}</small>
         <Card.Footer className="text-muted p-0 pt-1 mt-1 bg-light bg-transparent">
         <small className="list-date text-muted">Created at : {dateFormate(listData.createdAt)}</small>
         </Card.Footer>
