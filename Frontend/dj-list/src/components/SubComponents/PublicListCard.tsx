@@ -5,7 +5,14 @@ import { Link } from 'react-router-dom';
 import { IPublicListCard } from '../../interfaces/UserInterfaces';
 import {HandThumbsUp, HandThumbsUpFill} from 'react-bootstrap-icons';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
+
+
 function PublicListCard({listData}:{listData:IPublicListCard}) {
+
+    const userId = useSelector((state:RootState)=> state.userData.userInfo.id);
+
 
     function dateFormate(date:string){
         const formatedDate = new Date(date).toLocaleDateString();
@@ -16,12 +23,18 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         const buttonClasses = e.currentTarget.classList;
         const listId = e.currentTarget.dataset.listId
         if(buttonClasses.contains("btn-outline-primary")){
-            await axios.post("http://localhost:5000/userlists/createlist")
+           
+        // console.log(e.currentTarget.classList)
             e.currentTarget.classList.remove("btn-outline-primary")
             e.currentTarget.classList.add("btn-primary")
+
+            await axios.post("http://localhost:5000/publiclists/likelist", {listId, userId});
+           
         }else{
             e.currentTarget.classList.remove("btn-primary")
             e.currentTarget.classList.add("btn-outline-primary")
+            
+            await axios.post("http://localhost:5000/publiclists/unlikelist", {listId, userId});
         }
     }
 

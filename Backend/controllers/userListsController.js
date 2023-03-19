@@ -21,11 +21,15 @@ userLists = {
         const listGenre = req.body.genre;
         const listPrivate = req.body.isPrivate;
         const id = req.body.userId;
-
-        const newList = new List({user:id, name:listName, genre:listGenre, isPrivate:listPrivate});
-        await newList.save()
-
-        res.json("List created");
+        try {
+            const newList = new List({user:id, name:listName, genre:listGenre, isPrivate:listPrivate});
+            await newList.save()
+    
+            res.status(200).json({message:"List created"});
+            
+        } catch (error) {
+            res.status(400).json({errorMessage:"Unable to create list"})
+        }
     },
     getTracks: async function(req, res){
         try {

@@ -53,7 +53,10 @@ const ListSchema = new Schema({
     },
     tracks:[{
         type:TrackType
-    }]
+    }],
+    usersLiked:[{
+        type:String
+    }],
 
 },
     {
