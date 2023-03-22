@@ -57,7 +57,7 @@ function NavigationBar() {
             {/* <Nav.Link as={Link} to={"/userlists"} className={'fs-5 mx-3 ' + listsDisabled }>My lists</Nav.Link> */}
             <NavDropdown disabled={!userInfo.isAuth} menuVariant='dark'  className='fs-5 mx-3' title={<span className={listsDisabled}>Lists</span>}>
                      <NavDropdown.Item as={Link} to={"/userlists"}><span  className={'fs-6 text-light'}>My lists</span></NavDropdown.Item>
-                     <NavDropdown.Item as={Link} to={"/publicklists"} className={'fs-6 text-light'}>Public Lists</NavDropdown.Item>
+                     <NavDropdown.Item as={Link} to={"/publiclists"} className={'fs-6 text-light'}>Public Lists</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link>
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 

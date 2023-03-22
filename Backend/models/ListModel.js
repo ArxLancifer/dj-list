@@ -32,6 +32,17 @@ const TrackType = {
         }
     }
 
+
+    const CommentSchema = new Schema({
+            user:{ 
+                type:Schema.Types.ObjectId,
+                ref:'User',
+                required:true,
+            },
+            commentText:String,
+            
+    },{_id:false})
+
 const ListSchema = new Schema({
 
     user:{
@@ -61,9 +72,7 @@ const ListSchema = new Schema({
         type:String
     }],
     comments:[{
-        type:Schema.Types.ObjectId,
-        ref:'User',
-        commentText:String,
+        type:CommentSchema
     }]
 
 },

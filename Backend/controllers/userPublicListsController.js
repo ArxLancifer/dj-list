@@ -42,7 +42,28 @@ const publickLists = {
             res.json({errorMessage:"Something went wrong"})
         }
 
-    }
+    },
+    listComments: async function(req, res){
+        const listId = req.params.listid;
+        try {
+            const comments = await List.findById(listId).select('comments')
+            res.json(comments)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    addComment: async function(req, res){
+        const listId = req.params.listid;
+        const userId = req.body.userId;
+        const userComment = req.body.userComment;
+        try {
+            const comments = await List.findByIdAndUpdate(listId, {$push:{comments:{user:userId, commentText:userComment}}})
+            console.log(comments)
+            res.json("commented")
+        } catch (error) {
+            console.log(error)
+        }
+    },
 }
 
 module.exports = publickLists;

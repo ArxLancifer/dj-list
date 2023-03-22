@@ -33,7 +33,6 @@ app.post("/gatekeeper", async (req,res)=>{
         })
         if(userIsAuth){
             const userFavoriteLists = await User.findById(userIsAuth._id).select('favoriteLists -_id');
-            console.log(userFavoriteLists)
            return res.json({id:userIsAuth._id, name:userIsAuth.username, favoriteLists:userFavoriteLists, isAuth:true});
         }else{
            return res.status(403).json("Unauthorized user!");

@@ -43,7 +43,7 @@ function App() {
       <Route path='/createlist' element={<CreateListForm />} />
       <Route path='/trackstable/:listid' element={<TracksTable />} />
       <Route path='/pushtrack-form'  element={<AddTrackForm />} />
-      <Route path='/publicklists' element={<PublicLists />} />
+      <Route path='/publiclists' element={<PublicLists />} />
       <Route path='/publiclist/trackstable/:listid' element={<PublicTracksTable />} />
       <Route path='/listdiscussion' element={<ListDiscussion />} />
     </Routes>
