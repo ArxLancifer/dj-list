@@ -2,6 +2,7 @@ const { default: mongoose, Mongoose } = require('mongoose');
 const List = require('../models/ListModel');
 const {Track} = require('../models/TrackModel')
 const transformLinkToEmbed = require('../helpers/transformYoutubeLink');
+const User = require('../models/UserModel');
 userLists = {
     getLists: async function(req, res){
         const userId = req.params.user;
@@ -20,9 +21,10 @@ userLists = {
         const listName = req.body.name;
         const listGenre = req.body.genre;
         const listPrivate = req.body.isPrivate;
+        const listDescription = req.body.description || "There is no any description for this list";
         const id = req.body.userId;
         try {
-            const newList = new List({user:id, name:listName, genre:listGenre, isPrivate:listPrivate});
+            const newList = new List({user:id, name:listName, genre:listGenre, description:listDescription, isPrivate:listPrivate});
             await newList.save()
     
             res.status(200).json({message:"List created"});
@@ -108,8 +110,32 @@ userLists = {
             console.log(error)
             return res.json({errorMessage:"Track failed to be remove"})
         }
+        
 
+    },
+    addFavorite: async function(req, res){
+        try {
+            const listId = req.body.listId;
+            const userId = req.body.userId;
+            const x = await User.findByIdAndUpdate(userId,{$addToSet:{favoriteLists:listId}})
+            console.log(x, "added")
+            res.json("List has been added to favorites");
 
+        } catch (error) {
+            res.json("Something wrong on favorites add");
+        }
+    },
+    removeFavorite: async function(req, res){
+        try {
+            const listId = req.body.listId;
+            const userId = req.body.userId;
+            const x = await User.findByIdAndUpdate(userId,{$pull:{favoriteLists:listId}})
+            console.log(x, "removed")
+            res.json("List has been removed to favorites");
+
+        } catch (error) {
+            res.json("Something wrong on favorites remove");
+        }
     }
 }
 

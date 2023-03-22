@@ -15,7 +15,11 @@ const UserSchema = new Schema(
         password:{
             type:String,
             required:true
-        }
+        },
+        favoriteLists:[{
+            type:Schema.Types.ObjectId,
+            ref:'List',
+        }]
     },
     {timestamps:true}
 )

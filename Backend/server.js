@@ -10,6 +10,7 @@ const userPosts = require('./routes/userPosts');
 const userLists = require('./routes/userLists');
 const publickLists = require('./routes/publucLists');
 const { response } = require('express');
+const User = require('./models/UserModel');
 
 app.use(cors({
     origin: "http://localhost:3000", // allow to server to accept request from different origin
@@ -23,7 +24,7 @@ mongodDB();
 
 
 
-app.post("/gatekeeper", (req,res)=>{
+app.post("/gatekeeper", async (req,res)=>{
     const token = req.body.token;
     try {
         const userIsAuth = jwt.verify(token, process.env.TOKEN_SECRET, (err, result)=>{
@@ -31,7 +32,9 @@ app.post("/gatekeeper", (req,res)=>{
             return result;
         })
         if(userIsAuth){
-           return res.json({id:userIsAuth._id, name:userIsAuth.username, isAuth:true});
+            const userFavoriteLists = await User.findById(userIsAuth._id).select('favoriteLists -_id');
+            console.log(userFavoriteLists)
+           return res.json({id:userIsAuth._id, name:userIsAuth.username, favoriteLists:userFavoriteLists, isAuth:true});
         }else{
            return res.status(403).json("Unauthorized user!");
         }

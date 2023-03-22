@@ -47,6 +47,9 @@ const ListSchema = new Schema({
         type:String,
         required:true
     },
+    description:{
+        type:String
+    },
     isPrivate: {
         type:Boolean,
         default:false,
@@ -57,6 +60,11 @@ const ListSchema = new Schema({
     usersLiked:[{
         type:String
     }],
+    comments:[{
+        type:Schema.Types.ObjectId,
+        ref:'User',
+        commentText:String,
+    }]
 
 },
     {

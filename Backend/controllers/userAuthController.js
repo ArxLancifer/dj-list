@@ -15,7 +15,7 @@ const userAuth = {
          const userToken = createUserToken(user);
          const refreshToken = new Token({refreshToken:userToken.refreshToken});
          await refreshToken.save();
-            res.json({userToken, username:user.username, id:user._id});
+            res.json({userToken, username:user.username, id:user._id, favoriteLists:user.favoriteLists});
           }else {
             res.status(403).json("Wrong account");
           }

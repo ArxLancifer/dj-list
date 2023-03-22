@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice , PayloadAction} from "@reduxjs/toolkit";
 import {IUser, IToken} from "../../interfaces/UserInterfaces";
 import axios from "axios";
+import { stat } from "fs";
 
 export const fetchUserThunk = createAsyncThunk("userData/fetchData", async function(){
     // try {
@@ -17,6 +18,7 @@ const initialState = {
         name:"",
         email:"",
         id:"",
+        favoriteLists:["", "a"],
         userTokens:{},
         isAuth:false,
     },
@@ -42,7 +44,13 @@ const userData = createSlice({
         state.userInfo.isAuth = false;
         state.userInfo.userTokens = {};
        },
+       addFavorite(state, action:PayloadAction<{favorites:string[]}>){
+        state.userInfo.favoriteLists = [...action.payload.favorites];
 
+       },
+       removeFavorite(state, action:PayloadAction<{favorites:string[]}>){
+        state.userInfo.favoriteLists = [...action.payload.favorites];
+       },
 
     },
     extraReducers: (builder) => {
@@ -58,7 +66,8 @@ const userData = createSlice({
             if (state.fetchStatus === 'pending'){
                 state.userInfo.name = action.payload.name;
                 state.userInfo.id = action.payload.id;
-                state.userInfo.isAuth = action.payload.isAuth;
+                state.userInfo.isAuth = action.payload.isAuth;            
+                state.userInfo.favoriteLists = [...action.payload.favoriteLists.favoriteLists];
                 state.fetchStatus = 'idle';
                 console.log("Fetch fulfilled")
 
@@ -79,5 +88,5 @@ const userData = createSlice({
 })
 
 export default userData.reducer;
-export const {logInUser, logOutUser} = userData.actions;
+export const {logInUser, logOutUser, addFavorite, removeFavorite} = userData.actions;
 

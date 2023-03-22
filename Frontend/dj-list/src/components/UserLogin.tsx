@@ -55,6 +55,7 @@ function UserLogin() {
                 email: emailInput,
                 id: fetchUserData.data.id,
                 userTokens:{...fetchUserData.data.userToken},
+                favoriteLists:[...fetchUserData.data.favoriteLists],
                 isAuth:true,
               };
               

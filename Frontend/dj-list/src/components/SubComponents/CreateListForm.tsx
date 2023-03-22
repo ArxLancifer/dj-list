@@ -13,6 +13,7 @@ function CreateListForm() {
     const listName = useRef<any>();
     const listGenre = useRef<any>();
     const listPrivate = useRef<any>();
+    const listDescription = useRef<any>();
     const navigate = useNavigate();
 
     function inputValidity(name:string, genre:string):boolean{
@@ -24,6 +25,7 @@ function CreateListForm() {
         event.preventDefault();
         const name = listName.current.value;
         const genre = listGenre.current.value;
+        const description = listDescription.current.value;
         const isPrivate = listPrivate.current.checked;
         const inputsAreValid = inputValidity(name, genre);
         console.log(isPrivate)
@@ -31,7 +33,7 @@ function CreateListForm() {
             setError('Inputs must have 3 or more characters');
             return;
         } 
-        const requestCreateList = await axios.post("http://localhost:5000/userlists/createlist", {name, genre, isPrivate, userId}, {
+        const requestCreateList = await axios.post("http://localhost:5000/userlists/createlist", {name, genre, isPrivate, description , userId}, {
         headers: {
           'Content-Type': 'application/json'
       }
@@ -61,6 +63,10 @@ function CreateListForm() {
       <Form.Group className="mb-3">
         <Form.Label>List genre</Form.Label>
         <Form.Control ref={listGenre} type="text" placeholder="Genre" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Label>Description</Form.Label>
+        <Form.Control ref={listDescription} as="textarea" placeholder='Type list description here' rows={3} />
       </Form.Group>
       <Form.Group className="mb-3 fw-bold">
         <Form.Check ref={listPrivate} type="checkbox" label="Private" />
