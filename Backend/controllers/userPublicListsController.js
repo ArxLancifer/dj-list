@@ -46,7 +46,7 @@ const publickLists = {
     listComments: async function(req, res){
         const listId = req.params.listid;
         try {
-            const comments = await List.findById(listId).select('comments')
+            const comments = await List.findById(listId).select('comments').populate({path:'comments.user', select:'username'})
             res.json(comments)
         } catch (error) {
             console.log(error)

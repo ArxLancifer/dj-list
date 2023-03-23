@@ -1,11 +1,30 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useLocation } from 'react-router-dom';
+import { IComment } from '../interfaces/UserInterfaces';
 import CommentContainer from './SubComponents/CommentContainer';
 import CommentInput from './SubComponents/CommentInput';
 
 function ListDiscussion() {
+
+    const [comments, setComments] = useState<IComment[]>([])
+
+    const {state:{listId}} = useLocation()
+
+    async function getComments(){
+        
+        const comments = await axios.get(`http://localhost:5000/publiclists/discussion/${listId}`)
+        const commentsData = comments.data;
+        setComments(commentsData.comments) 
+    }
+
+    useEffect(()=>{
+        getComments();
+    }, []);
+
   return (
     <Container>
     <Card className="text-center h-100 mt-5">
@@ -21,7 +40,9 @@ function ListDiscussion() {
           Some list description and Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos facilis tempora ex distinctio saepe deleniti minus nobis corrupti nam sed!
         </Card.Text>
         <Button className='mb-4' variant="primary">Go to list</Button>
-         <CommentContainer />
+         {/* {comments.map((comment, idx) => <CommentContainer key={idx} {...comment} />)} */}
+         {comments.map((comment, idx) => <CommentContainer key={idx} commentData={comment} />)}
+         {/* {<CommentContainer x={"asdas"} />} */}
         <Card.Footer className='p-0'>
             <CommentInput />
         </Card.Footer>

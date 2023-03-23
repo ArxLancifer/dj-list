@@ -103,6 +103,10 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         <div onClick={addToFavorites} role="button" className='float-end text-end' data-list-id={listData._id} >{ isFavorite ? <StarFill className='text-warning fs-5 me-1 isfavorite'/>:<Star className='text-warning fs-5 me-1'/>}</div>
         <Card.Footer className="text-muted p-0 pt-1 mt-1 bg-light bg-transparent">
         <small className="list-date text-muted">Created at : {dateFormate(listData.createdAt)}</small>
+        <Link to={"/listdiscussion"} state={{ listId: listData._id }} >
+        <Button className='p-0 px-1 float-end' size='sm' variant="outline-secondary">Comments</Button>
+           
+        </Link>
         </Card.Footer>
       </Card.Body>
     </Card>
