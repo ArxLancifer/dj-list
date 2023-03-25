@@ -9,7 +9,7 @@ const userAuth = require('./routes/userAcount');
 const userPosts = require('./routes/userPosts');
 const userLists = require('./routes/userLists');
 const publickLists = require('./routes/publucLists');
-const { response } = require('express');
+const formidable = require('formidable')
 const User = require('./models/UserModel');
 
 app.use(cors({
@@ -47,6 +47,29 @@ app.use('/userlist', userPosts);
 app.use('/userlists', userLists);
 app.use('/publiclists', publickLists);
 
+app.post('/uploadimage', async (req, res)=>{
+    console.log("Request upload file")
+    const form = formidable({ multiples: true, uploadDir: __dirname, keepExtensions:true });
+    form.parse(req, (err, fields, files)=>{
+        if(err){
+            next(err)
+            return;
+        }
+       
+    })
+    // form.on('fileBegin', (name,file)=>{
+    //     file.path = __dirname + '/public' + file.originalFilename;
+    //     console.log(file.path)
+    //     console.log("filename:",name)
+    //     console.log("file:",file.originalFilename)
+    // })
+    // form.on('file', (name,file)=>{
+        
+    //     console.log("filename:",name)
+    //     console.log("file:",file.originalFilename)
+    // })
+    res.json("asd")
+})
 
 const x = jwt.sign({name:"Anestis",email:"anestis@gmail.com"}, process.env.TOKEN_SECRET);
 
