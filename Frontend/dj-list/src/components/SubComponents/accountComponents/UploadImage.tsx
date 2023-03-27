@@ -23,7 +23,7 @@ function UploadImage() {
       <span className='ms-2'>Upload</span>
       </label>
       <i className='ms-2'>{fileName}</i>
-      <input onChange={fileNameHandler} id="file-upload" name="userAvatar" type="file"/>
+      <input onChange={fileNameHandler} id="file-upload" name="userAvatar" type="file" accept="image/x-png,image/gif,image/jpeg"/>
       <Button className='d-block my-2' size='sm' variant='success' type="submit">Submit</Button>
     </form>
     </div>

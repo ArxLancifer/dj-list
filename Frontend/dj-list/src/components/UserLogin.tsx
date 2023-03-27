@@ -48,7 +48,7 @@ function UserLogin() {
         
         const userTokens = JSON.stringify(fetchUserData?.data.userToken)
         localStorage.setItem("userToken", userTokens);
-
+          console.log(fetchUserData)
         if(fetchUserData?.status === 200){
             const userPayload: IUser = {
                 name: fetchUserData.data.username,
@@ -56,6 +56,7 @@ function UserLogin() {
                 id: fetchUserData.data.id,
                 userTokens:{...fetchUserData.data.userToken},
                 favoriteLists:[...fetchUserData.data.favoriteLists],
+                accountSince:fetchUserData.data.accountSince,
                 isAuth:true,
               };
               

@@ -20,6 +20,7 @@ export interface IUser {
     email:string;
     id:string;
     favoriteLists:any;
+    accountSince:string;
     userTokens:IToken;
     isAuth:boolean;
 }

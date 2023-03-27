@@ -20,6 +20,7 @@ const initialState = {
         id:"",
         favoriteLists:["", "a"],
         userTokens:{},
+        accountSince:"",
         isAuth:false,
     },
     fetchStatus:"idle",
@@ -66,7 +67,8 @@ const userData = createSlice({
             if (state.fetchStatus === 'pending'){
                 state.userInfo.name = action.payload.name;
                 state.userInfo.id = action.payload.id;
-                state.userInfo.isAuth = action.payload.isAuth;            
+                state.userInfo.isAuth = action.payload.isAuth;
+                state.userInfo.accountSince = action.payload.accountSince;            
                 state.userInfo.favoriteLists = [...action.payload.favoriteLists.favoriteLists];
                 state.fetchStatus = 'idle';
                 console.log("Fetch fulfilled")
