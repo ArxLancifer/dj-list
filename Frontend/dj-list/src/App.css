@@ -16,6 +16,31 @@ a{
   padding: 0 !important;
   margin: 0 ;
 }
+
+.accountsettings{
+    font-size: 0.9rem;
+    background-color: rgb(25, 25, 25);
+    height: 90vh;
+}
+
+.accountsettings li>a{
+    display: inline-block;
+    border-left: 10px solid transparent;
+    width: 90%;
+    height: 30px;
+    line-height: 32px;
+}
+.accountsettings a:hover{
+    color: #fff;
+}
+.accountsettings li>a:focus {
+    background-color: rgb(40, 40, 40);
+    border-right: 3px solid lightgray;
+    
+}
+.accountsettings .content {
+    min-height: 40vh;
+}
 .alert-danger{
    padding: 4px;
    margin: 5px 0 5px 0;
@@ -115,4 +140,15 @@ iframe{
 .btn-outline-primary:hover{
     color: #0275d8;
     background-color:transparent;
+}
+
+/* Input file styling */
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }

@@ -15,7 +15,9 @@ import Footer from './components/Footer';
 import PublicLists from './components/PublicLists';
 import PublicTracksTable from './components/SubComponents/PublicTracksTable';
 import ListDiscussion from './components/ListDiscussion';
-import UploadImage from './components/SubComponents/UploadImage';
+import UploadImage from './components/SubComponents/accountComponents/UploadImage';
+import AccountInformation from './components/SubComponents/accountComponents/AccountInformation';
+import AccountSetting from './components/AccountSetting';
 
 
 function App() {
@@ -47,6 +49,10 @@ function App() {
       <Route path='/publiclists' element={<PublicLists />} />
       <Route path='/publiclist/trackstable/:listid' element={<PublicTracksTable />} />
       <Route path='/listdiscussion/:listid' element={<ListDiscussion />} />
+      <Route path='/accountsettings' element={<AccountSetting />}>
+            <Route path='accountinformation' element={<AccountInformation />} />
+            <Route path='uploadavatar' element={<UploadImage />} />
+      </Route>
       <Route path='/uploadimage' element={<UploadImage />} />
     </Routes>
     </main>
