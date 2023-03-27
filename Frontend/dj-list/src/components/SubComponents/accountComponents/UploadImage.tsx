@@ -17,7 +17,7 @@ function UploadImage() {
 
     <div className='text-light'>
       <h4 >Upload profile picture</h4>
-    <form action="http://localhost:5000/uploadimage" encType="multipart/form-data" method="post">
+    <form action="http://localhost:5000/accountsettings/uploadavatar" encType="multipart/form-data" method="post">
       <label htmlFor="file-upload" className="custom-file-upload">
       <CloudArrowUpFill className='fs-5'/>
       <span className='ms-2'>Upload</span>
