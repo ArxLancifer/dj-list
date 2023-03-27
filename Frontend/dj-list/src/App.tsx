@@ -18,6 +18,7 @@ import ListDiscussion from './components/ListDiscussion';
 import UploadImage from './components/SubComponents/accountComponents/UploadImage';
 import AccountInformation from './components/SubComponents/accountComponents/AccountInformation';
 import AccountSetting from './components/AccountSetting';
+import ListCollection from './components/SubComponents/accountComponents/ListCollection';
 
 
 function App() {
@@ -52,8 +53,8 @@ function App() {
       <Route path='/accountsettings' element={<AccountSetting />}>
             <Route path='accountinformation' element={<AccountInformation />} />
             <Route path='uploadavatar' element={<UploadImage />} />
+            <Route path='listcollection' element={<ListCollection />} />
       </Route>
-      <Route path='/uploadimage' element={<UploadImage />} />
     </Routes>
     </main>
     <Footer />

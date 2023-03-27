@@ -70,8 +70,8 @@ function NavigationBar() {
                     </div>
                  } id="basic-nav-dropdown">
                      <NavDropdown.Item className='fs-6' onClick={handleLogout}>Logout</NavDropdown.Item>
-                     <NavDropdown.Item className='fs-6'>
-                     <Nav.Link as={Link} to={"/accountsettings"}>Setting</Nav.Link>
+                     <NavDropdown.Item as={Link} to="/accountsettings/accountinformation" className='fs-6'>
+                        Settings
                      </NavDropdown.Item>
                 </NavDropdown>
             </div>

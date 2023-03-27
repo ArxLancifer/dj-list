@@ -11,7 +11,7 @@ userLists = {
         }
         
         const userLists = await List.find({user:userId})
-        .select('user name genre')
+        .select('user name genre tracks')
         .populate({path:'user', select:'username'})
         .lean();
         res.json(userLists);

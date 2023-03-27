@@ -15,7 +15,7 @@ function AccountSetting() {
           <Link to={`${pathname}/uploadavatar`}>Upload profile picture</Link>
         </li>
         <li>
-          <Link to={`${pathname}/uploadavatar`}>List Collection</Link>
+          <Link to={`${pathname}/listcollection`}>List Collection</Link>
         </li>
         </div>
         <div className='col-7'>
