@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
+const fs = require('fs');
 const cors = require('cors');
-const mongodDB = require('./config/mongoDB')
+const mongodDB = require('./config/mongoDB');
 const jwt = require('jsonwebtoken');
 require('dotenv').config({path:'config/.env'});
 const PORT = process.env.PORT;
@@ -9,7 +10,9 @@ const userAuth = require('./routes/userAcount');
 const userPosts = require('./routes/userPosts');
 const userLists = require('./routes/userLists');
 const publickLists = require('./routes/publucLists');
-const formidable = require('formidable')
+const formidable = require('formidable');
+const axios = require('axios');
+const FormData = require('form-data');
 const User = require('./models/UserModel');
 
 app.use(cors({
@@ -49,42 +52,44 @@ app.use('/publiclists', publickLists);
 
 app.post('/uploadimage', async (req, res)=>{
     console.log("Request upload file")
-    const form = formidable({ multiples: true, uploadDir: __dirname, keepExtensions:true });
+    const form = formidable({ multiples: true,  }); //uploadDir: __dirname, keepExtensions:true
     form.parse(req, (err, fields, files)=>{
         if(err){
             next(err)
             return;
         }
+      
+
        
     })
-    // form.on('fileBegin', (name,file)=>{
-    //     file.path = __dirname + '/public' + file.originalFilename;
-    //     console.log(file.path)
-    //     console.log("filename:",name)
-    //     console.log("file:",file.originalFilename)
-    // })
-    // form.on('file', (name,file)=>{
-        
-    //     console.log("filename:",name)
-    //     console.log("file:",file.originalFilename)
-    // })
+    form.on('file', async (formname, file)=>{
+        try {
+            const fileData = fs.createReadStream(file.filepath, ); //{ encoding: 'base64' }
+            const data = new FormData()
+            data.append('image', fileData);
+            const requestConfig = {
+                method: 'post',
+              maxBodyLength: Infinity,
+                url: 'https://api.imgur.com/3/image',
+                headers: { 
+                  'Authorization': `Client-ID ${process.env.IMGUR_CLIENT_ID}`, 
+                  ...data.getHeaders()
+                },
+                data : data
+              };
+    
+            const response = await axios(requestConfig)
+            const responseData = response.data;
+            console.log(responseData);
+        } catch (error) {
+            console.log(error)
+        }
+       
+    })
     res.json("asd")
 })
 
-const x = jwt.sign({name:"Anestis",email:"anestis@gmail.com"}, process.env.TOKEN_SECRET);
 
-app.post('/jwttestlogin', (req, res)=>{
-    const username = req.body.username;
-    const user ={name:username}
-
-    const createdUserToken = jwt.sign({user, exp:"1h"}, process.env.TOKEN_SECRET)
-    res.json(createdUserToken);
-})
-app.get('/jwttestauth', (req,res)=>{
-    const userToken = req.body.token;
-    const authTicket = jwt.verify(userToken, process.env.TOKEN_SECRET);
-    res.json(authTicket);
-})
 
 app.listen(PORT, ()=>{
     console.log("Server is running on port "+ PORT)
