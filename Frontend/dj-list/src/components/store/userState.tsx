@@ -7,6 +7,7 @@ export const fetchUserThunk = createAsyncThunk("userData/fetchData", async funct
     // try {
         const token: IToken = JSON.parse(localStorage.getItem('userToken') || '');
         const response = await axios.post("http://localhost:5000/gatekeeper", {token:token.createdUserToken});
+        console.log(response.data)
         return response.data;
     // } catch (error) {
     //     console.log(error);
@@ -65,11 +66,13 @@ const userData = createSlice({
           .addCase(fetchUserThunk.fulfilled, (state, action) => {
             const { requestId } = action.meta
             if (state.fetchStatus === 'pending'){
+                const userTokens:string = JSON.parse(localStorage.getItem('userToken') as string) || ""
                 state.userInfo.name = action.payload.name;
                 state.userInfo.id = action.payload.id;
                 state.userInfo.isAuth = action.payload.isAuth;
                 state.userInfo.accountSince = action.payload.accountSince;            
                 state.userInfo.favoriteLists = [...action.payload.favoriteLists.favoriteLists];
+                state.userInfo.userTokens = userTokens;
                 state.fetchStatus = 'idle';
                 console.log("Fetch fulfilled")
 

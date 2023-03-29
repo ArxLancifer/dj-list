@@ -16,6 +16,9 @@ const UserSchema = new Schema(
             type:String,
             required:true
         },
+        userimage:{
+            type:String,
+        },
         favoriteLists:[{
             type:Schema.Types.ObjectId,
             ref:'List',
