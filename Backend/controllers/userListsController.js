@@ -93,7 +93,6 @@ userLists = {
         try {
             const listid = req.params.listid;
             const trackToDelete = req.params.trackid;
-            console.log(trackToDelete)
             // const query = await List.updateOne(
             //     {"_id":listid, "tracks._id":trackToDelete},
             //     {$pull:{tracks:{$elemMatch:{_id:trackToDelete}}}}
@@ -117,8 +116,7 @@ userLists = {
         try {
             const listId = req.body.listId;
             const userId = req.body.userId;
-            const x = await User.findByIdAndUpdate(userId,{$addToSet:{favoriteLists:listId}})
-            console.log(x, "added")
+            await User.findByIdAndUpdate(userId,{$addToSet:{favoriteLists:listId}})
             res.json("List has been added to favorites");
 
         } catch (error) {
@@ -129,8 +127,7 @@ userLists = {
         try {
             const listId = req.body.listId;
             const userId = req.body.userId;
-            const x = await User.findByIdAndUpdate(userId,{$pull:{favoriteLists:listId}})
-            console.log(x, "removed")
+            await User.findByIdAndUpdate(userId,{$pull:{favoriteLists:listId}})
             res.json("List has been removed to favorites");
 
         } catch (error) {

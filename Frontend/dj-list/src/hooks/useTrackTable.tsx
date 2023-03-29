@@ -13,7 +13,7 @@ function TrackTableHook() {
 
              const response = await axios.post<AxiosResponse>(`http://localhost:5000/userlists/pushtrack/${listId}`, track)
              const data = response.data;
-              console.log(data)  
+
          } catch (error) {
             console.log(error)
             console.log("Track failed to be add");

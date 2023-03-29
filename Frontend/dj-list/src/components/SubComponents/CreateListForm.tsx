@@ -28,7 +28,6 @@ function CreateListForm() {
         const description = listDescription.current.value;
         const isPrivate = listPrivate.current.checked;
         const inputsAreValid = inputValidity(name, genre);
-        console.log(isPrivate)
         if(!inputsAreValid){
             setError('Inputs must have 3 or more characters');
             return;

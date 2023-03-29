@@ -48,7 +48,6 @@ function UserLogin() {
         
         const userTokens = JSON.stringify(fetchUserData?.data.userToken)
         localStorage.setItem("userToken", userTokens);
-          console.log(fetchUserData)
         if(fetchUserData?.status === 200){
             const userPayload: IUser = {
                 name: fetchUserData.data.username,

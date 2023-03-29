@@ -84,7 +84,6 @@ function TracksTable() {
     };
 
     const handleDeleteRow = async (row: MRT_Row<ITrack>) => {
-        console.log(row.original._id)
         const trackId = row.original._id;
           // eslint-disable-next-line no-restricted-globals
           if (!confirm(`Are you sure you want to delete ${row.getValue('title')}`)) {
@@ -199,21 +198,8 @@ function TracksTable() {
             editingMode="modal" //default
             enableEditing
             onEditingRowSave={handleSaveRow}
-            // displayColumnDefOptions={{
-            //     'mrt-row-actions': {
-            //       header: 'Title', //change "Actions" to "Edit"
-            //       //use a text button instead of a icon button
-            //       Cell: ({ cell, row }) => (
-            //         <button onClick={()=>console.log("row",row.id)}  className='btn btn-sm btn-danger p-0' data-link={JSON.stringify(row.getAllCells())}>
-            //         Play
-            //         <Play className='fs-5'/>
-            //         </button>
-            //     ),
-            //     },
-            //   }}
+          
         />
-       {/* <MRTDialog  columns={columns}/>  MRT Custom dialog if needed ill add this later instead of my AddTrackForm*/}
-       {/*docs source https://www.material-react-table.com/docs/examples/editing-crud */}
     </ThemeProvider>
     </Container>
   )

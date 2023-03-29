@@ -9,7 +9,6 @@ function UploadImage() {
     const userTokens = useSelector((state:RootState)=>state.userData.userInfo.userTokens)
     //@ts-ignore
     const userToken = userTokens.createdUserToken
-    console.log(userTokens)
     function fileNameHandler(e:React.ChangeEvent<HTMLInputElement>){
         const {files} = e.target;
         const filename = files as FileList

@@ -85,7 +85,7 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
   return (
       <Card className='h-100 m-2' style={{ width: '14rem' }}>
         <Card.Header><small>{listData.user.username}</small></Card.Header>
-      <Card.Img className='w-100 rounded-0' variant="top" src={listData.user.userimage || "http://placekitten.com/400/400"} />
+      <Card.Img className='w-100 rounded-0 cardImage' variant="top" src={listData.user.userimage || "http://placekitten.com/400/400"} />
       <Card.Body className=' px-2 py-1'>
         <Card.Title className='text-dark fs-6'>{listData.name}</Card.Title>
         {/* <Card.Text>

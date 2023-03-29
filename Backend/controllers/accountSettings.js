@@ -21,10 +21,9 @@ accountSettings = {
                         
                     },
                     async function(error, result) {
-                        console.log(error, result);
+                        // console.log(error, result);
                         // Update user avatar
                        const user = await User.findByIdAndUpdate(userID, {userimage:result.url})
-                       console.log(user)
                     }
                     )
                     streamifier.createReadStream(req.file.buffer).pipe(cloudResponse);
