@@ -1,62 +1,27 @@
-const formidable = require('formidable');
 const cloudinary = require('../middlawares/cloudinary');
-const path = require('path');
-const fs = require('fs')
+const streamifier = require('streamifier');
+
+
 
 accountSettings = {
 
     uploadAvatar: async function (req, res){
-        const form = formidable({ multiples: true}); //uploadDir: __dirname, keepExtensions:true
-        form.parse(req, (err, fields, files)=>{
-            if(err){
-                next(err)
-                return;
-            }
-        })
-        form.on("fileBegin", function(name, file) {
-            file.filepath = path.join(__dirname, file.originalFilename);
-          });
-        form.on('file', async (formname, file)=>{
-            try {
-
-            
-                console.log(file);
-                
-                
-                // const fileData = fs.createReadStream(file.filepath, ); //{ encoding: 'base64' }
-                const cloudResponse = await cloudinary.uploader.upload(file.filepath, 
+        const cloudResponse = await cloudinary.uploader.upload_stream( 
                     
-                    {
-                        folder:"dj-list-app",
-                        use_filename:true,
-                    })
-                console.log(cloudResponse);
-                fs.unlinkSync(file.filepath)
-
-            } catch (error) {
-                console.log(error)
+            {
+                folder:"dj-list-app",
+                use_filename:true,
+            },
+            function(error, result) {
+                console.log(error, result);
             }
-           
-        })
-        res.json("asd")
-    }
+            )
 
+            streamifier.createReadStream(req.file.buffer).pipe(cloudResponse);
+            console.log(cloudResponse)
+        res.json("Multer test")
+    }
+   
 }
 
 module.exports = accountSettings;
-
-
-// IMGUR API TESTING
-// const requestConfig = {
-//     method: 'post',
-//   maxBodyLength: Infinity,
-//     url: 'https://api.imgur.com/3/image',
-//     headers: { 
-//       'Authorization': `Client-ID ${process.env.IMGUR_CLIENT_ID}`, 
-//       ...data.getHeaders()
-//     },
-//     data : data
-//   };
-
-// const response = await axios(requestConfig)
-// const responseData = response.data;
