@@ -25,11 +25,12 @@ function ListCollection() {
 
   return (
     <div >
-      <ListGroup variant="flush">
+      <ListGroup variant="flush" className='rounded'>
       
       {userLists?.map((list) => {
         return <ListGroup.Item as="li" className='bg-dark text-light d-flex' key={list._id}>
             <div className="ms-2 me-auto">{list.name}</div>
+            <small className='smallText lh-lg me-1'>Tracks</small>
         <Badge bg="secondary lh-sm" pill>
           {list.tracks.length}
         </Badge>
