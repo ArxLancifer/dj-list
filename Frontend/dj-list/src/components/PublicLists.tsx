@@ -33,7 +33,8 @@ function PublicLists() {
 
 
   return (
-    <Container>
+
+    <Container >
         <InputGroup className="w-50 my-5 mx-auto" size='sm'>
         <Form.Control
           placeholder="Search your list"

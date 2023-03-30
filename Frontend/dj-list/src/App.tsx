@@ -38,7 +38,7 @@ function App() {
   return (
     <BrowserRouter>
     <NavigationBar />
-    <main>
+    <main className='bg-dark-linear p-4'>
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<UserLogin />} />

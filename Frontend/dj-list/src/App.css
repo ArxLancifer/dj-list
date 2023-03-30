@@ -17,11 +17,6 @@ a{
   margin: 0 ;
 }
 
-.accountsettings{
-    font-size: 0.9rem;
-    background-color: rgb(25, 25, 25);
-    height: 90vh;
-}
 
 .accountsettings li>a{
     display: inline-block;
@@ -92,7 +87,7 @@ div.dropdown-menu > a {
 .card-title, .djName{
     color: rgb(26, 153, 0);
 }
-.list-date{
+.smallText{
     font-size: 0.7rem;
 }
 /* iframe google video */
@@ -129,8 +124,8 @@ iframe{
     box-shadow:none;
 }
 /* Hero section Homepage */
-.hero-section{
-    height: 90vh;
+.hero-section, .bg-dark-linear{
+    min-height: 90vh;
     background: rgb(20,20,20);
     background: linear-gradient(90deg, rgba(20,20,20,1) 18%, rgba(43,43,43,1) 53%, rgba(62,62,62,1) 76%);
 }
@@ -152,6 +147,8 @@ input[type="file"] {
     padding: 6px 12px;
     cursor: pointer;
 }
-.cardImage{
-    height: 240px;
+
+.cardImage > img {
+    width: 112px;
+    height: 112px;
 }

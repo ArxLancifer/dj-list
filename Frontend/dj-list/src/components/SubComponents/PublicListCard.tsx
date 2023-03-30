@@ -83,15 +83,14 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
     
 
   return (
-      <Card className='h-100 m-2' style={{ width: '14rem' }}>
-        <Card.Header><small>{listData.user.username}</small></Card.Header>
-      <Card.Img className='w-100 rounded-0 cardImage' variant="top" src={listData.user.userimage || "http://placekitten.com/400/400"} />
+      <Card className='h-100 m-2 bg-dark text-light shadow border-0' style={{ width: '14rem' }}>
+       
+        <div className='w-100 cardImage my-4'>
+      <img className='d-block mx-auto rounded-circle' src={listData.user.userimage || "http://placekitten.com/400/400"} alt="user avatar" />
+      <Card.Header className='text-center'><h5>{listData.user.username}</h5></Card.Header>
+        </div>
       <Card.Body className=' px-2 py-1'>
-        <Card.Title className='text-dark fs-6'>{listData.name}</Card.Title>
-        {/* <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text> */}
+        <Card.Title className=' fs-6'>{listData.name}</Card.Title>
         <div className='d-flex justify-content-between my-1'>
         <Link to={`/publiclist/trackstable/${listData._id}`}>
         <Button className='py-1 px-1' size='sm' variant="info">Watch</Button>
@@ -99,10 +98,13 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         </Link>
         <button data-list-id={listData._id} onClick={removedOutline} className={`py-1 px-1 btn btn-sm ${userLikedThisList}`} >Like<HandThumbsUp className='fs-6 mb-1 align-middle'/></button>
          </div>
-        <small className="list-date text-muted">Likes: {likesCounter}</small>
-        <div onClick={addToFavorites} role="button" className='float-end text-end' data-list-id={listData._id} >{ isFavorite ? <StarFill className='text-warning fs-5 me-1 isfavorite'/>:<Star className='text-warning fs-5 me-1'/>}</div>
+        <small className="smallText text-muted">Likes: {likesCounter}</small>
+        <div onClick={addToFavorites} role="button" className='float-end text-end' data-list-id={listData._id} >
+            <small className='smallText text-muted mx-1'>Add favorite</small>
+            { isFavorite ? <StarFill className='text-warning fs-5 me-1 isfavorite'/>:<Star className='text-warning fs-5 me-1'/>}
+        </div>
         <Card.Footer className="text-muted p-0 pt-1 mt-1 bg-light bg-transparent">
-        <small className="list-date text-muted">Created at : {dateFormate(listData.createdAt)}</small>
+        <small className="smallText text-muted">Created at : {dateFormate(listData.createdAt)}</small>
         <Link to={`/listdiscussion/${listData._id}`} state={{ listId: listData._id , listOwner:listData.user.username}} >
         <Button className='p-0 px-1 float-end' size='sm' variant="outline-secondary">Comments</Button>
            
