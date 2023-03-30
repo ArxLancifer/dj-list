@@ -74,13 +74,13 @@ function UserLogin() {
     }
 
     return (
-    <div className='container'>
-        <h1>Sign Up Page</h1>
+    <div className='container text-light'>
         <form className='w-50 mx-auto mt-5 border rounded p-5'>
             {Object.values(errorsState).map((error, index)=>{
                 return <Alert key={index} variant={'danger'}>{error}</Alert>
             })}
         
+            <h1 className='text-center mb-4'>Sign Up Page</h1>
         <div className="mb-3">
         <label htmlFor="username" className="form-label">Username</label>
         <input onChange={handleInputs} type="text" className="form-control" id="username" aria-describedby="user name" minLength={5} maxLength={15} />
@@ -96,7 +96,7 @@ function UserLogin() {
         <div className="mb-3">
         <label htmlFor="password2" className="form-label">Repeat Password</label>
         <input onChange={handleInputs} type="password" className="form-control" id="password2" />
-        <div id="password2" className="form-text">We'll never share your password with anyone else.</div>
+        <div id="password2" className="form-text smallText text-light text-light">We'll never share your password with anyone else.</div>
         </div>
         <button onClick={handleSignup} className="btn btn-primary">Signup</button>
         </form>

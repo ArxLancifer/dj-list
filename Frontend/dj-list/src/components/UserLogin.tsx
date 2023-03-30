@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import styles from './styles.module.css';
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import { Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +10,6 @@ import { IUser } from '../interfaces/UserInterfaces';
 function UserLogin() {
 
     let localStorageTokens = localStorage.getItem("userToken") || "";
-    const selector = useSelector<any>(state=>state.userData);
     const [error, setError] = useState<string>("");
     const email = useRef<HTMLInputElement>(null)
     const password = useRef<HTMLInputElement>(null) 
@@ -71,9 +69,10 @@ function UserLogin() {
 
 
   return (
-<div className='container'>
-    <h1>Login Page</h1>
+<div className='container text-light'>
+    
     <form className='w-50 mx-auto mt-5 border rounded p-5'>
+        <h2 className='text-center pb-4'>Login Page</h2>
         {error &&<Alert variant={'danger'}>{error}</Alert>}
     <div className="mb-3">
     <label htmlFor="email" className="form-label">Email address</label>
@@ -83,11 +82,11 @@ function UserLogin() {
         <div className="mb-3">
         <label htmlFor="password" className="form-label">Password</label>
         <input ref={password} type="password" className="form-control" id="password" />
-        <div id="password" className="form-text">We'll never share your password with anyone else.</div>
+        <div id="password" className="form-text smallText text-light text-light">We'll never share your password with anyone else.</div>
     </div>
     <div className='d-flex justify-content-between align-items-center'>
         <button onClick={loginHandler} type="button" className="btn btn-primary">Login</button>
-        <Link to={'/signup'}><h5 className={styles.links}>Create account</h5></Link>
+        <Link to={'/signup'}><h5 className="btn btn-success">Create account</h5></Link>
     </div>
 </form>
 </div>
