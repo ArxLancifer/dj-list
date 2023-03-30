@@ -14,6 +14,10 @@ accountSettings = {
             if(userData){
                 const userID = userData._id;
                 // Cloudinary buffer upload
+                if(!res.file){
+                    return res.status(400).json({errorMessage:"File is required"})
+                }
+               
                 const cloudResponse = await cloudinary.uploader.upload_stream(        
                     {
                         folder:"dj-list-app",
@@ -33,7 +37,7 @@ accountSettings = {
            
         } catch (error) {
             console.log(error)
-            res.json({errorMessage:"Something went wrong, try to login again"})
+           return res.status(400).json({errorMessage:"Something went wrong, try to login again"})
         }
         
         

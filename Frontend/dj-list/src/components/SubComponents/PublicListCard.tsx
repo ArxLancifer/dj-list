@@ -57,10 +57,9 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
     }
     // Star button "favorite" request logic
     async function addToFavorites(e:React.MouseEvent<HTMLElement>){
-
         try {
             const listId:string = e.currentTarget.dataset.listId || "";
-            if(!e.currentTarget.children[0].classList.contains('isfavorite')){
+            if(!e.currentTarget.children[1].classList.contains('isfavorite')){
                 console.log("favorite added")
                 setIsFavorite(true)
                 const payload:string[] = [...favoritesList,listId];
@@ -90,10 +89,14 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
       <Card.Header className='text-center'><h5>{listData.user.username}</h5></Card.Header>
         </div>
       <Card.Body className=' px-2 py-1'>
+      <Link to={`/publiclist/trackstable/${listData._id}`}>
+        
         <Card.Title className=' fs-6'>{listData.name}</Card.Title>
+           
+        </Link>
         <div className='d-flex justify-content-between my-1'>
         <Link to={`/publiclist/trackstable/${listData._id}`}>
-        <Button className='py-1 px-1' size='sm' variant="info">Watch</Button>
+        <Button className='py-1 px-1' size='sm' variant="info">Go to list</Button>
            
         </Link>
         <button data-list-id={listData._id} onClick={removedOutline} className={`py-1 px-1 btn btn-sm ${userLikedThisList}`} >Like<HandThumbsUp className='fs-6 mb-1 align-middle'/></button>
@@ -101,7 +104,7 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         <small className="smallText text-muted">Likes: {likesCounter}</small>
         <div onClick={addToFavorites} role="button" className='float-end text-end' data-list-id={listData._id} >
             <small className='smallText text-muted mx-1'>Add favorite</small>
-            { isFavorite ? <StarFill className='text-warning fs-5 me-1 isfavorite'/>:<Star className='text-warning fs-5 me-1'/>}
+            { isFavorite ? <StarFill className='text-warning fs-5 me-1 isfavorite'/>:<Star className='text-secondary fs-5 me-1'/>}
         </div>
         <Card.Footer className="text-muted p-0 pt-1 mt-1 bg-light bg-transparent">
         <small className="smallText text-muted">Created at : {dateFormate(listData.createdAt)}</small>

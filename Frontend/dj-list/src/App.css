@@ -84,7 +84,7 @@ div.dropdown-menu > a {
 .card-body{
     border-radius: 5px;
 }
-.card-title, .djName{
+.djName{
     color: rgb(26, 153, 0);
 }
 .smallText{
