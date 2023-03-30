@@ -55,6 +55,7 @@ function UserLogin() {
                 id: fetchUserData.data.id,
                 userTokens:{...fetchUserData.data.userToken},
                 favoriteLists:[...fetchUserData.data.favoriteLists],
+                userImage:fetchUserData.data.userimage,
                 accountSince:fetchUserData.data.accountSince,
                 isAuth:true,
               };

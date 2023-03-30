@@ -22,6 +22,7 @@ export interface IUser {
     favoriteLists:any;
     accountSince:string;
     userTokens:IToken;
+    userImage:string;
     isAuth:boolean;
 }
 

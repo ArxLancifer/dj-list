@@ -7,7 +7,6 @@ export const fetchUserThunk = createAsyncThunk("userData/fetchData", async funct
     // try {
         const token: IToken = JSON.parse(localStorage.getItem('userToken') || '');
         const response = await axios.post("http://localhost:5000/gatekeeper", {token:token.createdUserToken});
-        console.log(response.data)
         return response.data;
     // } catch (error) {
     //     console.log(error);
@@ -22,6 +21,7 @@ const initialState = {
         favoriteLists:["", "a"],
         userTokens:{},
         accountSince:"",
+        userImage:"",
         isAuth:false,
     },
     fetchStatus:"idle",
@@ -33,6 +33,7 @@ const userData = createSlice({
 
     reducers:{
        logInUser(state, action:PayloadAction<IUser>){
+        // console.log(action.payload)
         state.userInfo = {...action.payload};
        },
        isAuth(state, action:PayloadAction<{id:string, name:string, isAuth:boolean}>){
@@ -71,6 +72,7 @@ const userData = createSlice({
                 state.userInfo.id = action.payload.id;
                 state.userInfo.isAuth = action.payload.isAuth;
                 state.userInfo.accountSince = action.payload.accountSince;            
+                state.userInfo.userImage = action.payload.userimage;
                 state.userInfo.favoriteLists = [...action.payload.favoriteLists.favoriteLists];
                 state.userInfo.userTokens = userTokens;
                 state.fetchStatus = 'idle';

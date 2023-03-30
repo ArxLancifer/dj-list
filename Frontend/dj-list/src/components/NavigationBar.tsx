@@ -8,11 +8,12 @@ import "../App.css";
 import { Alert, NavDropdown } from 'react-bootstrap';
 import { logOutUser } from './store/userState';
 import { Fragment, useState } from 'react';
+import { RootState } from './store';
 
 function NavigationBar() {
     
     
-    const {userInfo} = useSelector<any, any>(state => state.userData);
+    const {userInfo} = useSelector((state:RootState) => state.userData);
     const [error, setError] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -65,8 +66,11 @@ function NavigationBar() {
             <div className='d-flex align-items-center'>
                  <NavDropdown menuVariant='dark' className='fs-5 mx-4' title={
                     <div>
-                        <div className='user-picture'><span className='fs-5 fw-bold'>{userInfo.name[0].toUpperCase()}</span></div>
-                       <span className='d-block'>{userInfo.name}</span>
+                        <div className='nav-image'>
+                            <img className='d-block mx-auto rounded-circle' src={userInfo.userImage || `${process.env.PUBLIC_URL + '/default.png'}`} alt="user avatar" />
+                            
+                        </div>
+                       <span className='d-block mt-1 nav-username'>{userInfo.name}</span>
                     </div>
                  } id="basic-nav-dropdown">
                      <NavDropdown.Item className='fs-6' onClick={handleLogout}>Logout</NavDropdown.Item>

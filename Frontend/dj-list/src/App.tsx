@@ -19,11 +19,12 @@ import UploadImage from './components/SubComponents/accountComponents/UploadImag
 import AccountInformation from './components/SubComponents/accountComponents/AccountInformation';
 import AccountSetting from './components/AccountSetting';
 import ListCollection from './components/SubComponents/accountComponents/ListCollection';
+import { RootState } from './components/store';
 
 
 function App() {
     
-    const fetchStatus:any = useSelector((state:any) => state.userData.fetchStatus)
+    const fetchStatus:string = useSelector((state:RootState) => state.userData.fetchStatus)
     const dispatch = useDispatch();
     useEffect(()=>{
         if(fetchStatus === 'idle'){
