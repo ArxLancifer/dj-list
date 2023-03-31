@@ -6,15 +6,17 @@ const User = require('../models/UserModel');
 accountSettings = {
 
     uploadAvatar: async function (req, res){
-        const userData = jwt.verify(req.body.userToken ,process.env.TOKEN_SECRET, function(err, result){
-            if (err) return null;
-            return result;
-        });
+        
+
         try {
+            const userData = jwt.verify(req.body.userToken ,process.env.TOKEN_SECRET, function(err, result){
+                if (err) return null;
+                return result;
+            });
             if(userData){
                 const userID = userData._id;
                 // Cloudinary buffer upload
-                if(!res.file){
+                if(!req.file){
                     return res.status(400).json({errorMessage:"File is required"})
                 }
                
