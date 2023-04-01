@@ -33,6 +33,18 @@ userLists = {
             res.status(400).json({errorMessage:"Unable to create list"})
         }
     },
+    deleteList: async function(req, res){
+            const listToDelete = req.params.listid;
+            console.log(listToDelete)
+            try {
+                await List.findOneAndDelete({_id:listToDelete})
+               return res.json({message:'List has been deleted'})
+            } catch (error) {
+              return res.json({errorMessage:"Something went wrong on list delete"})
+            }
+            
+            
+    },
     getTracks: async function(req, res){
         try {
             const listId = req.params.listid;

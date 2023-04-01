@@ -10,5 +10,6 @@ router.post('/addfavorite', userLists.addFavorite);
 router.post('/removefavorite', userLists.removeFavorite);
 router.post('/pushtrack/:listid', userLists.pushTrack);
 router.put('/updatetrack/:listid/:trackid', userLists.editTrack);
+router.delete('/deletelist/:listid', userLists.deleteList);
 router.delete('/deletetrack/:listid/:trackid', userLists.deleteTrack);
 module.exports = router;
