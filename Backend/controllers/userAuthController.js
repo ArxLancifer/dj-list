@@ -36,7 +36,7 @@ const userAuth = {
             res.json("Account created succesfully")
         } catch (error) {
             console.log(error)
-            res.send("Something went wrong")  
+            res.status(400).send("Something went wrong")  
         }
     },
     logOut:async function(req,res){

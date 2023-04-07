@@ -56,8 +56,8 @@ function NavigationBar() {
           <Nav className="ms-auto align-items-center">
           <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Home</Nav.Link>
             {/* <Nav.Link as={Link} to={"/userlists"} className={'fs-5 mx-3 ' + listsDisabled }>My lists</Nav.Link> */}
-            <NavDropdown disabled={!userInfo.isAuth} menuVariant='dark'  className='fs-5 mx-3' title={<span className={listsDisabled}>Lists</span>}>
-                     <NavDropdown.Item as={Link} to={"/userlists"}><span  className={'fs-6 text-light'}>My lists</span></NavDropdown.Item>
+            <NavDropdown disabled={!userInfo.isAuth} menuVariant='dark'  className='fs-5 mx-3 listdrop' title={<span className={listsDisabled}>Lists</span>}>
+                     <NavDropdown.Item  as={Link} to={"/userlists"}><span  className={'fs-6 text-light'}>My lists</span></NavDropdown.Item>
                      <NavDropdown.Item as={Link} to={"/publiclists"} className={'fs-6 text-light'}>Public Lists</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link>
@@ -67,10 +67,11 @@ function NavigationBar() {
                  <NavDropdown menuVariant='dark' className='fs-5 mx-4' title={
                     <div>
                         <div className='nav-image'>
+                        {/* <span className='mt-1 nav-username'>{userInfo.name}</span> */}
                             <img className='d-block mx-auto rounded-circle' src={userInfo.userImage || `${process.env.PUBLIC_URL + '/default.png'}`} alt="user avatar" />
                             
+                       
                         </div>
-                       <span className='d-block mt-1 nav-username'>{userInfo.name}</span>
                     </div>
                  } id="basic-nav-dropdown">
                      <NavDropdown.Item className='fs-6' onClick={handleLogout}>Logout</NavDropdown.Item>

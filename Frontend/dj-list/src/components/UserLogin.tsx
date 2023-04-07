@@ -84,10 +84,10 @@ function UserLogin() {
         <input ref={password} type="password" className="form-control" id="password" />
         <div id="password" className="form-text smallText text-light text-light">We'll never share your password with anyone else.</div>
     </div>
-    <div className='d-flex justify-content-between align-items-center'>
-        <button onClick={loginHandler} type="button" className="btn btn-primary">Login</button>
-        <Link to={'/signup'}><h5 className="btn btn-success">Create account</h5></Link>
+    <div>
+        <button onClick={loginHandler} type="button" className="btn btn-pruple">Login</button>
     </div>
+        <Link to={'/signup'}><h5 className="mt-3">Create account</h5></Link>
 </form>
 </div>
   )

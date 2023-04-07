@@ -98,7 +98,7 @@ function UserLogin() {
         <input onChange={handleInputs} type="password" className="form-control" id="password2" />
         <div id="password2" className="form-text smallText text-light text-light">We'll never share your password with anyone else.</div>
         </div>
-        <button onClick={handleSignup} className="btn btn-primary">Signup</button>
+        <button onClick={handleSignup} className="btn btn-signup">Signup</button>
         </form>
     </div>
   )

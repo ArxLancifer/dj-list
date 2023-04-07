@@ -42,8 +42,8 @@ a{
 }
 
 #basic-nav-dropdown{
-    color:#00d836;
-    font-size: 0.6rem;
+    /* color:#00d836; */
+    /* font-size: 0.6rem; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -123,10 +123,32 @@ iframe{
 .hero-section, .bg-dark-linear{
     min-height: 90vh;
     background: rgb(20,20,20);
-    background: linear-gradient(90deg, rgba(20,20,20,1) 18%, rgba(43,43,43,1) 53%, rgba(62,62,62,1) 76%);
+    background: #121212;
 }
 
+/* Buttons */
+.btn-pruple,
+.btn-add,
+.btn-signup
+ {
+    color: #fff;
+    background-color: #6200EE;
+    border: none;
+}
+.btn-pruple:hover, 
+.btn-add:hover,
+.btn-signup:hover
+{
+    color: #fff;
+    background-color: #4527A0;
+}
 
+.trash-icon{
+    color: #FF0266;
+}
+.pen-icon{
+    color: #03DAC6;
+}
 /* Boostrap button hover (override) */
 .btn-outline-primary:hover{
     color: #0275d8;
@@ -155,3 +177,14 @@ input[type="file"] {
 .nav-username{
     min-width: 5rem;
 }
+/* Dropdown */
+/* #listdrop div.dropdown-menu .dropdown-item{
+    background-color: #00d836 !important;
+    color: rebeccapurple;
+} */
+
+/* .listdrop .dropdown-menu{
+   position: relative;
+   top:3rem;
+   height: 3.6rem;
+} */

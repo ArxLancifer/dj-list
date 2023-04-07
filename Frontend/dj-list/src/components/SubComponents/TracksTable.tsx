@@ -46,7 +46,7 @@ function TracksTable() {
             MuiTableCell:{
                 styleOverrides:{
                     head:{
-                        color:"#64d86b"
+                        color:"#00BFA5"
                     }
                 }
             },
@@ -98,11 +98,6 @@ function TracksTable() {
         }
 
     const columns:MRT_ColumnDef<ITrack>[] = [
-        // {
-        //     accessorKey: '_id', //access nested data with dot notation
-        //     header: 'user ID',
-        //     maxSize:100
-        // },
         {
             accessorKey: 'title', //access nested data with dot notation
             header: 'Title',
@@ -181,15 +176,15 @@ function TracksTable() {
             renderBottomToolbarCustomActions={({ table }) => {
                 
                 return (             
-                    <Button  className='btn-sm' onClick={()=>navigate('/pushtrack-form', {state:{listid}})} variant='success'>
+                    <Button  className='btn-sm btn-add' onClick={()=>navigate('/pushtrack-form', {state:{listid}})}>
                         Add Track
                     </Button>      
                 );
               }}
               renderRowActions={({row, table})=>(
                 <div className='d-flex'>
-                    <div onClick={() => table.setEditingRow(row)}><Pen   className='fs-5 mx-2 text-primary' /></div>
-                    <div onClick={()=>handleDeleteRow(row)}><Trash className='fs-5 mx-2 text-secondary text-danger' /></div>
+                    <div onClick={() => table.setEditingRow(row)}><Pen   className='fs-5 mx-2 pen-icon' /></div>
+                    <div onClick={()=>handleDeleteRow(row)}><Trash className='fs-5 mx-2 trash-icon' /></div>
                 </div>
               )}
             getRowId={(row) => row._id}

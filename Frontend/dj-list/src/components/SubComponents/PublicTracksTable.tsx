@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import MaterialReactTable, { MRT_ColumnDef,  MaterialReactTableProps, MRT_Row } from 'material-react-table'; 
+import MaterialReactTable, { MRT_ColumnDef} from 'material-react-table'; 
 import { ITrack } from '../../interfaces/UserInterfaces';
 import { createTheme, ThemeProvider} from '@mui/material';
 import ModalEmbedYoutube from './ModalEmbedYoutube';
-import  {Play, Trash, Pen} from 'react-bootstrap-icons';
-import {Button, Container, Row } from 'react-bootstrap';
+import  {Play} from 'react-bootstrap-icons';
+import {Container} from 'react-bootstrap';
 import { useDispatch} from 'react-redux';
 import {setYoutubeLink , modalShow} from '../store/modalState';
 import {useParams} from 'react-router-dom';
@@ -45,7 +45,7 @@ function PublicTracksTable() {
             MuiTableCell:{
                 styleOverrides:{
                     head:{
-                        color:"#64d86b"
+                        color:"#00BFA5"
                     }
                 }
             },
@@ -127,14 +127,6 @@ function PublicTracksTable() {
                 'data-track-id':row.original._id,
                 "data-yourube-link":row.original.youtubeLink
             })}
-            renderBottomToolbarCustomActions={({ table }) => {
-                
-                return (             
-                    <Button  className='btn-sm' onClick={()=>navigate('/pushtrack-form', {state:{listid}})} variant='success'>
-                        Add Track
-                    </Button>      
-                );
-              }}
             getRowId={(row) => row._id}
             enableDensityToggle={false}
             initialState={{ density: 'compact' }}
