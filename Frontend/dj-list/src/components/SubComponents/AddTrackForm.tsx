@@ -49,7 +49,7 @@ function AddTrackForm() {
     
     return (
     <Container className='pt-5'>
-    <Form className='w-50 mx-auto mt-5'>
+    <Form className='w-50 mx-auto mt-5 p-4 border border-secondary rounded text-light'>
       <Form.Group className="mb-2">
         <Form.Label>Track name</Form.Label>
         <Form.Control ref={trackName} size="sm" placeholder="Required field"/>
@@ -91,7 +91,7 @@ function AddTrackForm() {
         <Form.Control ref={subGenre} size="sm"/>
       </Form.Group>
 
-      <Button onClick={handleAddTrack} variant="primary" className='mt-4'>
+      <Button onClick={handleAddTrack} className='btn-createlist border-0'>
         Add track <NodePlus className='fs-5' />
       </Button>
 

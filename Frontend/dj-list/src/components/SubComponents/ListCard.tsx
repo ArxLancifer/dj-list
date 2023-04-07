@@ -32,10 +32,10 @@ function ListCard({listData}:{listData:IList}) {
     }
 
   return (
-    <Link to={`/trackstable/${listData._id}`}>
+    <Link className='list-card' to={`/trackstable/${listData._id}`}>
         <div >
     <Card  className='m-2 shadow' style={{ width: '18rem' }} data-list-id={listData._id} >
-        <Button onClick={handleDelete} size='sm'  variant="outline-danger position-absolute top-0 end-0 m-2 text-light"><Trash /></Button>
+        <Button onClick={handleDelete} size='sm'  variant="outline-danger border-0 position-absolute top-0 end-0 m-2 text-light"><Trash /></Button>
     <Card.Body className='d-flex flex-column justify-content-between' style={{
         backgroundImage: `url("/backgroundDark.jpg")`,
         WebkitBackgroundSize: "100% 100%",

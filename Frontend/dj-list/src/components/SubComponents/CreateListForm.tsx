@@ -52,7 +52,7 @@ function CreateListForm() {
 
   return (
     <Container>
-    <Form className='w-50 mx-auto mt-5'>
+    <Form className='w-50 mx-auto mt-5 text-light p-4 border border-secondary rounded'>
         {error && <Alert variant='danger'>{error}</Alert>}
       <Form.Group className="mb-3" >
         <Form.Label>List name</Form.Label>
@@ -71,7 +71,7 @@ function CreateListForm() {
         <Form.Check ref={listPrivate} type="checkbox" label="Private" />
       </Form.Group>
       <div className='text-end'>
-      <Button onClick={createList}  variant="primary">
+      <Button className='btn-createlist border-0' onClick={createList}  variant="primary">
         Create
       </Button>
       </div>

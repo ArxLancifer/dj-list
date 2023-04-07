@@ -35,7 +35,7 @@ function UserLists() {
     <Container className='my-5'>
       <div className='clearfix'>
         <Link to={'/createlist'}>
-          <Button variant="success" className='float-end'><PlusSquare className='me-1'/>New </Button>
+          <Button  className='float-end border-0 btn-createlist'><PlusSquare className='me-1'/>New </Button>
         </Link>
       </div>
         <InputGroup className="w-50 my-5 mx-auto" size='sm'>
