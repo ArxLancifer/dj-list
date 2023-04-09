@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IPublicListCard } from '../../interfaces/UserInterfaces';
-import {HandThumbsUp, StarFill, Star, HandThumbsUpFill} from 'react-bootstrap-icons';
+import {HandThumbsUp, StarFill, Star, ChatLeftText} from 'react-bootstrap-icons';
 import {addFavorite, removeFavorite} from '../store/userState';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { Badge} from 'react-bootstrap';
 
 
 function PublicListCard({listData}:{listData:IPublicListCard}) {
@@ -18,14 +19,13 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
     const userId = useSelector((state:RootState)=> state.userData.userInfo.id);
     const favoritesList:string[] = useSelector((state:RootState)=> state.userData.userInfo.favoriteLists);
     const dispatch = useDispatch();
-    
+    const navigate = useNavigate();
 
     useEffect(()=>{
         setIsFavorite(()=> favoritesList.includes(listData._id))
     },[])
 
-    // const userLikedThisList = listData.usersLiked.includes(userId) ?  'btn-primary' : 'btn-outline-primary' ; // Change this to Array Set for performance
-
+   
     const usersLiked = new Set(listData.usersLiked);
 
     const userLikedThisList = usersLiked.has(userId) ?  'btn-primary' : 'btn-outline-primary' ;
@@ -38,6 +38,7 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
     }
     // Like button request and logic
     async function removedOutline(e:React.SyntheticEvent<HTMLButtonElement>){
+        e.preventDefault();
         const buttonClasses = e.currentTarget.classList;
         const listId = e.currentTarget.dataset.listId
         if(buttonClasses.contains("btn-outline-primary")){
@@ -57,9 +58,11 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
     }
     // Star button "favorite" request logic
     async function addToFavorites(e:React.MouseEvent<HTMLElement>){
+        e.preventDefault()
+        console.log(e.currentTarget.children[0].classList)
         try {
             const listId:string = e.currentTarget.dataset.listId || "";
-            if(!e.currentTarget.children[1].classList.contains('isfavorite')){
+            if(!e.currentTarget.children[0].classList.contains('isfavorite')){
                 console.log("favorite added")
                 setIsFavorite(true)
                 const payload:string[] = [...favoritesList,listId];
@@ -79,42 +82,44 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
        
 
     }
-    
 
   return (
-      <Card className='h-100 m-2 bg-dark text-light shadow border-0' style={{ width: '14rem' }}>
+  <Link className='h-100' to={`/publiclist/trackstable/${listData._id}`}>
+      <Card className='h-100 m-2 pt-2 bg-dark text-light shadow border-0' style={{ width: '14rem' }}>
        
-        <div className='w-100 cardImage my-4'>
+        <div className='w-100 cardImage my-2'>
       <img className='d-block mx-auto rounded-circle' src={listData.user.userimage || "http://placekitten.com/400/400"} alt="user avatar" />
       <Card.Header className='text-center'><h5>{listData.user.username}</h5></Card.Header>
         </div>
       <Card.Body className=' px-2 py-1'>
-      <Link to={`/publiclist/trackstable/${listData._id}`}>
+      <Badge className='mb-2 card-badge' pill bg="success" text="light">{listData.genre}</Badge>{' '}
+          
+      
         
         <Card.Title className=' fs-6'>{listData.name}</Card.Title>
            
+        
+        <div className='my-1'>
+        <div className='d-flex justify-content-between'>
+        <Link to={`/listdiscussion/${listData._id}`} state={{ listId: listData._id , listOwner:listData.user.username}} >
+        <Button className='d-block rounded-pill' size='sm' variant="outline-secondary">Comment<ChatLeftText className='mx-1'/></Button>
         </Link>
-        <div className='d-flex justify-content-between my-1'>
-        <Link to={`/publiclist/trackstable/${listData._id}`}>
-        <Button className='py-1 px-1' size='sm' variant="info">Go to list</Button>
-           
-        </Link>
-        <button data-list-id={listData._id} onClick={removedOutline} className={`py-1 px-1 btn btn-sm ${userLikedThisList}`} >Like<HandThumbsUp className='fs-6 mb-1 align-middle'/></button>
+        <button data-list-id={listData._id} onClick={removedOutline} className={`d-block rounded-pill btn btn-sm ${userLikedThisList}`} >Like <HandThumbsUp className='fs-6 mb-1 align-middle'/></button>
+        </div>
          </div>
-        <small className="smallText text-muted">Likes: {likesCounter}</small>
-        <div onClick={addToFavorites} role="button" className='float-end text-end' data-list-id={listData._id} >
-            <small className='smallText text-muted mx-1'>Add favorite</small>
+         <div className='d-flex justify-content-between'>
+            <small className="smallText mx-1 text-muted">Comments: {listData.comments.length}</small>
+            <small className="smallText mx-1 text-muted">Likes: {likesCounter}</small>
+         </div>
+        <div onClick={addToFavorites} role="button" className='position-absolute top-0 end-0 m-1' data-list-id={listData._id} >
             { isFavorite ? <StarFill className='text-warning fs-5 me-1 isfavorite'/>:<Star className='text-secondary fs-5 me-1'/>}
         </div>
         <Card.Footer className="text-muted p-0 pt-1 mt-1 bg-light bg-transparent">
         <small className="smallText text-muted">Created at : {dateFormate(listData.createdAt)}</small>
-        <Link to={`/listdiscussion/${listData._id}`} state={{ listId: listData._id , listOwner:listData.user.username}} >
-        <Button className='p-0 px-1 float-end' size='sm' variant="outline-secondary">Comments</Button>
-           
-        </Link>
         </Card.Footer>
       </Card.Body>
     </Card>
+    </Link>
   )
 }
 

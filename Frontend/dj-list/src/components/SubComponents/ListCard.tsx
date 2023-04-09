@@ -21,7 +21,6 @@ function ListCard({listData}:{listData:IList}) {
             {headers:{
                 Authorization:`Bearer ${userToken.createdUserToken}`,
             }})
-            console.log(deleteResponse.data);
             navigate(0);
         } catch (error) {
             console.log(error)

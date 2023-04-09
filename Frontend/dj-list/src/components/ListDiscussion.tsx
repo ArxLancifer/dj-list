@@ -26,7 +26,6 @@ function ListDiscussion() {
         setComments(listData.comments) 
     }
     
-    console.log(comments)
     useEffect(()=>{
         getComments();
     }, []);

@@ -3,7 +3,6 @@ import React from 'react'
 import { Button, Stack } from 'react-bootstrap'
 
 function TestDialog(columns:any) {
-    console.log(columns)
   return (
     <div>
       <Dialog open={true}>

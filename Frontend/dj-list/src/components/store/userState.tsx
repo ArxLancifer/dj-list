@@ -33,7 +33,6 @@ const userData = createSlice({
 
     reducers:{
        logInUser(state, action:PayloadAction<IUser>){
-        // console.log(action.payload)
         state.userInfo = {...action.payload};
        },
        isAuth(state, action:PayloadAction<{id:string, name:string, isAuth:boolean}>){
