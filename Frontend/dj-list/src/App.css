@@ -192,3 +192,9 @@ input[type="file"] {
 .nav-username{
     min-width: 5rem;
 }
+
+.card-badge{
+    letter-spacing: 0.05rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+}

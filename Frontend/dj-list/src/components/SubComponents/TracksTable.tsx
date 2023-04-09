@@ -92,7 +92,6 @@ function TracksTable() {
         //   send api delete request here, then refetch or update local table data for re-render
         
           const requestDelete = await deleteTrack(listid ?? "", trackId)
-          console.log(requestDelete)
           tracks.splice(row.index, 1);
           setTracks([...tracks]);
         }
