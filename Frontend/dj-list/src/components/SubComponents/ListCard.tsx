@@ -10,7 +10,6 @@ import { RootState } from '../store';
 function ListCard({listData}:{listData:IList}) {
     const navigate = useNavigate();
     const userToken = useSelector((state:RootState)=> state.userData.userInfo.userTokens as IToken);
-
    async function handleDelete(e:React.MouseEvent<HTMLButtonElement>){
         e.preventDefault()
         const userChoice= window.confirm("Are you sure you want to delete this list?")
@@ -26,9 +25,9 @@ function ListCard({listData}:{listData:IList}) {
             console.log(error)
         }
         } else return;
-        
-
     }
+
+    
 
   return (
     <Link className='list-card' to={`/trackstable/${listData._id}`}>
@@ -40,11 +39,6 @@ function ListCard({listData}:{listData:IList}) {
         WebkitBackgroundSize: "100% 100%",
       }}>
       <Card.Title>{listData.name}</Card.Title>
-      {/* <Card.Subtitle className="m-0 p-0 text-muted">Card Subtitle</Card.Subtitle> */}
-      {/* <Card.Text>
-        Some quick example text to build on the card title and make up the
-        bulk of the card's content.
-      </Card.Text> */}
       <div>
       <Card.Subtitle className='d-block text-light'>{listData.genre}</Card.Subtitle>
       <Card.Subtitle className='d-block p-0 m-0 text-primary'>Dj {listData.user.username}</Card.Subtitle>

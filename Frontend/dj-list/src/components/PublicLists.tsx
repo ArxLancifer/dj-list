@@ -60,7 +60,7 @@ function PublicLists() {
           aria-label="Search your list"
           type="search"
         />
-        <InputGroup.Text onClick={()=>console.log(searchList())}><Search className='fs-5' role='button' /></InputGroup.Text>
+        <InputGroup.Text onClick={searchList}><Search className='fs-5' role='button' /></InputGroup.Text>
       </InputGroup>
       <Container className='d-flex flex-wrap justify-content-center'>
         
