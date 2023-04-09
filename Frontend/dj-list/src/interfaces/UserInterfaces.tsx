@@ -39,7 +39,6 @@ export interface IList {
 }
 
 export interface IPublicListCard extends IList{
-    userImage:string;
     createdAt:string;
     usersLiked:[string];
     comments:[string];
@@ -69,6 +68,7 @@ export interface INewTrack {
 export interface IComment {
     user:{
         username:string;
+        userimage:string;
     };
     commentText:string;
 }

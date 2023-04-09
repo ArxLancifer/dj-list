@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { Dropdown } from 'react-bootstrap'
 import { IComment } from '../../interfaces/UserInterfaces'
 
 function CommentContainer(props:{key:number, commentData:IComment}) {
+    console.log(props)
   return (
-    <div className="discussion bg-light border-top border-1 rounded-1">
-         <div className='user-comment-container d-flex justify-content-between py-2 '>
+    <Fragment>
+         <div className='user-comment-container d-flex justify-content-between py-2'>
         <div className='col-sm-1 col-2'>
-            <div className='user-picture'><span className='fs-5 fw-bold'>{props.commentData.user.username[0]}</span></div>
+            <div className='user-picture'><img src={props.commentData.user.userimage || "http://placekitten.com/50/50"} alt="comment user avatar" /></div>
         </div>
         <div className='text-start col-sm-11 col-10'>
             <small className='fw-bold'>{props.commentData.user.username}</small>
             <p>{props.commentData.commentText}</p>
         </div>
          </div>
-        </div>
+         <hr className='hr' />
+        </Fragment>
   )
 }
 

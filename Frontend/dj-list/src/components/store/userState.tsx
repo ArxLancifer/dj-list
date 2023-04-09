@@ -72,6 +72,7 @@ const userData = createSlice({
                 state.userInfo.isAuth = action.payload.isAuth;
                 state.userInfo.accountSince = action.payload.accountSince;            
                 state.userInfo.userImage = action.payload.userimage;
+                state.userInfo.email = action.payload.email;
                 state.userInfo.favoriteLists = [...action.payload.favoriteLists.favoriteLists];
                 state.userInfo.userTokens = userTokens;
                 state.fetchStatus = 'idle';

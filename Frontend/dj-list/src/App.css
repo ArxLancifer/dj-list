@@ -91,12 +91,18 @@ div.dropdown-menu > a {
     font-size: 0.7rem;
 }
 .list-card{
-    transition: all 150ms ease-in-out;
+    transition: transform 150ms ease-in-out;
 }
-
 .list-card:hover{
     color:#FFF;
     opacity: 0.8;
+    transform: scale(1.02);
+}
+.public-list-card{
+    transition: transform  150ms ease-in-out;
+}
+.public-list-card:hover{
+    
     transform: scale(1.02);
 }
 /* iframe google video */
@@ -110,20 +116,32 @@ iframe{
     width: 50px;
     height: 50px;
 }
+
+/* Comment discussion image */
 .user-picture-discussion{
     width: 56px;
-    height: 56px;
-    line-height: 56px;
-    border-radius: 50%;
-    background-color: rgb(151, 151, 151);
 }
-.user-comment-container .user-picture,
-.comment-input .user-picture{
+.user-picture-discussion > img {
+    height: 56px;
+    border-radius: 50%;
+}
+.discussion-container{
+    background-color:#1F1B24;
+}
+.user-comment-container{
+    color:#bebebe;
+    padding: 1.2rem;
+}
+
+.user-picture{
     width: 40px;
     height: 40px;
-    line-height: 40px;
+}
+.user-picture > img{
+    display: block;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: rgb(151, 151, 151);
 }
 .comment-input .form-control:focus{
     box-shadow:none;
@@ -197,4 +215,8 @@ input[type="file"] {
     letter-spacing: 0.05rem;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 400;
+}
+
+.list-group-item > span.badge{
+    background-color: #6200EE !important;
 }

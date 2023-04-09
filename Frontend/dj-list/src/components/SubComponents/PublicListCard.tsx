@@ -13,7 +13,6 @@ import { Badge} from 'react-bootstrap';
 
 function PublicListCard({listData}:{listData:IPublicListCard}) {
 
-    
     const [likesCounter, setLikesCounter] = useState<number>(listData.usersLiked.length);
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const userId = useSelector((state:RootState)=> state.userData.userInfo.id);
@@ -85,7 +84,7 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
 
   return (
   <Link className='h-100' to={`/publiclist/trackstable/${listData._id}`}>
-      <Card className='h-100 m-2 pt-2 bg-dark text-light shadow border-0' style={{ width: '14rem' }}>
+      <Card className='h-100 m-2 pt-2 bg-dark text-light shadow border-0 public-list-card' style={{ width: '14rem' }}>
        
         <div className='w-100 cardImage my-2'>
       <img className='d-block mx-auto rounded-circle' src={listData.user.userimage || "http://placekitten.com/400/400"} alt="user avatar" />
@@ -101,7 +100,7 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
         
         <div className='my-1'>
         <div className='d-flex justify-content-between'>
-        <Link to={`/listdiscussion/${listData._id}`} state={{ listId: listData._id , listOwner:listData.user.username}} >
+        <Link to={`/listdiscussion/${listData._id}`} state={{ listId: listData._id , listOwner:listData.user.username, ownerImage:listData.user.userimage}} >
         <Button className='d-block rounded-pill' size='sm' variant="outline-secondary">Comment<ChatLeftText className='mx-1'/></Button>
         </Link>
         <button data-list-id={listData._id} onClick={removedOutline} className={`d-block rounded-pill btn btn-sm ${userLikedThisList}`} >Like <HandThumbsUp className='fs-6 mb-1 align-middle'/></button>

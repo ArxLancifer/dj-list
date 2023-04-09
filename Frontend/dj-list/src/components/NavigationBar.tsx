@@ -49,7 +49,9 @@ function NavigationBar() {
     <Navbar className='p-2' bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="#home">
+        <Nav.Link as={Link} to={"/"}>
         <img className='p-0 mx-5 memotrack-logo' src={process.env.PUBLIC_URL + '/MemotrackLogo.png'} alt="app logo"/>
+        </Nav.Link> 
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className='text-center ' id="basic-navbar-nav">
@@ -60,7 +62,7 @@ function NavigationBar() {
                      <NavDropdown.Item  as={Link} to={"/userlists"}><span  className={'fs-6 text-light'}>My lists</span></NavDropdown.Item>
                      <NavDropdown.Item as={Link} to={"/publiclists"} className={'fs-6 text-light'}>Public Lists</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link>
+                {/* <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link> */}
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 
             
             <div className='d-flex align-items-center'>

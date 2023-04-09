@@ -31,7 +31,7 @@ function ListCollection() {
         return <ListGroup.Item as="li" className='bg-dark text-light d-flex' key={list._id}>
             <div className="ms-2 me-auto">{list.name}</div>
             <small className='smallText lh-lg me-1'>Tracks</small>
-        <Badge bg="secondary lh-sm" pill>
+        <Badge className="lh-sm" pill>
           {list.tracks.length}
         </Badge>
         </ListGroup.Item>
