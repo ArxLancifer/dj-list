@@ -32,7 +32,7 @@ function CreateListForm() {
             setError('Inputs must have 3 or more characters');
             return;
         } 
-        const requestCreateList = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/userlists/createlist`, {name, genre, isPrivate, description , userId}, {
+        const requestCreateList = await axios.post(`https://memotrack-api.onrender.com/userlists/createlist`, {name, genre, isPrivate, description , userId}, {
         headers: {
           'Content-Type': 'application/json'
       }

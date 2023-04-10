@@ -15,7 +15,7 @@ function CommentInput({setCommentState}:any) {
     async function postComment(){
         const commentText:string = userComment.current?.value || ""
         if(commentText.length <= 0) return;
-        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/publiclists/discussion/${params.listid}`, {userId, userComment:commentText})
+        await axios.post(`https://memotrack-api.onrender.com/publiclists/discussion/${params.listid}`, {userId, userComment:commentText})
         setCommentState((prevState:[{}]) => [...prevState, {commentText:commentText, user:{username:username}}])
     }
 

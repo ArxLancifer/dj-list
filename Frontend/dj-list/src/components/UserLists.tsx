@@ -21,7 +21,7 @@ function UserLists() {
     const userId = useSelector((state:any)=>state.userData.userInfo.id)
     async function fetchLists(){
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/userlists/getlists/${userId}`)
+            const response = await axios.get(`https://memotrack-api.onrender.com/userlists/getlists/${userId}`)
             const listsData = response.data;
             setUserLists(listsData);
             setSearchedLists(listsData);

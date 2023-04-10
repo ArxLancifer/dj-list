@@ -36,7 +36,7 @@ function UploadImage() {
         formData.append("userToken", userToken);
         try {
             const response = await axios.post<AxiosResponse>(
-                `${process.env.REACT_APP_API_BASE_URL}/accountsettings/uploadavatar`,
+                `https://memotrack-api.onrender.com/accountsettings/uploadavatar`,
                 formData,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
@@ -57,7 +57,7 @@ function UploadImage() {
             {error && <Alert variant="danger">{error}</Alert>}
             <h4>Upload profile picture</h4>
             <form
-                action={`${process.env.REACT_APP_API_BASE_URL}/accountsettings/uploadavatar`}
+                action={`https://memotrack-api.onrender.com/accountsettings/uploadavatar`}
                 encType="multipart/form-data"
                 method="post"
             >

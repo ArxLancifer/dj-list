@@ -26,7 +26,7 @@ function UserLogin() {
     }
 
     async function createAccount(){
-        const postRequest = await fetch(`${process.env.REACT_APP_API_BASE_URL}/user/signup`, {
+        const postRequest = await fetch(`https://memotrack-api.onrender.com/user/signup`, {
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

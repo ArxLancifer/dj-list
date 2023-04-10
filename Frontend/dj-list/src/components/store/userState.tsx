@@ -6,7 +6,7 @@ import { stat } from "fs";
 export const fetchUserThunk = createAsyncThunk("userData/fetchData", async function(){
     // try {
         const token: IToken = JSON.parse(localStorage.getItem('userToken') || '');
-        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/gatekeeper`, {token:token.createdUserToken});
+        const response = await axios.post(`https://memotrack-api.onrender.com/gatekeeper`, {token:token.createdUserToken});
         return response.data;
     // } catch (error) {
     //     console.log(error);

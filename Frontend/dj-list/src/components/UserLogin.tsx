@@ -28,7 +28,7 @@ function UserLogin() {
             setError("Invalid password")
             return null;
         }else {setError("")}
-        const fetchUserData = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/user/loginuser`,
+        const fetchUserData = await axios.post(`https://memotrack-api.onrender.com/user/loginuser`,
         {
             email:emailInput,
             password:passwordInput
