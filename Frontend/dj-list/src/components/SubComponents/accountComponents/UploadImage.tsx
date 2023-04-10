@@ -36,7 +36,7 @@ function UploadImage() {
         formData.append("userToken", userToken);
         try {
             const response = await axios.post<AxiosResponse>(
-                "http://localhost:5000/accountsettings/uploadavatar",
+                `{process.env.REACT_APP_API_BASE_URL}/accountsettings/uploadavatar`,
                 formData,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
@@ -57,7 +57,7 @@ function UploadImage() {
             {error && <Alert variant="danger">{error}</Alert>}
             <h4>Upload profile picture</h4>
             <form
-                action="http://localhost:5000/accountsettings/uploadavatar"
+                action={`${process.env.REACT_APP_API_BASE_URL}/accountsettings/uploadavatar`}
                 encType="multipart/form-data"
                 method="post"
             >

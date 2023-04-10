@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios'
 import {INewTrack} from '../interfaces/UserInterfaces'
 function TrackTableHook() {
   async function fetchTracks(listId:string){
-    const response = await axios.get<AxiosResponse>(`http://localhost:5000/userlists/gettracks/${listId}`)
+    const response = await axios.get<AxiosResponse>(`${process.env.REACT_APP_API_BASE_URL}/userlists/gettracks/${listId}`)
     const data = response.data;
     return data;
   }
@@ -11,7 +11,7 @@ function TrackTableHook() {
   async function addTrack(listId:string,track:INewTrack){
          try {
 
-             const response = await axios.post<AxiosResponse>(`http://localhost:5000/userlists/pushtrack/${listId}`, track)
+             const response = await axios.post<AxiosResponse>(`${process.env.REACT_APP_API_BASE_URL}/userlists/pushtrack/${listId}`, track)
              const data = response.data;
 
          } catch (error) {
@@ -21,10 +21,10 @@ function TrackTableHook() {
 }
 
     async function editTrack(listId:string, trackId:string, editedTrack:INewTrack){
-        // const response = await axios.put(`http://localhost:5000/userlists/updatetrack/${listId}/${trackId}`, {values:editedTrack})
+        // const response = await axios.put(`process.env.REACT_APP_API_BASE_URL/userlists/updatetrack/${listId}/${trackId}`, {values:editedTrack})
 
         try {
-            const response = await axios.put<AxiosResponse>(`http://localhost:5000/userlists/updatetrack/${listId}/${trackId}`, {values:editedTrack});
+            const response = await axios.put<AxiosResponse>(`${process.env.REACT_APP_API_BASE_URL}/userlists/updatetrack/${listId}/${trackId}`, {values:editedTrack});
             return response.data;
           } catch (error) {
               if (axios.isAxiosError(error)) {
@@ -38,7 +38,7 @@ function TrackTableHook() {
     async function deleteTrack(listId:string, trackId:string) {
 
         try {
-            const response = await axios.delete<AxiosResponse>(`http://localhost:5000/userlists/deletetrack/${listId}/${trackId}`);
+            const response = await axios.delete<AxiosResponse>(`${process.env.REACT_APP_API_BASE_URL}/userlists/deletetrack/${listId}/${trackId}`);
             return response.data;
           } catch (error) {
               if (axios.isAxiosError(error)) {

@@ -16,7 +16,7 @@ function ListCard({listData}:{listData:IList}) {
 
         if(userChoice){
             try {
-            const deleteResponse = await axios.delete<AxiosResponse>(`http://localhost:5000/userlists/deletelist/${listData._id}`, 
+            const deleteResponse = await axios.delete<AxiosResponse>(`${process.env.REACT_APP_API_BASE_URL}/userlists/deletelist/${listData._id}`, 
             {headers:{
                 Authorization:`Bearer ${userToken.createdUserToken}`,
             }})

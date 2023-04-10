@@ -46,13 +46,13 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
             e.currentTarget.classList.remove("btn-outline-primary")
             e.currentTarget.classList.add("btn-primary")
             setLikesCounter((prevLikes) => prevLikes+1)
-            await axios.post("http://localhost:5000/publiclists/likelist", {listId, userId});
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/publiclists/likelist`, {listId, userId});
            
         }else{
             e.currentTarget.classList.remove("btn-primary")
             e.currentTarget.classList.add("btn-outline-primary")
             setLikesCounter((prevLikes) => prevLikes-1)
-            await axios.post("http://localhost:5000/publiclists/unlikelist", {listId, userId});
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/publiclists/unlikelist`, {listId, userId});
         }
     }
     // Star button "favorite" request logic
@@ -66,14 +66,14 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
                 setIsFavorite(true)
                 const payload:string[] = [...favoritesList,listId];
                 dispatch(addFavorite({favorites:payload}))
-              await axios.post("http://localhost:5000/userlists/addfavorite", {listId, userId})
+              await axios.post(`${process.env.REACT_APP_API_BASE_URL}/userlists/addfavorite`, {listId, userId})
               return;
             }
             console.log("favorite removed")
             setIsFavorite(false)
             const payload:string[] = favoritesList.filter(id => id !== listId);
             dispatch(removeFavorite({favorites:payload}))
-            await axios.post("http://localhost:5000/userlists/removefavorite", {listId, userId})
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/userlists/removefavorite`, {listId, userId})
            
         } catch (error) {
             console.log(error)

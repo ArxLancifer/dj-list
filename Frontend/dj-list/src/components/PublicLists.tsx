@@ -18,7 +18,7 @@ function PublicLists() {
     const searchRef = useRef<HTMLInputElement>(null);
     async function fetchLists(){
         try {
-            const response = await axios.get(`http://localhost:5000/publiclists/getlists`)
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/publiclists/getlists`)
             const listsData = response.data;
             setUserLists(listsData);
             setSearchedLists(listsData);

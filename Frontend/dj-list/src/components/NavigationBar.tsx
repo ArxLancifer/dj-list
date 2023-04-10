@@ -22,7 +22,7 @@ function NavigationBar() {
     async function handleLogout(){
       const {refreshToken}:any = JSON.parse(localStorage.getItem('userToken') || '{}')
       // *NOTE* I HAVE TO ADD BEARER FOR DELETE REQUEST IN BACKEND
-      const logOutRequest = await axios.post("http://localhost:5000/user/logout", {refreshToken:refreshToken}, {
+      const logOutRequest = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/user/logout`, {refreshToken:refreshToken}, {
         headers: {
           'Content-Type': 'application/json'
       }
