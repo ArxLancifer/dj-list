@@ -28,7 +28,7 @@ function AddTrackForm() {
             title:trackName.current?.value || "",
             artist:artistName.current?.value || "",
             album:albumName.current?.value || "",
-            subGenre:subGenre.current?.value || "",
+            subGenre:subGenre.current?.value || "Not available",
             duration:duration.current?.value || "",
             BPM:BPM.current?.value || "",
             youtubeLink:youtubeLink.current?.value || "",

@@ -7,7 +7,8 @@
 }
 
 main{
-    min-height: 90vh;
+    min-height: 87vh !important;
+    background: #121212;;
 }
 
 a{
@@ -79,7 +80,7 @@ div.dropdown-menu > a {
 /* Card styling */
 .card {
     height: 10rem;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .card-body{
     border-radius: 5px;
@@ -104,6 +105,12 @@ div.dropdown-menu > a {
 .public-list-card:hover{
     
     transform: scale(1.02);
+}
+/* Homepage card */
+.home-card.card {
+    height: auto;
+    /* width: 30%; */
+    border-color: #5e5d5d;
 }
 /* iframe google video */
 iframe{
@@ -147,24 +154,21 @@ iframe{
     box-shadow:none;
 }
 /* Hero section Homepage */
-.hero-section, .bg-dark-linear{
-    min-height: 90vh;
-    background: rgb(20,20,20);
+.hero-section{
+    min-height: 50vh;
     background: #121212;
 }
 
 /* Buttons */
-.btn-pruple,
-.btn-add,
-.btn-signup
+/* .btn-pruple, */
+.btn-add
+/* .btn-signup */
  {
     color: #fff;
     background-color: #6200EE;
     border: none;
 }
-.btn-pruple:hover, 
-.btn-add:hover,
-.btn-signup:hover
+.btn-add:hover
 {
     color: #fff;
     background-color: #4527A0;

@@ -85,7 +85,7 @@ function UserLogin() {
         <div id="password" className="form-text smallText text-light text-light">We'll never share your password with anyone else.</div>
     </div>
     <div>
-        <button onClick={loginHandler} type="button" className="btn btn-pruple">Login</button>
+        <button onClick={loginHandler} type="button" className="btn btn-success btn-pruple">Login</button>
     </div>
         <Link to={'/signup'}><h5 className="mt-3">Create account</h5></Link>
 </form>

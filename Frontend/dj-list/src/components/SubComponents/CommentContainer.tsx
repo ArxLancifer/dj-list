@@ -3,7 +3,6 @@ import { Dropdown } from 'react-bootstrap'
 import { IComment } from '../../interfaces/UserInterfaces'
 
 function CommentContainer(props:{key:number, commentData:IComment}) {
-    console.log(props)
   return (
     <Fragment>
          <div className='user-comment-container d-flex justify-content-between py-2'>

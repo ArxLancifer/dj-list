@@ -8,6 +8,7 @@ import { RootState } from '../store';
 function CommentInput({setCommentState}:any) {
     const username = useSelector((state:RootState)=> state.userData.userInfo.name)
     const userId = useSelector((state:RootState)=> state.userData.userInfo.id)
+    const userImage = useSelector((state:RootState)=> state.userData.userInfo.userImage)
     const userComment = useRef<HTMLTextAreaElement>(null);
     // const {state:{listId}} = useLocation(); 
     const params = useParams() 
@@ -22,7 +23,9 @@ function CommentInput({setCommentState}:any) {
     <>
     <div className='comment-input d-flex flex-wrap justify-content-between py-2'>
         <div className='col-sm-1 col-2'>
-            <div className='user-picture'><span className='fs-5 fw-bold'>C</span></div>
+            <div className='user-picture ms-3'>
+            <img src={userImage || "http://placekitten.com/50/50"} alt="comment user avatar" />
+            </div>
         </div>
         <div className='text-start col-sm-11 col-10'>
         <small className='fw-bold'>{username}</small>

@@ -84,7 +84,7 @@ function PublicListCard({listData}:{listData:IPublicListCard}) {
 
   return (
   <Link className='h-100' to={`/publiclist/trackstable/${listData._id}`}>
-      <Card className='h-100 m-2 pt-2 bg-dark text-light shadow border-0 public-list-card' style={{ width: '14rem' }}>
+      <Card className='h-100 m-3 pt-2 bg-dark text-light shadow border-0 public-list-card' style={{ width: '14rem' }}>
        
         <div className='w-100 cardImage my-2'>
       <img className='d-block mx-auto rounded-circle' src={listData.user.userimage || "http://placekitten.com/400/400"} alt="user avatar" />
