@@ -36,7 +36,7 @@ function UploadImage() {
         formData.append("userToken", userToken);
         try {
             const response = await axios.post<AxiosResponse>(
-                `{process.env.REACT_APP_API_BASE_URL}/accountsettings/uploadavatar`,
+                `${process.env.REACT_APP_API_BASE_URL}/accountsettings/uploadavatar`,
                 formData,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );

@@ -15,7 +15,7 @@ function ListDiscussion() {
     const {state:{listOwner},state:{ownerImage}} = useLocation();
     const params = useParams()
     async function getComments(){
-        const fetchedList = await axios.get(`process.env.REACT_APP_API_BASE_URL/publiclists/discussion/${params.listid}`)
+        const fetchedList = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/publiclists/discussion/${params.listid}`)
         const listData = fetchedList.data;
         setListInfo({
             listName:listData.name, 
