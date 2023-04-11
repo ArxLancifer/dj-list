@@ -9,9 +9,7 @@ function HomePage() {
             <div className='col-md-5 col-11'>
                 <section className='text-light mx-auto'>
                 <img className='memotrack-logo' src={process.env.PUBLIC_URL + '/MemotrackLogo.png'} alt="" />
-                    <p><em>Is an application which helps DJs and even common users to have a music list managmement.
-                        With some useful features like saving lists by their genre, adding tracks, deleting, editing and saving
-                        youtube links to have access on play button anytime.
+                    <p><em>Is an application that helps DJs and even casual users manage their music playlists. It includes useful features such as the ability to save lists by genre, add and delete tracks, edit existing playlists, and save YouTube links for easy access to the play button anytime.
                         </em>
                     </p>
                 </section>
@@ -25,8 +23,7 @@ function HomePage() {
        </section>
        <hr />
             <section className='demo-section'>
-                <h5 className='text-light w-75 text-center mx-auto py-4'>Check out some great features that MEMOTRACK will help you to manage you lists , discusse with other people and get
-                    feedback about your list, and find more awasome lists from other MEMOTRACK users.
+                <h5 className='text-light w-75 text-center mx-auto py-4'>Check out some of the great features that MEMOTRACK offers to help you manage your music playlists. You can discuss your playlists with other people and receive feedback, as well as discover awesome playlists from other MEMOTRACK users.
                 </h5>
                 
                 <div>
@@ -36,7 +33,7 @@ function HomePage() {
                         <Card.Body  className='bg-dark rounded-0 rounded-bottom text-light'>
                         <Card.Title>Search for lists</Card.Title>
                         <Card.Text>
-                            You can search all public lists from other users, based on name or genre
+                        You can easily search for public playlists created by other users based on the name of the playlist or its genre.
                         </Card.Text>
                         </Card.Body>
                     </Card>
@@ -45,8 +42,7 @@ function HomePage() {
                         <Card.Body className='bg-dark rounded-0 rounded-bottom text-light'>
                         <Card.Title>Discuss about list</Card.Title>
                         <Card.Text>
-                            You can have discussion about list in comments, give to user who created that list a feedback, like that list or even
-                            add it to you favorites.
+                        You can discuss playlists in the comments section, provide feedback to the creator of the playlist, like the playlist, or even add it to your favorites.
                         </Card.Text>
                         </Card.Body>
                     </Card>
@@ -55,8 +51,7 @@ function HomePage() {
                         <Card.Body className='bg-dark rounded-0 rounded-bottom text-light'>
                         <Card.Title>YouTube Modal </Card.Title>
                         <Card.Text>
-                            MEMOTRACK provides you YouTube modal integration so user can listen their saved tracks 
-                            directly from list.
+                            MEMOTRACK provides YouTube modal integration so that users can listen to their saved tracks directly from the playlist.
                         </Card.Text>
                         </Card.Body>
                     </Card>
