@@ -71,7 +71,7 @@ function UserLogin() {
   return (
 <div className='container text-light'>
     
-    <form className='w-50 mx-auto mt-5 border rounded p-5'>
+    <form className='col-12 col-sm-6 mx-auto mt-5 border rounded p-5'>
         <h2 className='text-center pb-4'>Login Page</h2>
         {error &&<Alert variant={'danger'}>{error}</Alert>}
     <div className="mb-3">

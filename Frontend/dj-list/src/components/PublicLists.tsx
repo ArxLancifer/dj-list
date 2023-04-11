@@ -52,7 +52,7 @@ function PublicLists() {
   return (
 
     <Container >
-        <InputGroup className="w-50 my-5 mx-auto" size='sm'>
+        <InputGroup className="col-8 col-sm-6 my-5 mx-auto" size='sm'>
         <Form.Control
           ref={searchRef} 
           onKeyDown={handleEnterKey}

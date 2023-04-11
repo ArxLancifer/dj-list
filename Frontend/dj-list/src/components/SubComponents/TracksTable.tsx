@@ -160,7 +160,7 @@ function TracksTable() {
   return (
     
     <Container className='mt-5 pt-5'>
-        {error && <Alert className='w-50 mx-auto' variant='danger'>{error}</Alert>}
+        {error && <Alert className='col-12 col-sm-6 mx-auto' variant='danger'>{error}</Alert>}
         <ModalEmbedYoutube />
     <ThemeProvider theme={theme}>
         <MaterialReactTable

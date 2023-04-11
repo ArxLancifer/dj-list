@@ -26,7 +26,7 @@ function UserLists() {
             setUserLists(listsData);
             setSearchedLists(listsData);
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
     }
     useEffect(()=>{
@@ -57,7 +57,7 @@ function UserLists() {
           <Button  className='float-end border-0 btn-createlist'><PlusSquare className='me-1'/>New </Button>
         </Link>
       </div>
-        <InputGroup className="w-50 my-5 mx-auto" size='sm'>
+        <InputGroup className="col-8 col-sm-6 my-5 mx-auto" size='sm'>
         <Form.Control
           ref={searchRef} 
           onKeyDown={handleEnterKey}

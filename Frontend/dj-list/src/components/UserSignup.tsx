@@ -75,7 +75,7 @@ function UserLogin() {
 
     return (
     <div className='container text-light'>
-        <form className='w-50 mx-auto mt-5 border rounded p-5'>
+        <form className='col-12 col-sm-6 mx-auto mt-5 border rounded p-5'>
             {Object.values(errorsState).map((error, index)=>{
                 return <Alert key={index} variant={'danger'}>{error}</Alert>
             })}

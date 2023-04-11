@@ -49,7 +49,7 @@ function AddTrackForm() {
     
     return (
     <Container className='pt-5'>
-    <Form className='w-50 mx-auto mt-5 p-4 border border-secondary rounded text-light'>
+    <Form className='col-12 col-sm-6 mx-auto mt-5 p-4 border border-secondary rounded text-light'>
       <Form.Group className="mb-2">
         <Form.Label>Track name</Form.Label>
         <Form.Control ref={trackName} size="sm" placeholder="Required field"/>
