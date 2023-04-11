@@ -20,8 +20,8 @@ function UserLogin() {
     async function handleSignup(e:React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
         const isValid = checkValidity(userInputs);
-        if(isValid) return;
-        await createAccount();
+        if(isValid === false) return;
+        createAccount();
 
     }
 
@@ -45,6 +45,7 @@ function UserLogin() {
         const validLength = !Object.values(inputs).some(input => input.length <= 5);
         const validEmail = emailRegex.test(inputs.email);
         const validPassword = inputs.password === inputs.password2 && inputs.password !== ""
+        console.log(validEmail, validLength, validPassword)
         if(!validLength){
             setErrorsState((prevErrors)=>{
                 return {
@@ -69,7 +70,7 @@ function UserLogin() {
                 }
             })
         }
-        if(!validLength && validPassword && validEmail) return true;
+        if(validLength && validPassword && validEmail) return true;
         return false;
     }
 
