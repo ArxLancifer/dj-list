@@ -20,6 +20,7 @@ import AccountInformation from './components/SubComponents/accountComponents/Acc
 import AccountSetting from './components/AccountSetting';
 import ListCollection from './components/SubComponents/accountComponents/ListCollection';
 import { RootState } from './components/store';
+import { Container } from 'react-bootstrap';
 
 
 function App() {
@@ -40,7 +41,8 @@ function App() {
   return (
     <BrowserRouter>
     <NavigationBar />
-    <main className='bg-dark-linear pt-4 px-1'>
+    <Container fluid='md' className='col-12 col-md-12 col-md-8'>
+    <main className='py-4 px-md-5 px-0'>
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<UserLogin />} />
@@ -59,6 +61,7 @@ function App() {
       </Route>
     </Routes>
     </main>
+    </Container>
     <Footer />
     </BrowserRouter>
   );

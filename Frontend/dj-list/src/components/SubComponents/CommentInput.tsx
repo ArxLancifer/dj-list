@@ -23,7 +23,7 @@ function CommentInput({setCommentState}:any) {
     <>
     <div className='comment-input d-flex flex-wrap justify-content-between py-2'>
         <div className='col-sm-1 col-2'>
-            <div className='user-picture ms-3'>
+            <div className='user-picture ms-2 ms-md-3'>
             <img src={userImage || "http://placekitten.com/50/50"} alt="comment user avatar" />
             </div>
         </div>
@@ -37,7 +37,7 @@ function CommentInput({setCommentState}:any) {
         id="userID"
       />
         </div>
-    <Button onClick={postComment} className='col-11 ms-auto' size='sm' variant='success'>Comment</Button>
+    <Button onClick={postComment} className='col-sm-11 col-10 ms-auto' size='sm' variant='success'>Comment</Button>
     </div>
     </>
   )

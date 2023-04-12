@@ -7,6 +7,7 @@ import axios from 'axios';
 import { IList } from '../interfaces/UserInterfaces';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
+import { debounce } from '@mui/material';
 function UserLists() {
 
     // const navigate = useNavigate();
@@ -44,6 +45,10 @@ function UserLists() {
         setSearchedLists(searchedLists)
       }
 
+      const updatedDebounce = debounce((inputValue:React.ChangeEvent<HTMLInputElement>)=>{
+        searchList();
+      }, 500)
+
       const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
           searchList();
@@ -57,8 +62,9 @@ function UserLists() {
           <Button  className='float-end border-0 btn-createlist'><PlusSquare className='me-1'/>New </Button>
         </Link>
       </div>
-        <InputGroup className="col-8 col-sm-6 my-5 mx-auto" size='sm'>
+        <InputGroup className="my-5 mx-auto w-75" size='sm'>
         <Form.Control
+        onChange={updatedDebounce}
           ref={searchRef} 
           onKeyDown={handleEnterKey}
           placeholder="Search your list"

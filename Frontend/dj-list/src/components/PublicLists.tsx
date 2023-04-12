@@ -4,6 +4,7 @@ import {Search} from 'react-bootstrap-icons'
 import axios from 'axios';
 import { IPublicListCard } from '../interfaces/UserInterfaces';
 import PublicListCard from './SubComponents/PublicListCard';
+import { debounce } from '@mui/material/utils';
 
 function PublicLists() {
 
@@ -33,15 +34,24 @@ function PublicLists() {
     },[] )
 
     function searchList(){
-        const searchParams = searchRef.current?.value.split(' ').map(word=>word.toLowerCase());
+        const searchParams = searchRef.current?.value.split(' ').filter(param=>param !=="").map(word=>word.toLowerCase()) || [];
         const searchedLists = userLists?.filter((list)=>{
             const doesInclude = searchParams?.some((word)=>{
                 return list.name.toLowerCase().includes(word) || list.genre.toLowerCase().includes(word)
             })
             if(doesInclude) return list || [];
         })
-        setSearchedLists(searchedLists)
+        if(searchParams?.length <= 1 && (searchParams[0]?.length || '') <= 2){
+            setSearchedLists(userLists)
+        }else {
+            setSearchedLists(searchedLists)
+        }
       }
+
+      const updatedDebounce = debounce((inputValue:React.ChangeEvent<HTMLInputElement>)=>{
+        searchList();
+      }, 500)
+    
 
       const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
@@ -52,9 +62,10 @@ function PublicLists() {
   return (
 
     <Container >
-        <InputGroup className="col-8 col-sm-6 my-5 mx-auto" size='sm'>
+        <InputGroup className="my-5 mx-auto w-75" size='sm'>
         <Form.Control
-          ref={searchRef} 
+          ref={searchRef}
+          onChange={updatedDebounce} 
           onKeyDown={handleEnterKey}
           placeholder="Search your list"
           aria-label="Search your list"

@@ -8,9 +8,11 @@
 
 main{
     min-height: 87vh !important;
-    background: #121212;;
+    background: #121212;
 }
-
+body{
+    background: #121212;
+}
 a{
   text-decoration: none;
   color: #fff;
