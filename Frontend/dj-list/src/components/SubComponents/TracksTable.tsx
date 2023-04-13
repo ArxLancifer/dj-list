@@ -28,7 +28,7 @@ function TracksTable() {
             //@ts-ignore
             fetchTracks(listid).then(data=> setTracks(data.tracks));
         }
-    }, [tracks])
+    }, [])
 
     function handleSetLink(e:React.SyntheticEvent<HTMLElement>){
         const linkToYoutube:string = e.currentTarget.dataset.link || "";
