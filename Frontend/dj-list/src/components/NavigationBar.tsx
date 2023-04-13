@@ -43,10 +43,10 @@ function NavigationBar() {
       dispatch(logOutUser())
       navigate("/login")
     }
-
+    
   return (
     <Fragment>
-    <Navbar className='p-2' bg="dark" variant="dark" expand="lg">
+    <Navbar  collapseOnSelect className='p-2' bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="#home">
         <Nav.Link as={Link} to={"/"}>
@@ -59,8 +59,8 @@ function NavigationBar() {
           <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Home</Nav.Link>
             {/* <Nav.Link as={Link} to={"/userlists"} className={'fs-5 mx-3 ' + listsDisabled }>My lists</Nav.Link> */}
             <NavDropdown disabled={!userInfo.isAuth} menuVariant='dark'  className='fs-5 mx-3 listdrop' title={<span className={listsDisabled}>Lists</span>}>
-                     <NavDropdown.Item  as={Link} to={"/userlists"}><span  className={'fs-6 text-light'}>My lists</span></NavDropdown.Item>
-                     <NavDropdown.Item as={Link} to={"/publiclists"} className={'fs-6 text-light'}>Public Lists</NavDropdown.Item>
+                     <NavDropdown.Item eventKey="1"  as={Link} to={"/userlists"}><span  className={'fs-6 text-light'}>My lists</span></NavDropdown.Item>
+                     <NavDropdown.Item eventKey="2" as={Link} to={"/publiclists"} className={'fs-6 text-light'}>Public Lists</NavDropdown.Item>
                 </NavDropdown>
                 {/* <Nav.Link as={Link} to={"/"} className='fs-5 mx-3 text-light'>Contact</Nav.Link> */}
             {(userInfo.isAuth === true && userInfo.name.length > 0) ? 
@@ -77,7 +77,7 @@ function NavigationBar() {
                     </div>
                  } id="basic-nav-dropdown">
                      <NavDropdown.Item className='fs-6' onClick={handleLogout}>Logout</NavDropdown.Item>
-                     <NavDropdown.Item as={Link} to="/accountsettings/accountinformation" className='fs-6'>
+                     <NavDropdown.Item eventKey="3" as={Link} to="/accountsettings/accountinformation" className='fs-6'>
                         Settings
                      </NavDropdown.Item>
                 </NavDropdown>

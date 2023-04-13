@@ -70,6 +70,7 @@ div.dropdown-menu{
 div.dropdown-menu > a {
     font-size: 1.1rem;
     font-weight: 500;
+    background-color: transparent;
 }
 .dropdown-menu {
     min-width: 6rem;
